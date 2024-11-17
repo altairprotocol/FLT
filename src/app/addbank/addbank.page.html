@@ -1,0 +1,61 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon size="large" (click)="back()" 
+            class="text-color" name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Add bank</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card class="p-2 bg-base text-color">
+    <div>
+      <ion-row>
+        <ion-col size="12">
+          <ion-select class="custom-input drop-style" label="Choose bank" placeholder="" [(ngModel)]="selectedbank"
+            name="bank">
+            <ion-select-option *ngFor="let bank of banks" [value]="bank.title">{{bank.title}}</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="Address Hint" label-placement="floating" fill="outline" placeholder="Enter address"
+            [(ngModel)]="addressname" class="custom-input my-1"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="Country" label-placement="floating" fill="outline" placeholder="Enter country"
+            class="custom-input my-1" [(ngModel)]="bankprov"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="City" label-placement="floating" fill="outline" placeholder="Enter city"
+            [(ngModel)]="bankcity" class="custom-input my-1"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="Branch/Swift/IBAN" label-placement="floating" fill="outline" placeholder="Enter branch"
+            [(ngModel)]="bankaddr" class="custom-input my-1"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="A/C Holder Name" label-placement="floating" fill="outline" placeholder="Enter holder Name"
+            [(ngModel)]="truename" class="custom-input my-1"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="A/C Number" label-placement="floating" fill="outline" placeholder="Enter A/C number"
+            [(ngModel)]="bankcard" class="custom-input my-1"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label=" Fund Password" label-placement="floating" fill="outline" class="custom-input my-1"
+            [(ngModel)]="fundpassword"><ion-input-password-toggle style="color: beige!important;"
+              slot="end"></ion-input-password-toggle></ion-input>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-button expand="block" (click)="doaddbank()" class="h-40" [disabled]="!bankaddr">Save</ion-button>
+        </ion-col>
+
+      </ion-row>
+    </div>
+  </ion-card>
+</ion-content>

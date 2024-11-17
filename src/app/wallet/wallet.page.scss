@@ -1,0 +1,188 @@
+.text-dark-force {
+    --ion-color-base: var(--text-color) !important;
+}
+
+.d-flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-flex-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px
+}
+
+.overflow-x {
+    overflow-x: scroll;
+}
+
+.w-28 {
+    width: 28px;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+// Properties to hide scroll bar starts
+
+.d-flex-row::-webkit-scrollbar {
+    display: none;
+}
+
+.d-flex-row {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+// Properties to hide scroll bar ends
+
+.light-bg-f3 {
+    background: var(--bg-primary-color);
+    border-radius: 5%;
+    margin: 4px 2px 4px 2px;
+}
+
+.font-9 {
+    font-size: 9px;
+}
+
+.wallet-container {
+    padding: 10px;
+
+    h1 {
+        font-weight: 600;
+        font-size: 22px;
+        margin-bottom: 0px;
+    }
+}
+
+.total-value-icon {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+
+}
+
+.menu-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .iconWithText {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+
+        p {
+            font-weight: lighter;
+            font-size: 11px;
+        }
+
+        .menu-icon {
+            width: 35px !important;
+            height: 35px !important;
+        }
+    }
+
+}
+
+.my-accounts-container {
+
+    .wallet-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 10px !important;
+
+        .wallet-amount-container {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            flex-direction: column;
+
+            p {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .large-amount {
+                font-size: 16px;
+                font-weight: 900;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+}
+
+.custom-segment {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    border-bottom: 1px solid gainsboro;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-segment-buttons {
+    color: var(--text-color) !important;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.active {
+    border-bottom: 3px solid blue;
+}
+
+.search-field {
+    border: 1px solid var(--custom-border);
+    border-radius: 40px;
+    padding-left: 34px !important;
+    height: 26px !important;
+    // margin: 0 10px 0px 10px;
+    color: var(--text-color);
+    background: var(--bg-primary-color);
+}
+
+.linkme {
+
+    .action-sheet-group {
+        --background: #f58840 !important;
+        background: #f58840 !important;
+    }
+
+    --background: #f58840 !important;
+    background: #f58840 !important;
+    // --backdrop-opacity: 0.6;
+
+    // --button-background-selected: #e97223;
+    // --button-color: #000000;
+    // --color: #fff;
+    /* role: "destructive" button iOS styling override */
+    // --ion-color-danger: #000000;
+}

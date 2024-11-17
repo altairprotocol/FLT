@@ -1,0 +1,227 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <div class="trade-header">
+      <ion-icon size="large" (click)="back()" class="text-color" name="arrow-back"></ion-icon>
+      <p>Spot</p>
+      <ion-icon name="star-outline" *ngIf="!is_fav" (click)="changeFav(this.commonmarket, 'add')"></ion-icon>
+      <ion-icon name="star" *ngIf="is_fav" (click)="changeFav(this.commonmarket, 'remove')"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button class="top-button" size="small" expand="block" fill="outline" color="secondary"
+        (click)="referToMarketDetail()">Charts</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button class="top-button" size="small" expand="block" color="secondary">Trade</ion-button>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row class="bg-base my-3">
+    <ion-col size="12" class="d-flex gap-3 px-4">
+      <a class="txt-decoration">
+        <ion-text class="privacy-text font-weight-bold font-12" (click)="showComingSoon()">Spot</ion-text>
+      </a>
+
+      <a class="txt-decoration">
+        <ion-text class="privacy-text font-weight-bold font-12" (click)="showComingSoon()">P2P</ion-text>
+      </a>
+
+      <a class="txt-decoration">
+        <ion-text class="privacy-text font-weight-bold font-12" (click)="showComingSoon()">Fiat</ion-text>
+      </a>
+      <a class="txt-decoration">
+        <ion-text class="privacy-text font-weight-bold font-12" (click)="showComingSoon()">Convert</ion-text>
+      </a>
+    </ion-col>
+  </ion-row> -->
+
+  <ion-row class="px-2">
+    <ion-col size="12" class="d-flex justify-content-between align-items-center">
+      <span class="d-flex gap-3">
+        <span (click)="referToMarkets()"><ion-img class="w-20 prt-5" src="assets/images/check.svg"></ion-img></span>
+        <span><ion-text class="text-large">{{this.printable_market}}</ion-text></span>
+        <span style="background: rgba(179, 0, 0, 0.19);" class="text-medium-danger p-1  mx-2">{{change}}%</span>
+        <!-- <span><ion-text class="text-color">Vol </ion-text><ion-text
+            class="text-medium-green ml-2 font-14">{{volume}}</ion-text></span> -->
+      </span>
+
+      <!-- <span class="d-flex gap-3">
+        <ion-img (click)="referToMarketDetail()" class="w-20" src="assets/images/graph-icon.svg"></ion-img>
+      </span> -->
+    </ion-col>
+  </ion-row>
+
+
+  <div class="bg-form-light">
+
+
+    <ion-row class="px-2">
+      <!-- second-side  -->
+      <ion-col size="7">
+        <div class="toggle-container">
+          <div class="toggle-button" [class.active_buy]="selectedOption === 'buy'" (click)="selectOption('buy')">
+            Buy
+          </div>
+          <div class="toggle-button" [class.active_sell]="selectedOption === 'sell'" (click)="selectOption('sell')">
+            Sell
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between" style="padding: 10px 0 10px 0;">
+          <span class="privacy-text font-weight-bold font-11">Avail.</span>
+          <span *ngIf="selectedOption === 'buy'" class="text-medium d-flex gap-1 font-11">{{available_two}} {{base}}
+            <span><ion-img class="w-14" (click)="referToDepositModel(1)"
+                src="assets/images/plus-circle.svg"></ion-img></span></span>
+          <span *ngIf="selectedOption === 'sell'" class="text-medium d-flex gap-1 font-11">{{available_one}} {{first}}
+            <span><ion-img class="w-14" (click)="referToDepositModel(0)"
+                src="assets/images/plus-circle.svg"></ion-img></span></span>
+        </div>
+
+        <ion-select class="custom-input drop-style" label="Type" placeholder="" [(ngModel)]="trade_type"
+          name="trade_type">
+          <ion-select-option value="limit">Limit</ion-select-option>
+          <ion-select-option value="market">Market</ion-select-option>
+        </ion-select>
+
+        <ion-input label="Price ({{base}})" label-placement="floating" fill="outline" placeholder="" [(ngModel)]="price"
+          [hidden]="trade_type == 'market'" (input)="cal_total()" min="0.000001" max="100000000" inputmode="decimal"
+          type="text" value="{{buy_price}}" class="custom-input my-1 small-input"></ion-input>
+
+        <ion-text [hidden]="trade_type == 'market'" class="privacy-text">~$ {{new_price}}</ion-text>
+
+        <ion-input label="Quantity ({{first}})" label-placement="floating" fill="outline" placeholder=""
+          [(ngModel)]="qty" (input)="cal_total()" min="0.000001" max="100000000" inputmode="decimal" type="text"
+          class="custom-input my-1 small-input"></ion-input>
+
+        <div class="d-flex gap-1 justify-content-between w-100" style="margin: 10px 0px 10px 0px;">
+          <span class="privacy-text percent-border" (click)="trade(25)">25%</span>
+          <span class="privacy-text percent-border" (click)="trade(50)">50%</span>
+          <span class="privacy-text percent-border" (click)="trade(75)">75%</span>
+          <span class="privacy-text percent-border" (click)="trade(100)">100%</span>
+        </div>
+
+        <ion-input label="Total ({{base}})" label-placement="floating" fill="outline" placeholder="Enter text"
+          class="custom-input my-1 small-input" [(ngModel)]="total" value="{{total}}"></ion-input>
+
+        <ion-button *ngIf="selectedOption === 'buy'" class="main-buy-sell-btn w-100 my-2 small-input" color="success"
+          style="color: white;" (click)="uptrade(1)">Buy
+          {{first}}</ion-button>
+
+        <ion-button *ngIf="selectedOption === 'sell'" class="main-buy-sell-btn w-100 my-2 small-input" color="danger"
+          style="color: white;" (click)="uptrade(2)">Sell
+          {{first}}</ion-button>
+      </ion-col>
+      <ion-col size="5">
+
+        <div class="d-flex justify-content-between mt-4">
+          <span class="privacy-text">Price ({{base}})</span>
+          <span class="privacy-text d-flex-c">Total ({{first}}) <span><ion-img
+                src="assets/images/drop-tip.svg"></ion-img></span></span>
+        </div>
+        <div class="d-flex flex-column">
+          <div class="d-flex ion-justify-content-between  full-width-row gap-auto"
+            *ngFor="let sell of sellorders; let i = index"
+            [ngStyle]="{'background': 'linear-gradient(to left, rgba(220, 97, 93, 0.1) ' + sellPercentages[i] + '%, transparent 0%)'}">
+            <p class="text-medium" style="color: var(--danger) !important">{{sell?.price*1}}</p>
+            <p class="text-medium">{{limitDecimals(sell?.nums*1)}}</p>
+          </div>
+        </div>
+
+        <br>
+        <div class="coin-new-price">
+          <h3 *ngIf="change >= 0" class="green">{{this.new_price}}</h3>
+          <h3 *ngIf="change < 0" class="red">{{this.new_price}}</h3>
+          <h5 class="privacy-text" >~{{this.new_price}} USD</h5>
+        </div>
+
+        <div class="d-flex flex-column">
+          <div class="d-flex ion-justify-content-between full-width-row gap-auto"
+            *ngFor="let buy of buyorders; let i = index"
+            [ngStyle]="{'background': 'linear-gradient(to left, rgba(103, 153, 1, 0.2) ' + buyPercentages[i] + '%, transparent 0%)'}">
+            <p class="text-medium text-success">{{buy?.price*1}}</p>
+            <p class="text-medium">{{limitDecimals(buy?.nums*1)}}</p>
+          </div>
+        </div>
+
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row class="bg-base">
+      <ion-col size="12" class="d-flex gap-3 px-4">
+        <a class="txt-decoration" [ngClass]="{'active': showOpenOrders}" (click)="toggleSection('openOrders')">
+          <ion-text class="privacy-text font-weight-bold font-12">Open Orders</ion-text>
+        </a>
+        <a class="txt-decoration" [ngClass]="{'active': showOrderHistory}" (click)="toggleSection('orderHistory')">
+          <ion-text class="privacy-text font-weight-bold font-12">Order History</ion-text>
+        </a>
+        <a class="txt-decoration" href="/orders">
+          <ion-text class="privacy-text font-weight-bold font-12">View All</ion-text>
+        </a> 
+        <!-- <div *ngIf="showSliderHelperArrow && showOpenOrders" class="slide-hint">
+          <ion-icon name="chevron-back-outline" size="large" color="warning" class="slide-arrow" open="true"></ion-icon>
+        </div> -->
+
+        <!-- <ion-text *ngIf="showOrderHistory" size="small" color="warning" class="view-all-btn"
+          (click)="refer('orders')">View
+          All</ion-text> -->
+      </ion-col>
+    </ion-row>
+
+    <div *ngIf="showOpenOrders" class="pb-70">
+      <ion-item-sliding *ngFor="let o of entrusts" (ionDrag)="onSlideStart(o)" (click)="toggleSlide()">
+        <ion-item lines="none" class="bg-base">
+          <ion-card class="w-100" class="bg-base">
+            <ion-card-content class="order-box" (click)="toggleSlide()">
+              <div class="order-left">
+                <ion-text class="text-medium"><ion-icon [color]="o?.type == '1' ? 'success' : 'danger'" fill="solid"
+                    size="medium" class="px-2 mt-2" name="ellipse-outline"></ion-icon>{{printable_market}}</ion-text>
+                <ion-text class="text-medium">{{o?.price}} <ion-text
+                    class="text-muted text-medium">Price</ion-text></ion-text>
+                <ion-text class="text-medium">Amount {{o?.first.toUpperCase()}}</ion-text>
+                <ion-text class="text-medium">Total</ion-text>
+              </div>
+              <div class="order-right">
+                <ion-text class="text-medium">{{o?.deal}} Filled</ion-text>
+                <ion-text>{{o?.addtime.substr(0, 5)}} {{o?.addtime.substr(5)}}</ion-text>
+                <ion-text class="text-medium">{{o.deal}} / {{o?.num}}</ion-text>
+                <ion-text class="text-medium">{{o?.num * o?.price}} {{o?.base.toUpperCase()}}</ion-text>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+        <ion-item-options side="end" class="w-30">
+          <ion-item-option color="danger" (click)="cancelentrust(o.id)">Cancel</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </div>
+
+    <div *ngIf="showOrderHistory" class="pb-70">
+      <ion-card *ngFor="let o of closedorders" class="bg-base">
+        <ion-card-content class="order-box">
+          <div class="order-left">
+            <!-- <ion-text class="text-medium">{{printable_market}}</ion-text> -->
+            <ion-text class="text-medium"><ion-icon [color]="o?.type == '1' ? 'success' : 'danger'" fill="solid"
+                size="medium" class="px-2 mt-2" name="ellipse-outline"></ion-icon>{{printable_market}}</ion-text>
+            <ion-text class="text-medium">{{o?.price}} <ion-text
+                class="text-muted text-medium">Price</ion-text></ion-text>
+            <ion-text class="text-medium">Amount {{o?.first?.toUpperCase()}}</ion-text>
+            <ion-text class="text-medium">Total</ion-text>
+          </div>
+          <div class="order-right">
+            <ion-text style="height: 14px;"></ion-text>
+            <ion-text>{{o?.addtime.substr(0, 5)}} {{o?.addtime.substr(5)}}</ion-text>
+            <ion-text class="text-medium">{{o.deal}} / {{o?.num}}</ion-text>
+            <ion-text class="text-medium">{{o?.num * o?.price}} {{o?.base.toUpperCase()}}</ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,40 @@
+.container {
+    margin-top: 30px;
+
+    .key-value-container {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .heading {
+            margin: 0;
+            padding: 0;
+            font-weight: 700;
+            font-size: 17px;
+        }
+
+        .heading-value-container {
+            text-decoration: none;
+        }
+
+        .key-value {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            .key {
+                font-size: 15px;
+                color: gray;
+                margin: 0;
+                padding: 0;
+            }
+
+            .value {
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+}

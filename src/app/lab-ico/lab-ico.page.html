@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">ICO Details</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container d-flex flex-column align-items-center justify-content-center w-100 gap-3 text-color">
+    <ion-img class="top-image" src="../../assets/images/lab-info-icon.svg"></ion-img>
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <h1 class="m-0 p-0">{{name}}</h1>
+      <ion-button size="small" color="success">Running</ion-button>
+    </div>
+    <div *ngIf="beginTime && endTime" class="w-100">
+      <app-timer [beginTime]="beginTime" [endTime]="endTime"></app-timer>
+    </div>
+    <ion-input labelPlacement="stacked" label="Amount" placeholder="5.2" errorText="Invalid amount" [(ngModel)]="amount"
+      (ionInput)="onAmount()">
+      <ion-icon slot="start" aria-hidden="true" name="wallet-outline"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="amountValid && amount" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="!amountValid && amount" slot="icon-only" name="alert-circle" color="danger"
+          aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <ion-input labelPlacement="stacked" label="Password" placeholder="Enter password" errorText="Invalid password"
+      [(ngModel)]="password" (ionInput)="onPassword()" type="password">
+      <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="passwordValid && password" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="!passwordValid && password" slot="icon-only" name="alert-circle" color="danger"
+          aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <ion-select label="Currency" label-placement="fixed" [(ngModel)]="currency"
+      placeholder="{{currency ? currency?.toUpperCase() : 'Select'}}">
+      <ion-select-option *ngFor="let coin of coins | keyvalue"
+        value="{{coin?.value?.name}}">{{coin?.value?.name?.toUpperCase()}}</ion-select-option>
+    </ion-select>
+    <ion-button id="confirmSubscription" expand="block" class="sliderButton mt-3 w-100"
+      [disabled]="!amount || !password || !id || !currency ">
+      Continue
+    </ion-button>
+    <ion-alert trigger="confirmSubscription" header="Primalx.io Risk Note"
+      message="ICO risk warning advises against investing more than one&#39;s financial capacity for risk. It cautions not to invest in assets without understanding their fundamentals. Additionally, it warns against heeding any online recommendations to purchase coins under the 
+guise of investment advice. Investors are urged to firmly resist pyramid schemes, wire fraud, money laundering, and any other forms of illegal arbitrage activities"
+      [buttons]="alertButtons" (didDismiss)="setResult($event)"></ion-alert>
+  </div>
+</ion-content>

@@ -1,0 +1,191 @@
+<!-- <ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Assets</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">assets</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+
+<ion-content class="bg-base text-color">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="wallet-container text-color">
+    <h1>{{walletHeading}}</h1>
+    <ion-card class="mb-3 bg-base p-1">
+      <ion-card-content class="">
+        <ion-row>
+          <ion-col size="5" class="align-items-center">
+            <div class="total-value-icon">
+              <p>Total Value</p>
+              <ion-icon size="small" name="eye-outline" (click)="toggleTotalWorth()"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt-2 mb-0">
+          <ion-col size="12">
+            <div class="total-value-icon align-items-end text-color">
+              <h1>{{worthHidden ? '********' : accountsValuation?.['total'] | number: '1.2-2'}}</h1>
+              <p>USD</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <div class="menu-container bg-base text-color ">
+      <div class="iconWithText" (click)="onDeposit()">
+        <ion-img class="menu-icon invert-1" src="../../../assets/images/deposit-wallet.svg"></ion-img>
+        <p>Deposit</p>
+      </div>
+      <div class="iconWithText" (click)="onWithdraw()">
+        <ion-img class="menu-icon invert-1" src="../../../assets/images/withdraw-wallet.svg"></ion-img>
+        <p>Withdraw</p>
+      </div>
+      <div class="iconWithText" (click)="refer('wallet-transfer')">
+        <ion-img class="menu-icon invert-1" src="../../../assets/images/transfer-wallet.svg"></ion-img>
+        <p>Transfer</p>
+      </div>
+      <div class="iconWithText" (click)="refer('convert')">
+        <ion-img class="menu-icon invert-1" src="../../../assets/images/convert-wallet.svg"></ion-img>
+        <p>Convert</p>
+      </div>
+    </div>
+    <div *ngIf="showMyAccounts" class="my-accounts-container ">
+      <h6>My Accounts</h6>
+      <ion-card *ngFor="let account of baltypes" class="wallet-container bg-base text-color"
+        (click)="showWalletDataFn(account)">
+        <div class="wallet-amount-container">
+          <p>{{account?.toUpperCase()}}</p>
+          <p class="large-amount">{{ accountsValuation?.[account] | accurateNumber }} <span
+              style="font-size: 12px; font-weight: 100;">USD</span></p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-card>
+      <!-- <ion-card class="wallet-container" (click)="showWalletDataFn('p2p')">
+        <div class="wallet-amount-container">
+          <p>P2P</p>
+          <p class="large-amount">100.00 <span style="font-size: 12px; font-weight: 100;">USD</span></p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-card>
+      <ion-card class="wallet-container" (click)="showWalletDataFn('staking')">
+        <div class="wallet-amount-container">
+          <p>Staking</p>
+          <p class="large-amount">100.00 <span style="font-size: 12px; font-weight: 100;">USD</span></p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-card>
+      <ion-card class="wallet-container" (click)="showWalletDataFn('piggy')">
+        <div class="wallet-amount-container">
+          <p>Piggy</p>
+          <p class="large-amount">100.00 <span style="font-size: 12px; font-weight: 100;">USD</span></p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-card> -->
+    </div>
+  </div>
+  <div *ngIf="showWalletData">
+    <ion-button shape="round" (click)="hideWalletData()" fill="clear">
+      <ion-icon slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <div *ngIf="showWalletData && isArray(coins)" class="custom-segment">
+    <ion-button class="custom-segment-buttons" [class]="currentSegment == 'crypto' ? 'active' : ''"
+      (click)="changeActiveSegment('crypto')" fill="clear">Crypto</ion-button>
+    <ion-button class="custom-segment-buttons" [class]="currentSegment == 'fiat' ? 'active' : ''"
+      (click)="changeActiveSegment('fiat')" fill="clear">Fiat</ion-button>
+  </div>
+  <div *ngIf="showWalletData">
+    <ion-row *ngIf=" isArray(coins)" class="align-items-center">
+      <ion-col size="6" class="d-flex-row justify-content-between p-2">
+        <label class="custom-checkbox my-3">
+          <input type="checkbox" [(ngModel)]="showZero" value="showZero">
+          <span class="checkmark"></span>
+          <span class="w-100 agree privacy-text">
+            <span class="text-strong pt-3">Hide small balance</span>
+          </span>
+        </label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-input [(ngModel)]="search" class="search-field" (ionInput)="getItems($event)"
+          placeholder="Search"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf=" isArray(coins)">
+      <ion-col size="12">
+        <ion-input *ngIf="showSearchBar" label="Search Coins" label-placement="floating" fill="outline"
+          [(ngModel)]="search" class="custom-input my-1" (ionInput)="getItems($event)"></ion-input>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-grid class="table-style">
+      <!-- <ion-row>
+        <ion-col size="9" class="text-semi">
+          <p class="text-11">Pair / Vol &#x2193;</p>
+        </ion-col>
+        <ion-col size="3" class="text-semi">
+          <p class="text-11">Price &#x2193;</p>
+        </ion-col>
+      </ion-row> -->
+
+      <div *ngIf="isArray(coins)">
+        <div *ngFor="let t of coins" class="light-bg-f3">
+          <ion-row class="align-items-center p-2" *ngIf="t?.total > 0 || !showZero" (click)="balance(t.symbol,t.type)">
+            <ion-col size="9" class="d-flex align-items-center" style="gap: 10px;">
+              <ion-img class="w-28" src="{{t?.ico}}"></ion-img>
+              <div>
+                <span class="font-14 text-color">{{t?.symbol.toUpperCase()}}</span>
+                <span class="font-9 text-color"> {{t?.name.toUpperCase()}}</span>
+              </div>
+            </ion-col>
+            <ion-col size="3"><span class="text-color">{{t?.total | number: '1.2-2'}}</span></ion-col>
+          </ion-row>
+        </div>
+      </div>
+
+      <div *ngIf="!isArray(coins)">
+        <!-- <p class="fs-6 fw-bold"></p> -->
+        <ion-card *ngFor="let t of coins | keyvalue" class="border-0 bg-base">
+          <!-- (click)="balance(t?.value?.symbol,t?.value?.type)" -->
+          <ion-card-content class="border-0">
+            <div class="d-flex align-items-center justify-content-between w-100">
+              <div class="d-flex align-items-center justify-content-center gap-2">
+                <ion-img class="w-28"
+                  src="{{'https://ultra.codono.com/Upload/coin/' + t?.key?.toUpperCase() + '.png'}}"></ion-img>
+                <span class="font-14 text-color">{{t?.key?.toUpperCase()}}</span>
+              </div>
+              <span class="text-color">{{t?.value?.total | number: '1.2-2'}}</span>
+            </div>
+            <!-- <ion-col size="9" class="d-flex align-items-center" style="gap: 10px;">
+              <div>
+                <span class="font-14 text-color">{{t?.key?.toUpperCase()}}</span> -->
+            <!-- <span class="font-9 text-color"> {{t?.key?.toUpperCase()}}</span> -->
+            <!-- </div>
+            </ion-col>
+            <ion-col size="3"><span class="text-color">{{t?.value?.total | number: '1.2-2'}}</span></ion-col> -->
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <div *ngIf="!coins" class="w-100"
+        style="display: flex; align-items:center; justify-content:center; height: 60vh;">
+        <p class="m-0 p-0 text-center fs-6 fw-bold text-color">Please use Transfer feature to transfer funds to
+          {{walletHeading}}
+        </p>
+      </div>
+    </ion-grid>
+  </div>
+
+</ion-content>

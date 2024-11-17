@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-title >
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon class="text-color"  size="large" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-col size="8">
+        <span class="text-center">Enter 2FA code</span>
+      </ion-col>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-scroll">
+  <ion-col init="false" #swiper css-mode="true">
+    
+      <div class="welcome-bg">
+        <h2 class="text-center title">Please enter the 2FA code</h2>
+        <p class="text-center m-0" style="font-size: 15px !important;">Enter 6 Digit 2FA Code </p>
+        <ion-img src="../../assets/images/2fa.svg"
+          style="width: 70px !important; height:70px !important;"></ion-img>
+        <ng-otp-input class="d-flex-c mt-3" (onInputChange)="onOtpChange($event)"
+          [config]="{ length: 6, placeholder: '_', inputClass: 'otp-input-box', allowNumbersOnly: true }"
+          (keyup)="checkOTP()"></ng-otp-input>
+        
+        <ion-button (click)="check2FA()" expand="block" class="sliderButton m-0" [disabled]="gacode?.length !== 6">
+          Continue
+        </ion-button>
+        <p class="text-center m-0 terms-text">Please goto Google Authenticator where you previously saved 2FA Secret and enter 6 digit code</p>
+      </div>
+    
+ 
+  </ion-col>
+</ion-content>

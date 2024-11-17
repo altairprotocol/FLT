@@ -1,0 +1,69 @@
+.total-balance {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 25px 0px 10px 0px;
+
+    .total-balance-text {
+        font-size: 20px;
+    }
+
+    .total-balance-amount {
+        font-size: 25px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid lightgrey !important;
+}
+
+.deposit-details-box {
+    margin: 10px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    .deposit-details-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        width: 100%;
+    }
+}
+
+.copy-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    p {
+        margin-top: 8px;
+    }
+}
+
+.filled_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+
+    img {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+    }
+
+    p {
+        font-size: 13px;
+        color: green;
+    }
+
+}

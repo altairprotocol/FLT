@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">OTC Confirm</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center w-100 flex-column">
+      <p class="m-0 p-0 text-secondary">I want to buy</p>
+      <p class="text-success fs-2">{{trade_coin_amount}} {{trade_coin}}</p>
+    </div>
+    <div class="key-value-container w-100">
+      <div class="key-value">
+        <p class="key">Quote price</p>
+        <p class="value">{{base_coin_amount}} {{base_coin}}/{{trade_coin}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Quote Expires In</p>
+        <p class="value">{{time_left}} Seconds</p>
+      </div>
+    </div>
+    <ion-button expand="block" class="sliderButton mt-5" (click)="confirm()" [disabled]="time_left <= 0">
+      {{time_left <= 0 ? 'Expired' : 'Confirm' }} </ion-button>
+  </div>
+</ion-content>

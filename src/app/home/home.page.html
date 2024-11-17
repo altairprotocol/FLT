@@ -1,0 +1,196 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="text-color">Home</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding bg-content" [fullscreen]="true" style="margin-top: 40px;">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngIf="!isAuthenticated" class="card-style" style="margin-top: 50px;">
+    <ion-card-header class="pb-0">
+      <ion-card-title class="card-title head-table">Login / Signup</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content class="card-content">
+      <span class="card-txt">You have a token reward worth up to <br />
+        700 USDT to claim!
+      </span>
+      <ion-img class="crypto-img" src="assets/images/crypto.svg"></ion-img>
+    </ion-card-content>
+
+    <ion-button href="auth/register" class="signup-btn">Sign up</ion-button>
+    <ion-button href="login2" class="sign-inbtn">Log in</ion-button>
+  </ion-card>
+
+  <ion-card *ngIf="isAuthenticated" class="card-style" style="margin-top: 50px;">
+    <ion-card-header class="pb-0">
+      <ion-card-title class="card-title head-table f-23">Buy / Sell</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content class="card-content">
+      <span class="card-txt">You have a token reward worth up to <br />
+        700 USDT to claim!
+      </span>
+      <ion-img class="crypto-img" src="assets/images/crypto.svg"></ion-img>
+    </ion-card-content>
+
+    <ion-button href="tabs/trade" class="signup-btn">Buy</ion-button>
+    <ion-button href="tabs/trade" class="sign-inbtn">Sell</ion-button>
+  </ion-card>
+
+  <span class="pt-1 products-style text-large">
+    <span class="d-flex-col w-2" (click)="showComingSoon()">
+      <ion-img class="w-28" src="assets/images/binary.svg"></ion-img>
+      <ion-text class="text-semi">Binary</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="showComingSoon()">
+      <ion-img class="w-28" src="assets/images/investments.svg"></ion-img>
+      <ion-text class="text-semi">Investments</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="showComingSoon()">
+      <ion-img class="w-28" src="assets/images/forex.svg"></ion-img>
+      <ion-text class="text-semi">Forex</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="showComingSoon()">
+      <ion-img class="w-28" src="assets/images/bots.svg"></ion-img>
+      <ion-text class="text-semi">Bots</ion-text>
+    </span>
+  </span>
+
+
+  <span class="pt-1 products-style">
+    <span class="d-flex-col w-2" (click)="showComingSoon()">
+      <ion-img class="w-28" src="assets/images/token_offers.svg"></ion-img>
+      <ion-text class="text-semi">Token offers</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="showComingSoon()">
+      <ion-img class="w-28" src="assets/images/staking.svg"></ion-img>
+      <ion-text class="text-semi">Staking</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="showComingSoon()">
+      <ion-img class="w-28 " src="assets/images/p2p.svg"></ion-img>
+      <ion-text class="text-semi">P2P</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="showComingSoon()">
+      <ion-img class="w-28" src="assets/images/marketplace.svg"></ion-img>
+      <ion-text class="text-semi">Marketplace</ion-text>
+    </span>
+  </span>
+
+  <span class="pt-1 products-style">
+    <span class="d-flex-col w-2" (click)="refer('referral')">
+      <ion-img class="w-28 h-28" src="assets/images/referrals.svg"></ion-img>
+      <ion-text class="text-semi">Referrals</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="refer('history')">
+      <ion-img class="w-28" src="assets/images/transactions.svg"></ion-img>
+      <ion-text class="text-semi">Transactions</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="refer('/faq')">
+      <ion-img class="w-28" src="assets/images/knowledge_base.svg"></ion-img>
+      <ion-text class="text-semi">Guide</ion-text>
+    </span>
+    <span class="d-flex-col w-2" (click)="refer('/tabs/wallet')">
+      <ion-img class="w-28" src="assets/images/wallet.svg"></ion-img>
+      <ion-text class="text-semi">Wallet</ion-text>
+    </span>
+  </span>
+
+  <ion-card class="card-style-white mt-10">
+    <ion-card-content class="card-content">
+      <span class="flex-evenly py-2" *ngFor="let item of dataByIDFirstFour">
+        <ion-text class="text-currency text-sm">{{item?.ticker.toUpperCase().split('_')[0]}} /
+          {{item?.ticker.toUpperCase().split('_')[1]}}</ion-text>
+        <ion-text class="text-amount">{{item?.new_price * 1}}</ion-text>
+        <ion-text class="text-percent">-{{item?.change * 1}}</ion-text>
+      </span>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <!-- <ion-row class="pt-1 mt-10">
+    <ion-col size="6" *ngFor="let banner of banners">
+      <ion-img src="{{banner?.img}}" alt=""></ion-img>
+    </ion-col>
+  </ion-row> -->
+
+  <div class="scrolling-wrapper">
+    <ion-row class="pt-1 mt-10 flex-nowrap">
+      <ion-col class="flex-auto" size="6" *ngFor="let banner of banners">
+        <ion-img (click)="referToArticleView(banner.id)" [src]="banner?.img" alt="Banner image" class="img-fluid"></ion-img>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+  <ion-card class="card-style-white mt-10">
+    <ion-card-content class="card-content">
+      <div class="d-flex-col" style="align-items: start;">
+        <strong>Total assets</strong>
+        <strong>{{totalAssets ?? '0'}} USD</strong>
+      </div>
+      <div class="d-flex-col" style="align-items: end;">
+        <ion-icon size="small" (click)="refer('/tabs/wallet')" name="arrow-forward" class=""></ion-icon>
+        <div class="d-flex">
+          <p class="font-weight-bold font-12" (click)="refer('orders')">Orders</p>
+          <p class="font-weight-bold font-12" (click)="refer('/tabs/wallet')">| Assets Overview</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid class="table-style border-20 mt-10">
+    <ion-row>
+      <ion-segment class="table-head" (ionChange)="segmentChanged($event)" value="base_market">
+        <ion-segment-button class="segment-bg" mode="ios" value="trending" checked="true">
+          <ion-label class="text-11">Trending</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="segment-bg" mode="ios" value="gainers">
+          <ion-label class="text-11">Gainers</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="segment-bg" mode="ios" value="new">
+          <ion-label class="text-11">New</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="segment-bg" mode="ios" value="volume">
+          <ion-label class="text-11">Volume</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="segment-bg" mode="ios" value="losers">
+          <ion-label class="text-11">Losers</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <!-- <ion-col class="head-table">Losers</ion-col> -->
+    </ion-row>
+    <ion-row>
+      <ion-col size="5" class="text-semi">
+        <p class="text-11">Coins &#x2193;</p>
+      </ion-col>
+      <ion-col size="4" class="text-semi">
+        <p class="text-11">Price &#x2193;</p>
+      </ion-col>
+      <ion-col size="3" class="text-semi">
+        <p class="text-11">24h change &#x2193;</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of homeData" class="align-items-center flex" (click)="referToMarketDetail(item?.ticker);">
+      <ion-col size="6"><span class="my-flex"> <ion-img class="w-28 m-r-3" src="{{item?.icon}}"></ion-img>
+          <span class="font-14 label-color">{{item?.ticker.toUpperCase().split('_')[0]}}</span>
+          <span class="font-14 text-lighter label-color">/{{item?.ticker.toUpperCase().split('_')[1]}}</span>
+        </span>
+      </ion-col>
+      <ion-col size="3"><span class="label-color">{{item?.new_price | number: '1.2'}}</span></ion-col>
+      <ion-col size="3"><ion-button *ngIf="item?.change >= 0" class="positive-rate w-100 text-large">{{item?.change *
+          1}}%</ion-button>
+        <ion-button *ngIf="item?.change < 0" class="negative-rate w-100 text-large">{{item?.change *
+          1}}%</ion-button></ion-col>
+    </ion-row>
+    <!-- Add more rows as needed -->
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Deposit Detail</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="total-balance">
+    <p class="total-balance-text text-color">Amount</p>
+    <p class="total-balance-amount text-color">{{deposit.mum}} {{deposit.coinname.toUpperCase()}}</p>
+  </div>
+  <div class="border-top"></div>
+  <div class="deposit-details-box">
+    <div class="deposit-details-item">
+      <p class="text-large">Deposit Wallet</p>
+      <p class="text-large">SpotWallet</p>
+    </div>
+    <div class="deposit-details-item">
+      <p class="text-large">Address</p>
+      <div class="copy-box">
+        <p class="text-large w-75 text-end">{{deposit.username}}</p>
+        <ion-icon name="copy-outline" class="text-color" (click)="copyString(deposit.username)"></ion-icon>
+      </div>
+    </div>
+    <div class="deposit-details-item">
+      <p class="text-large">TxID</p>
+      <div class="copy-box">
+        <p class="text-medium w-75 text-end">{{deposit.txid}}</p>
+        <ion-icon name="copy-outline" class="text-color" (click)="copyString(deposit.txid)"></ion-icon>
+      </div>
+    </div>
+    <div class="deposit-details-item">
+      <p class="text-large">Deposit Fees</p>
+
+      <p class="text-large">{{deposit.fee ?? '---'}}</p>
+    </div>
+    <div class="deposit-details-item">
+      <p class="text-large">Date</p>
+      <p class="text-large">{{deposit.addtime * 1000 | date:'yyyy-MM-dd HH-mm-ss' }}</p>
+    </div>
+
+    <a class="text-warning" href="/faq">Need help? View FAQs</a>
+  </div>
+
+
+</ion-content>

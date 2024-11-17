@@ -1,0 +1,81 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <span class="icon-title p-2"><ion-icon class="text-color"  size="large" (click)="back()" name="arrow-back"></ion-icon>
+      <a class="text-medium txt-decoration" href="login2">Log In</a>
+    </span>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-item lines="none" class="heading bg-base w-50 d-flex align-items-center justify-items-center">
+    <img src="assets/logo.svg" alt="" />
+  </ion-item>
+  <h1 class="ms-5 fs-5 fw-500 text-large"></h1>
+
+  <form class="bg-form-light">
+    <ion-item lines="none" class="bg-base">
+      <div class="input-form">
+        <ion-input label="Username" label-placement="floating" fill="outline" placeholder="Enter username"
+          name="username" [(ngModel)]="userData.username" class="custom-input my-1"></ion-input>
+        <ion-input label="Email" label-placement="floating" fill="outline" placeholder="Enter email" name="email"
+          [(ngModel)]="userData.email" class="custom-input my-1"></ion-input>
+        <ion-item lines="none" class="bg-base">
+          <ion-input label="Code" label-placement="floating" fill="outline" placeholder="Enter Code" name="code"
+            [(ngModel)]="userData.code" class="custom-input my-1"></ion-input>
+          <ion-button (click)="emailcode(userData.email)" size='medium' class="w-50 request-code-btn ">Request
+            Code</ion-button>
+        </ion-item>
+        <ion-input label="Password" label-placement="floating" fill="outline" placeholder="Password" name="password"
+          class="custom-input my-1 w-80" [(ngModel)]="userData.password" name="password"
+          placeholder="Enter password"><ion-input-password-toggle style="color: beige!important;"
+            slot="end"></ion-input-password-toggle></ion-input>
+
+        <p *ngIf="this.toggleCode === 'hidden'" (click)="toggelInviteCode()" class="text-color">Have a referral code?
+          &#9660;
+        </p>
+        <p *ngIf="this.toggleCode === 'show'" (click)="toggelInviteCode()" class="text-color">Have a referral code?
+          &#9650;
+        </p>
+        <ion-input *ngIf="this.toggleCode === 'show'" label="Invite Code" label-placement="floating" fill="outline"
+          placeholder="Enter Invite Code" name="invite" [(ngModel)]="userData.invite"
+          class="custom-input my-1"></ion-input>
+
+        <label class="custom-checkbox my-3">
+          <input type="checkbox" [(ngModel)]="userData.acceptterms" name="acceptterms">
+          <span class="checkmark"></span>
+          <span class="agree privacy-text">
+            I agree to the <span class="text-strong">Terms of Service</span> and
+            <span class="text-strong">Privacy Policy</span>
+          </span>
+        </label>
+      </div>
+    </ion-item>
+    <!-- <ion-checkbox class="m-4" labelPlacement="end">
+    <span class="agree privacy-text">
+      I agree to the <strong>Terms of Service</strong> and
+       <strong>Privacy Policy</strong>
+    </span></ion-checkbox
+  > -->
+    <ion-button class="my-2 mx-5 text-capitalize button-primary" (click)="signUp()" expand="full">Create
+      Account</ion-button>
+    <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+      <ng-template>
+        <div class="block">
+          <div class="my-3"> <ion-text class="text-align-c text-p">
+              Before continuing, could you verify your email address by clicking on the link we just emailed you? if you
+              didn't receive the email, we will gladly send your another.
+            </ion-text></div>
+          <div>
+            <ion-button class="my-2 mx-5 text-capitalize button-primary" expand="full">Resend Verification
+              Email</ion-button>
+          </div>
+          <div>
+            <ion-button href="login2" class=" mx-5 text-capitalize button-danger" expand="full">Logout</ion-button>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+  </form>
+</ion-content>

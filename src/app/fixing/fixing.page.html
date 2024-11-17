@@ -1,0 +1,188 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="5"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="5">
+        <h4 style="margin: 0; margin-top: 5px;">Fixing</h4>
+      </ion-col>
+      <ion-col size="2">
+        <div class="d-flex w-100">
+          <ion-icon size="large" name="document-text-outline" (click)="refer('fixing-history')"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base text-color">
+  <div *ngIf="!loaded">
+    <ion-list class="bg-base p-0">
+      <ion-list-header class="bg-base">
+        <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+      </ion-list-header>
+      <ion-item lines="none" class="bg-base">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="loaded" class="container">
+    <ion-card class="m-0 p-0 mt-3 bg-base text-color shadow-xl" *ngFor="let item of stakingItems">
+      <!-- style="border: 0.1px solid var(--text-color);" -->
+      <ion-card-content class="list-container">
+        <div class="d-flex flex-column w-100">
+          <ion-img class="coin-icon w-100" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+          <p class="m-0 p-0 mt-1 w-100 coin-text text-center text-secondary fw-bolder">Locked Staking</p>
+        </div>
+        <div class="stake-container">
+          <h3 class="fw-bolder">{{item?.title?.toUpperCase()}}</h3>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-3">
+            <p class="m-0 p-0 text-secondary text-xs">Duration</p>
+            <div class="duration-container">
+              <p *ngFor="let durationItem of item?.percentage | keyvalue" class="text-xs w-100"
+                [class]="selectedDurations[item?.id] === durationItem.key ? 'bg-success text-color' : 'text-white'"
+                (click)="setDuration(durationItem?.key, item?.id)" id="{{durationItem.value}}">
+                {{durationItem.key}}</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-50 gap-3">
+            <p class="m-0 p-0 text-secondary coin-text">Return</p>
+            <p class="m-0 p-0 text-secondary value">{{formatNumber(getLargestReturn(item?.percentage))}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-50 gap-3">
+            <p class="m-0 p-0 text-secondary coin-text">Min Amount</p>
+            <p class="m-0 p-0 text-secondary value">{{formatNumber(item?.minvest)}}</p>
+          </div>
+          <div class="stake-now-btn">
+            <ion-button size="small" color="primary" (click)="confirmStake(item?.id)">Stake Now</ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

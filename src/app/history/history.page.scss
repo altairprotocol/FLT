@@ -1,0 +1,26 @@
+.text-dark-force {
+    --ion-color-base: black !important;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+:host {
+    ::ng-deep .segment-button-checked {
+        background: var(--bg-primary-color) !important;
+        color: var(--bg-primary-color) !important;
+    }
+}

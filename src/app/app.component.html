@@ -1,0 +1,119 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" side="start" menuId="main-menu">
+      <ion-header class="shadow-n bg-base text-color">
+        <ion-toolbar class="bg-base">
+          <ion-buttons slot="start">
+            <ion-menu-toggle menu="main-menu" class="p-2 d-flex d-block">
+              <ion-icon size="large" name="arrow-back"></ion-icon>
+            </ion-menu-toggle>
+          </ion-buttons>
+          <ion-title class="text-center"></ion-title>
+          <ion-buttons slot="end" class="p-2">
+            <a *ngIf="!darkMode" class="text-medium txt-decoration" (click)="changeToDarkMode(true)">
+              <ion-img class="w-18" src="assets/images/dark-mode.svg"></ion-img>
+            </a>
+            <a *ngIf="darkMode" class="text-medium txt-decoration" (click)="changeToDarkMode(false)">
+              <ion-img class="w-18 invert-1" src="assets/images/light-mode.svg"></ion-img>
+            </a>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="bg-base">
+        <div class="ion-padding">
+          <span class="d-flex justify-content-between gap-2 w-100">
+            <div class="d-flex justify-content-start gap-2" (click)="referTo('/login2');">
+              <span><ion-img class="w-28" src="assets/images/coin.svg"></ion-img></span>
+              <ion-text *ngIf="isAuthenticated" class="text-large">{{fullName}} <br>
+                <span class="privacy-text">{{userEmail}}</span></ion-text>
+              <ion-text *ngIf="!isAuthenticated" class="text-large">Guest user <br>
+                <span class="privacy-text">Please log in</span></ion-text>
+            </div>
+            <ion-buttons class="text-end" slot="end" class="p-2">
+              <a *ngIf="!darkMode" class="text-medium txt-decoration" (click)="changeToDarkMode(true)">
+                <ion-img class="w-18" src="assets/images/dark-mode.svg"></ion-img>
+              </a>
+              <a *ngIf="darkMode" class="text-medium txt-decoration" (click)="changeToDarkMode(false)">
+                <ion-img class="w-18 invert-1" src="assets/images/light-mode.svg"></ion-img>
+              </a>
+            </ion-buttons>
+          </span>
+
+          <div *ngIf="!hideKycBox" (click)="refer('/auth/kyc-status')" class="d-block mt-3 p-3 info-mesg">
+            <span class="text-medium">Please Verify Your Account</span>
+            <br>
+            <small class="text-10 text-lighter">Please complete verification to enable cool features. </small>
+          </div>
+        </div>
+        <div class="bg-form-light px-3 side-nav">
+          <a [href]="isAuthenticated ? 'auth/profile2' : 'login2'"
+            class="text-large txt-decoration d-flex justify-content-start gap-2">
+            <ion-img class="w-side-icon invert-1" src="assets/images/profile-side.svg"></ion-img>My Profile</a>
+          <a [href]="isAuthenticated ? 'referral' : 'login2'"
+            class="text-large txt-decoration d-flex justify-content-start gap-2">
+            <ion-img class="w-side-icon invert-1" src="assets/images/p2p.svg"></ion-img>Referral</a>
+          <a [href]="isAuthenticated ? 'auth/kyc-status' : 'login2'"
+            class="text-large txt-decoration d-flex justify-content-start gap-2">
+            <ion-img class="w-side-icon invert-1" src="assets/images/security.svg"></ion-img>Verification Center</a>
+          <a [href]="isAuthenticated ? 'security-center' : 'login2'"
+            class="text-large txt-decoration d-flex justify-content-start gap-2">
+            <ion-img class="w-side-icon invert-1" src="assets/images/verification.svg"></ion-img>Security</a>
+          <a href="support" class="text-large txt-decoration d-flex justify-content-start gap-2">
+            <ion-img class="w-side-icon invert-1" src="assets/images/head.svg"></ion-img>Support</a>
+          <span *ngIf="isAuthenticated" (click)="scanQRCode()"
+            class="text-large txt-decoration d-flex justify-content-start gap-2">
+            <ion-img class="w-side-icon invert-1" src="assets/images/qr_login.svg"></ion-img>Login to Desktop</span>
+          <a *ngIf="isAuthenticated" class="text-large txt-decoration d-flex justify-content-start gap-2"
+            (click)="logout()"><ion-img class="w-side-icon invert-1"
+              src="assets/images/log-out.svg"></ion-img>Logout</a>
+          <a *ngIf="!isAuthenticated" href="login2"
+            class="text-large txt-decoration d-flex justify-content-start gap-2"><ion-img class="w-side-icon invert-1"
+              src="assets/images/log-out.svg"></ion-img>Login</a>
+        </div>
+      </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+
+  <ion-header [hidden]="!showMenu">
+    <ion-toolbar class="bg-content bg-base">
+      <ion-item class="bg-content d-flex gap-2 bg-base" lines="none">
+        <ion-menu-toggle menu="main-menu">
+          <!-- <ion-img class="profile-img" src="assets/images/profile.svg"></ion-img> -->
+          <ion-icon class="headerIcon" color="primary" name="person-circle"></ion-icon>
+        </ion-menu-toggle>
+        <!-- <ion-img class="w-img search-icon" src="assets/images/search.svg"></ion-img> -->
+        <ion-icon class="w-img search-icon" color="dark" name="search-outline"></ion-icon>
+        <ion-input class="search-field" style="padding-left: 30px !important;" placeholder="Search"
+          (input)="search($event)" [(ngModel)]="mainSearchBar"></ion-input>
+        <!-- <a href="support" class="ml-3"><ion-img class="support-img" src="assets/images/head.svg"></ion-img></a> -->
+        <!-- <a href="support" class="ml-3"><ion-icon color="secondary" name="chatbubbles"></ion-icon></a> -->
+        <ion-icon class="headerIcon" name="chatbubbles-outline" (click)="gotoToPage('support');"></ion-icon>
+        <!-- <a href="support" class="ml-3"><ion-icon color="secondary" name="notifications"></ion-icon></a> -->
+        <ion-icon class="headerIcon" name="notifications-outline" (click)="gotoToPage('history');"></ion-icon>
+      </ion-item>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content *ngIf="isSearchActivated" class="bg-base">
+    <ion-card *ngFor="let item of coins" class="bg-base card-border">
+      <ion-card-content>
+        <ion-row class="align-items-center flex" (click)="referToMarketDetail(item?.ticker);">
+          <ion-col size="6"><span class="my-flex"> <ion-img class="w-28 m-r-3" src="{{item?.icon}}"></ion-img>
+              <span class="font-14 text-color">{{item?.ticker.toUpperCase().split('_')[0]}}</span>
+              <span class="font-14 text-color">/{{item?.ticker.toUpperCase().split('_')[1]}}</span>
+            </span>
+          </ion-col>
+          <ion-col size="3"><span class="text-color">{{item?.new_price | number: '1.2'}}</span></ion-col>
+          <ion-col size="3"><ion-button *ngIf="item?.change >= 0" class="positive-rate w-100 text-large">{{item?.change
+              *
+              1}}%</ion-button>
+            <ion-button *ngIf="item?.change < 0" class="negative-rate w-100 text-large">{{item?.change *
+              1}}%</ion-button></ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</ion-app>

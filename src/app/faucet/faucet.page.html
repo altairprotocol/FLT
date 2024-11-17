@@ -1,0 +1,140 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="5"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="5">
+        <h4 style="margin: 0; margin-top: 5px;">Faucet</h4>
+      </ion-col>
+      <ion-col size="2">
+        <div class="d-flex w-100">
+          <ion-icon size="large" name="document-text-outline" (click)="refer('faucet-logs')"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <div class="segments-container mt-5">
+      <div class="custom-segment">
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Live' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Live')">Live</div>
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Upcoming' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Upcoming')">Upcoming</div>
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Ended' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Ended')">Ended</div>
+      </div>
+    </div>
+    <ion-card *ngIf="activeSegment == 'Live' && faucets?.list_running.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-secondary">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="activeSegment == 'Upcoming' && faucets?.list_upcoming.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-secondary">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="activeSegment == 'Ended' && faucets?.list_ended.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-secondary">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div *ngIf="activeSegment == 'Live'">
+      <ion-card class="m-0 mt-3 bg-base text-color" *ngFor="let faucet of faucets?.list_running">
+        <ion-card-content>
+          <div class="list-container d-flex align-items-center justify-content-between w-100 gap-3">
+            <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+            <div class="d-flex align-items-start justify-content-start w-100 flex-column gap-1">
+              <p class="p-0 m-0 fs-5">{{faucet?.name}}</p>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Quantity</p>
+                <p class="p-0 m-0">{{faucet?.num}} {{faucet?.coinname}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Coin</p>
+                <p class="p-0 m-0">{{faucet?.coinname}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Start Time</p>
+                <p class="p-0 m-0">{{faucet?.endTime}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">End Time</p>
+                <p class="p-0 m-0">{{faucet?.beginTime}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-end w-100">
+                <ion-button size="small" color="success" (click)="claimFaucet(faucet?.id)">Claim</ion-button>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngIf="activeSegment == 'Upcoming'">
+      <ion-card class="m-0 mt-3 bg-base text-color" *ngFor="let faucet of faucets?.list_upcoming">
+        <ion-card-content>
+          <div class="list-container d-flex align-items-center justify-content-between w-100 gap-3">
+            <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+            <div class="d-flex align-items-start justify-content-start w-100 flex-column gap-1">
+              <p class="p-0 m-0 fs-5">{{faucet?.name}}</p>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Quantity</p>
+                <p class="p-0 m-0">{{faucet?.num}} {{faucet?.coinname}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Coin</p>
+                <p class="p-0 m-0">{{faucet?.coinname}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Start Time</p>
+                <p class="p-0 m-0">{{faucet?.endTime}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">End Time</p>
+                <p class="p-0 m-0">{{faucet?.beginTime}}</p>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngIf="activeSegment == 'Ended'">
+      <ion-card class="m-0 mt-3 bg-base text-color" *ngFor="let faucet of faucets?.list_ended">
+        <ion-card-content>
+
+          <div class="list-container d-flex align-items-center justify-content-between w-100 gap-3">
+            <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+            <div class="d-flex align-items-start justify-content-start w-100 flex-column gap-1">
+              <p class="p-0 m-0 fs-5">{{faucet?.name?.toUpperCase()}}</p>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Quantity</p>
+                <p class="p-0 m-0">{{faucet?.num}} {{faucet?.coinname}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Coin</p>
+                <p class="p-0 m-0">{{faucet?.coinname}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">Start Time</p>
+                <p class="p-0 m-0">{{faucet?.beginTime}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+                <p class="p-0 m-0 text-secondary">End Time</p>
+                <p class="p-0 m-0">{{faucet?.endTime}}</p>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

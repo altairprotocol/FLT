@@ -1,0 +1,78 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">My Ads</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <div *ngIf="adsList?.length === 0" class="no-ads-container">
+      <ion-img src="../../assets/images/p2p-ads-empty-face.svg"></ion-img>
+      <p>Oops You dont have any active ads </p>
+      <ion-button class="w-100" expand="block" color="primary">Post a new Ad</ion-button>
+    </div>
+    <div *ngIf="!(adsList?.length === 0)" class="ads-container">
+      <!-- <div class="ads-filter">
+        <p>Coin &#x2193;</p>
+        <p>Type &#x2193;</p>
+        <p>Status &#x2193;</p>
+      </div> -->
+
+      <ion-card *ngFor="let ad of adsList | keyvalue">
+        <ion-card-content class="w-100 bg-base text-color">
+          <div class="single-ad-container d-flex align-items-center justify-content-center w-100 flex-column gap-2">
+            <div class="d-flex align-items-center justify-content-between w-100">
+              <div class="d-flex align-items-center justify-content-center w-100 gap-1">
+                <p class="m-0 p-0 fs-6 fw-bolder" [class]="ad?.value?.ad_type == '1' ? 'text-success' : 'text-danger'">
+                  {{ad?.value?.ad_type == '1' ? 'Buy': 'Sell'}}</p>
+                <p class="m-0 p-0 fs-6 fw-bolder">{{ad?.value?.coin}}</p>
+                <p class="m-0 p-0 text-secondary">with</p>
+                <p class="m-0 p-0 fs-6 fw-bold">{{ad?.value?.fiat}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-center w-100 flex-column">
+                <!-- <div class="d-flex align-items-center justify-content-end w-100">
+                  <ion-icon size="small" name="trash-outline" color="danger"></ion-icon>
+                  <span class="text-danger mt-1" style="font-size: 12px !important;"> Close Ad</span>
+                </div> -->
+                <div class="d-flex align-items-center justify-content-end w-100 gap-2">
+                  <span [class]="ad?.value?.online == '1' ? 'text-success' : 'text-secondary'"
+                    style="font-size: 12px !important;">{{ad?.value?.online == '1' ? 'Online' : 'Offline'}}</span>
+                  <ion-icon [color]="ad?.value?.online == '1' ? 'success' : 'secondary'"
+                    name="toggle-outline"></ion-icon>
+                  <!-- <ion-icon [color]="ad?.value?.online == '1' ? 'success' : 'secondary'"
+                    name="create-outline"></ion-icon> -->
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between w-100">
+              <p class="p-0 m-0 text-secondary">Price</p>
+              <p class="p-0 m-0 text-secondary fs-6 fw-bolder">{{formatNumber(ad?.value?.fixed_price)}}
+                {{ad?.value?.fiat}}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between w-100">
+              <p class="p-0 m-0 text-secondary">Amount</p>
+              <p class="p-0 m-0 text-secondary fs-6 fw-bolder">{{formatNumber(ad?.value?.available)}}
+                {{ad?.value?.fiat}}</p>
+            </div>
+            <div class="custom-divider"></div>
+            <div class="d-flex align-items-start justify-content-start w-100 custom-border-left">
+              <p *ngIf="ad?.value?.method?.length === 0" class="p-0 m-0" style="margin-left: 5px !important;">Bank
+                Transfer</p>
+              <p class="p-0 m-0" style="margin-left: 5px !important;">{{ad?.value?.method?.join(" / ")}}
+              </p>
+            </div>
+            <!-- TODO: Add edit  -->
+            <!-- <div class="d-flex align-items-center justify-content-end w-100 gap-2">
+              <ion-icon name="create-outline" style="margin-bottom: 5px !important;"></ion-icon>
+              <p class="m-0 p-0 fs-6 fw-bolder">Edit</p>
+            </div> -->
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

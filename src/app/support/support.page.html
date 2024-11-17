@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-toolbar class="bg-base">
+      <ion-row>
+        <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color" name="arrow-back"></ion-icon></span></ion-col>
+        <ion-title class="text-color">Support</ion-title>
+      </ion-row>
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base" [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row class="ion-padding">
+    <ion-col size="12">
+      <h2 class="text-color">Having issues?</h2>
+    </ion-col>
+    <ion-col size="12">
+      <a class="text-warning" href="/faq">Need help? View FAQs</a>
+    </ion-col>
+    <ion-col size="12">
+      <ion-text class="text-p">We are happy to help you. Contact using one of following methods.</ion-text>
+    </ion-col>
+    <ion-col size="12">
+      <div class="d-block p-3 support-channel my-2">
+        <span class="text-large">Telegram</span>
+        <br>
+        <a href="https://telegram.me/joinchat/EEv2g-7CG" class="text-decoration-none"><span
+            class="privacy-text font-15">https://telegram.me/joinchat/EEv2g-7CG</span></a>
+      </div>
+    </ion-col>
+    <ion-col size="12">
+      <div class="d-block p-3 support-channel my-2">
+        <span class="text-large">Skype</span>
+        <br>
+        <a href="https://skype.com/join/EEv2g-7CG" class="text-decoration-none"><span
+            class="privacy-text font-15">https://skype.com/join/EEv2g-7CG</span></a>
+      </div>
+    </ion-col>
+    <ion-col size="12">
+      <div class="d-block p-3 support-channel my-2">
+        <span class="text-large">Email</span>
+        <br>
+        <a href="mailto:support@primalx.io" class="text-decoration-none"><span
+            class="privacy-text font-15">support&#64;primalx.io</span></a>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

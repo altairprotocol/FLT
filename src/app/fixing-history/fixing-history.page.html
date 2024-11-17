@@ -1,0 +1,72 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Fixing History</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base text-color">
+  <div class="container">
+    <ion-card *ngFor="let item of stakingItems" class="bg-base text-color">
+      <ion-card-content>
+        <div class="voting-info-container w-100">
+          <div class="key-value">
+            <p class="key">Staking ID</p>
+            <p class="value">{{item?.staking_id}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Amount</p>
+            <p class="value">{{formatNumber(item?.amount)}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Period</p>
+            <p class="value">{{item?.period}} Days</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Start Time</p>
+            <p class="value">{{formatDate(item?.begintime)}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">End Time</p>
+            <p class="value">{{formatDate(item?.endtime)}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Percentage</p>
+            <p class="value">{{item?.percentage}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Status</p>
+            <p class="value">{{item?.status == '1' ? 'Active': 'Inactive'}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Coin Name</p>
+            <p class="value">{{item?.coinname.toUpperCase()}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Penalty Coin</p>
+            <p class="value">{{item?.penalty_coin?.toUpperCase()}}</p>
+          </div>
+          <div class="key-value">
+            <p></p>
+            <ion-button size="small" [color]="item?.allow_withdrawal == '0' ? 'primary' : 'warning'"
+              (click)="confirmWithdraw(item?.docid, item)">{{item?.allow_withdrawal == "0" ? 'Show
+              Info' :
+              'Cancel'}}</ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="stakingItems && stakingItems.length === 0">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="fs-6 text-secondary">No data found!</p>
+          <!-- <p *ngIf="stakingItems && stakingItems.length > 0" class="fs-6 text-secondary">No data found!</p> -->
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

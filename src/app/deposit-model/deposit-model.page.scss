@@ -1,0 +1,24 @@
+.d-flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.d-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-dark-force {
+    --ion-color-base: var(--text-color) !important;
+}

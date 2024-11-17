@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" 
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Payment Successful</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="d-flex h-100 w-100 align-items-center justify-content-center flex-column"
+      style="height: 80vh !important;">
+      <ion-icon size="large" color="success" name="checkmark-circle"
+        style="width: 100px !important; height: 100px !important"></ion-icon>
+      <p class="m-0 p-0 fs-4">P2P Order is Completed</p>
+    </div>
+    <ion-button (click)="refer('/tabs/wallet')" expand="block" color="tertiary">Done</ion-button>
+  </div>
+</ion-content>

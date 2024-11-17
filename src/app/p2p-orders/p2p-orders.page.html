@@ -1,0 +1,91 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">P2P Orders</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="segments-container">
+      <div class="custom-segment">
+        <div class="custom-segment-buttons" [class]="activeOrderSegment == 'Placed' ? 'active' : ''"
+          (click)="changeOrderSegment('Placed')">Placed</div>
+        <div class="custom-segment-buttons" [class]="activeOrderSegment == 'Received' ? 'active' : ''"
+          (click)="changeOrderSegment('Received')">Received</div>
+      </div>
+
+      <div class="custom-segment mt-3 mb-3">
+        <div class="custom-segment-buttons" [class]="activeSubOrderSegment == 'All' ? 'active' : ''"
+          (click)="changeSubOrderSegment('All')">All</div>
+        <div class="custom-segment-buttons" [class]="activeSubOrderSegment == 'In Progress' ? 'active' : ''"
+          (click)="changeSubOrderSegment('In Progress')">In Progress</div>
+        <div class="custom-segment-buttons" [class]="activeSubOrderSegment == 'Cancelled' ? 'active' : ''"
+          (click)="changeSubOrderSegment('Cancelled')">Cancelled</div>
+      </div>
+    </div>
+
+    <ion-card *ngIf="ordersList?.length === 0">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <h3>No data found</h3>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngFor="let order of ordersList" (click)="referToOrderInfo(order?.orderid)">
+      <ion-card-content class="w-100">
+        <div class="single-ad-container d-flex align-items-center justify-content-center w-100 flex-column gap-2">
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="d-flex align-items-center justify-content-start w-100 gap-1">
+              <p class="m-0 p-0 fs-6 fw-bolder" [class]="order?.ad_type == '1' ? 'text-success' : 'text-danger'">
+                {{order?.ad_type == '1' ? 'Buy' : 'Sell'}}</p>
+              <p class="m-0 p-0 fs-6 fw-bolder">{{order?.coin?.toUpperCase()}}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-end w-100 gap-1">
+              <span *ngIf="order?.status == '0'" class="fw-bolder mt-1 text-warning"
+                style="font-size: 12px !important;">Pending</span>
+              <span *ngIf="order?.status == '1'" class="fw-bolder mt-1 text-success"
+                style="font-size: 12px !important;">Paid</span>
+              <span *ngIf="order?.status == '2'" class="fw-bolder mt-1 text-danger"
+                style="font-size: 12px !important;">Cancelled</span>
+              <span *ngIf="order?.status == '3'" class="fw-bolder mt-1 text-danger"
+                style="font-size: 12px !important;">Disputed</span>
+              <span *ngIf="order?.status == '4'" class="fw-bolder mt-1 text-success"
+                style="font-size: 12px !important;">Completed</span>
+              <ion-icon size="small" name="arrow-forward-outline"></ion-icon>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Amount</p>
+            <p class="p-0 m-0 text-secondary fs-6 fw-bolder">{{formatNumber(order?.fiat_qty)}}
+              {{order?.fiat?.toUpperCase()}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Price</p>
+            <p class="p-0 m-0 text-secondary fs-6 ">{{formatNumber(order?.fixed_price)}} {{order?.fiat?.toUpperCase()}}
+            </p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Quantity</p>
+            <p class="p-0 m-0 text-secondary fs-6">{{order?.coin_qty}} {{order?.coin?.toUpperCase()}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Order Number</p>
+            <p class="p-0 m-0 text-secondary fs-6">{{order?.orderid}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Peer Name</p>
+            <div class="d-flex align-items-center justify-content-center gap-2">
+              <p class="p-0 m-0 text-secondary fs-6 fw-bolder">{{order?.name?.toUpperCase()}}</p>
+              <ion-icon name="chatbubble-ellipses"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

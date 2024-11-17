@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="3"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Payment Settings</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container d-flex align-items-center justify-content-between flex-column h-100 w-100 text-color">
+    <ion-card class="w-100 mt-3 bg-base text-color" *ngIf="paymentMethods?.length === 0">
+      <ion-card-content class="w-100">
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p>No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div class="w-100">
+      <ion-card class="" *ngFor="let method of paymentMethods">
+        <ion-card-content class="bg-base text-color">
+          <div class="d-flex align-items-start justify-content-start w-100 flex-column gap-2">
+            <p class="m-0 p-0 fw-bolder fs-5">Bank Transfer</p>
+            <p class="m-0 p-0  text-color">{{method?.bank}}</p>
+            <p class="m-0 p-0  text-color">{{method?.bankaddr}}</p>
+            <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+              <p class="m-0 p-0  text-secondary">{{formatDate(method?.addtime)}}</p>
+              <div class="d-flex align-items-center justify-content-center gap-2">
+                <!-- <ion-icon (click)="editBank(method)" name="create-outline" color="primary"></ion-icon> -->
+                <ion-icon (click)="confirmDelete(method?.id)" name="trash-outline" color="danger"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-button class="w-100 mb-3" slot="end" expand="block" (click)="referTo('p2p-payment-method-new')">Add a new
+      Payment Method</ion-button>
+  </div>
+</ion-content>

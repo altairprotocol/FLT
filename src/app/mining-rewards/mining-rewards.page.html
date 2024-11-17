@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="2"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="8" class="text-center">
+        <h4 style="margin: 0; margin-top: 5px;">My Rewards</h4>
+      </ion-col>
+      <ion-col size="2">
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <div class="container text-color">
+    <ion-card class="m-0 bg-base text-color" *ngIf="miningRewardsList?.length === 0">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <h1>No data found</h1>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let item of miningRewardsList">
+      <ion-card-content class="bg-base text-color">
+        <div class="key-value">
+          <p class="key">PoolId</p>
+          <p class="value">3123</p>
+        </div>
+        <div class="key-value">
+          <p class="key">RentId</p>
+          <p class="value">3213123</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Coin</p>
+          <p class="value">USDT</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Reward</p>
+          <p class="value">121</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Mining Hash</p>
+          <p class="value">0x42...aknn</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Time</p>
+          <p class="value">2024-07-29 12:13:11</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

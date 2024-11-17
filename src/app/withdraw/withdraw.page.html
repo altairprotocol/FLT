@@ -1,0 +1,60 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Withdraw</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card class="p-2 bg-base card-border">
+    <div class="total-balance">
+      <p class="total-balance-text">Total Balance</p>
+      <p class="total-balance-amount">{{coin_total | number: '1.8'}} {{coin_name}}</p>
+    </div>
+
+    <div class="withdraw-form">
+      <div class="w-100">
+        <ion-item class="qrIconWithInput bg-base" lines="none">
+          <ion-input label="Address ({{network.toUpperCase()}})" label-placement="floating" fill="outline"
+            class="custom-input my-1 bg-base" [(ngModel)]="inputData.sendto">
+          </ion-input>
+          <ion-icon slot="end" (click)="scanQRCode()" name="qr-code-outline" class="qr-icon text-color">
+          </ion-icon>
+        </ion-item>
+
+
+        <!-- <ion-icon (click)="scanQRCode()" name="qr-code-outline"></ion-icon>
+        <ion-input label="Address ({{network.toUpperCase()}})" label-placement="floating" fill="outline"
+          class="custom-input my-1" [(ngModel)]="inputData.sendto"></ion-input> -->
+      </div>
+      <div class="w-100">
+        <span (click)="max()" class="">Max</span>
+        <ion-input label="Amount" label-placement="floating" fill="outline" class="custom-input my-1"
+          [(ngModel)]="sendAmount" min="0.000001" max="100000000" inputmode="decimal" type="number"
+          (input)="calculateReceiveAmount()" helperText="{{this.msg}}"></ion-input>
+      </div>
+      <ion-input label=" Fund Password" label-placement="floating" fill="outline" class="custom-input my-1"
+        [(ngModel)]="inputData.password"><ion-input-password-toggle style="color: beige!important;"
+          slot="end"></ion-input-password-toggle></ion-input>
+    </div>
+
+    <div class="action-buttons">
+      <ion-row>
+        <ion-col size="6">
+          <ion-button color="danger" expand="block" class="h-40" (click)="back()">Cancel</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button
+            (click)="send(this.inputData.password, this.sendAmount, this.coin, this.inputData.sendto, this.selectedType)"
+            color="success" expand="block" class="h-40">Send</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-card>
+</ion-content>

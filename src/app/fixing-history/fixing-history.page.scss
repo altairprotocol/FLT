@@ -1,0 +1,19 @@
+.container {
+    .voting-info-container {
+        .key-value {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            .key {
+                font-size: 15px;
+                color: gray;
+            }
+
+            .value {
+                font-weight: 700;
+            }
+        }
+    }
+}

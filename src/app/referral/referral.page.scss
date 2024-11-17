@@ -1,0 +1,42 @@
+.top-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 5px 0px 5px 0px;
+    background: var(--bg-primary-color);
+    height: 60px;
+}
+
+.qr-msg-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    margin: 20px 0px 20px 0px;
+
+    .qr-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .qr-text {
+        width: 85%;
+        text-align: center;
+        font-size: 13px;
+        color: var(--text-color);
+    }
+}
+
+.copy-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    p {
+        margin-top: 8px;
+    }
+}

@@ -1,0 +1,38 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Security</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <form class="bg-form-light">
+    <ion-item lines="none" class="bg-base">
+      <div class="input-form">
+        <ion-text>
+          <h2 class="text-large">Update Password</h2>
+        </ion-text>
+        <ion-text>
+          <h2 class="text-p pr-b-15">Ensure your account is using a long, random password to stay secure.</h2>
+        </ion-text>
+        <ion-input label="Current Password" label-placement="floating" fill="outline" placeholder="Current Password"
+          name="oldPassword" [(ngModel)]="oldPassword" class="custom-input my-1"></ion-input>
+        <ion-input label="New Password" label-placement="floating" fill="outline" placeholder="New Password"
+          name="newPassword" class="custom-input my-1" [(ngModel)]="newPassword"></ion-input>
+        <ion-input label="Confirm Password" label-placement="floating" fill="outline" placeholder="Confirm Password"
+          name="confirmNewPassword" [(ngModel)]="confirmNewPassword" class="custom-input my-1"></ion-input>
+        <ion-text *ngIf="response">{{response}}</ion-text>
+
+
+      </div>
+    </ion-item>
+
+    <ion-button class="my-5 mx-5 text-capitalize button-primary" (click)="updatePassword()"
+      expand="full">Save</ion-button>
+  </form>
+</ion-content>

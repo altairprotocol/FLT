@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="4">
+        <h4 style="margin: 0; margin-top: 5px;">Store</h4>
+      </ion-col>
+      <ion-col size="2">
+        <div class="d-flex w-100 gap-3">
+          <ion-icon size="large" name="document-text-outline" (click)="refer('store-orders')"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col size="2">
+        <div class="d-flex w-100 gap-3">
+          <ion-icon size="large" name="home-outline" (click)="refer('store-addresses')"></ion-icon>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <ion-card *ngFor="let item of storeItems" class="w-100 p-0 m-0 bg-base text-color" (click)="viewItem(item?.id)">
+      <ion-card-content>
+        <ion-img class="discount-badge" src="../../assets/images/store-discount.svg"></ion-img>
+        <div class="item-list">
+          <div class="image-slider">
+            <ion-img class="product-image" [src]="exchangeUrl + item?.img"></ion-img>
+          </div>
+          <div class="product-info">
+            <h1 class="product-name">{{item?.name}}</h1>
+            <div class="product-description" [innerHTML]="item?.content?.substring(0, 30)"></div>
+            <p class="product-price">Price: {{item?.buycoin}} {{item?.price}} [${{item?.price}}]</p>
+            <div class="buy-now-btn">
+              <ion-button size="small" color="success">Buy Now</ion-button>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

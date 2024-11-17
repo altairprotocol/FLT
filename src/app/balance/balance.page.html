@@ -1,0 +1,87 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-toolbar class="bg-base">
+      <ion-row>
+        <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+              name="arrow-back"></ion-icon></span></ion-col>
+        <ion-title class="text-color">Balance</ion-title>
+      </ion-row>
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card class="p-2 bg-base card-border" *ngIf="coin_total">
+    <ion-row class="align-items-center p-2">
+      <ion-col size="2"><img src="{{this.coin_img}}" width="40" alt=""></ion-col>
+      <ion-col size="10">{{coin.toUpperCase()}} <small>{{coin.toUpperCase()}}</small></ion-col>
+    </ion-row>
+    <div class="d-flex justify-content-between align-items-center p-2">
+      <ion-text>Total <small>({{this.coin.toUpperCase()}})</small></ion-text>
+      <ion-text>{{this.coin_total * 1}}</ion-text>
+    </div>
+    <div class="d-flex justify-content-between align-items-center p-2">
+      <ion-text>Available <small>({{this.coin.toUpperCase()}})</small></ion-text>
+      <ion-text>{{this.available * 1}}</ion-text>
+    </div>
+    <div class="d-flex justify-content-between align-items-center p-2 border-btm">
+      <ion-text>In order <small>({{this.coin.toUpperCase()}})</small></ion-text>
+      <ion-text>{{this.inorder * 1}}</ion-text>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center p-2">
+      <ion-text>Estimated Value <small>({{this.conversion_coin}})</small></ion-text>
+      <ion-text>{{this.fiat}}</ion-text>
+    </div>
+
+    <div *ngIf="homeData?.length > 0">
+      <h4>Go to Trade</h4>
+      <ion-card class="bg-base">
+        <ion-card-content>
+          <ion-row *ngFor="let item of homeData" class="align-items-center">
+            <ion-col size="5">
+              <ion-row class="align-items-center p-0 m-0">
+                <ion-col size="3"><ion-img class="w-28" src="{{item?.icon}}"></ion-img></ion-col>
+                <ion-col size="9">
+                  <span class="font-14">{{item?.ticker.toUpperCase().split('_')[0]}}</span>
+                  <span class="font-14 text-muted">/{{item?.ticker.toUpperCase().split('_')[1]}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="4"><span class="">{{item?.new_price | number: '1.2'}}</span></ion-col>
+            <ion-col size="3"><ion-button *ngIf="item?.change >= 0"
+                class="positive-rate w-100 text-large ">{{item?.change *
+                1}}%</ion-button>
+              <ion-button *ngIf="item?.change < 0" class="negative-rate w-100 text-large">{{item?.change *
+                1}}%</ion-button></ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div>
+      <ion-row class="pt-5">
+        <ion-col size="6">
+          <ion-button class="h-45 bg-green" expand="block" (click)="Wallet(this.coin,this.type,1)"><strong
+              class=" text-light">Deposit</strong></ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button class="h-45 bg-red" expand="block" (click)="Wallet(this.coin,this.type,2)"><strong class="
+            text-light">Withdrawal</strong></ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button class="h45 bg-blue" expand="block" (click)="transfer()"><strong
+              class="text-light">Transfer</strong></ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button class="h-45 bg-blue" expand="block" (click)="history(this.coin)"><strong
+              class="text-light">History</strong></ion-button>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </ion-card>
+</ion-content>

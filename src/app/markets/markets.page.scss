@@ -1,0 +1,360 @@
+.profile-img {
+  width: 30px !important;
+}
+
+.search-field {
+  border: 1px solid #d9d9d9;
+  border-radius: 40px;
+  padding-left: 34px !important;
+  height: 26px !important;
+  margin-right: 10px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 75px;
+}
+
+.w-img {
+  width: 25px;
+  height: 12px;
+}
+
+.card-txt {
+  color: var(--text-color);
+  font-size: 10px;
+  font-family: "Montserrat";
+}
+
+.card-title {
+  padding-bottom: 0px;
+  color: var(--text-color);
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+
+.pb-0 {
+  padding-bottom: 0;
+}
+
+.verfiy-acc {
+  background: #1b1b1b;
+  --background: #1b1b1b;
+  color: #ffffff;
+  font-weight: bold;
+  font-family: "Montserrat";
+  border-radius: 40px;
+  --border-radius: 40px;
+  width: 200px;
+  position: relative;
+  left: 10px;
+  border: 1px solid var(--custom-border);
+}
+
+.sign-inbtn {
+  background: #f9f8f8;
+  --background: #f9f8f8;
+  color: #1b1b1b;
+  font-weight: bold;
+  font-family: "Montserrat";
+  border-radius: 40px;
+  --border-radius: 40px;
+  width: 110px;
+  position: relative;
+  left: 15px;
+}
+
+.crypto-img {
+  width: 100px !important;
+}
+
+.w-28 {
+  width: 28px;
+}
+
+.w-60 {
+  width: 60px;
+}
+
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-semi {
+  color: rgba(28, 28, 28, 0.78);
+  font-weight: 600;
+  font-size: 8px;
+  font-family: "Montserrat";
+  padding-top: 12px;
+}
+
+.pt-5 {
+  padding-top: 1.5rem;
+}
+
+.bg-content {
+  --background: var(--bg-primary-color);
+}
+
+.bg-content2 {
+  background: #f9f8f8;
+}
+
+ion-header {
+  box-shadow: none;
+  --background: #f9f8f8;
+}
+
+.card-style {
+  border: 1px solid var(--custom-border);
+  border-radius: 14px;
+  box-shadow: none;
+  padding-bottom: 12px;
+}
+
+.card-style-white {
+  border-radius: 14px;
+  box-shadow: none;
+  padding-bottom: 12px;
+}
+
+.products-style {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.products-style2 {
+  display: flex;
+  gap: 38px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p-72 {
+  padding: 72px;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.head-table {
+  color: rgba(28, 28, 28, 0.54);
+  font-size: 8px;
+  font-family: "Montserrat";
+  font-weight: 700;
+}
+
+.active-b {
+  color: #1C1C1C;
+  font-size: 8px;
+  font-family: "Montserrat";
+  font-weight: 700;
+}
+
+.text-currency {
+  color: rgba(28, 28, 28, 0.78);
+  font-size: 10px;
+  font-family: "Montserrat";
+}
+
+.text-amount {
+  color: #1C1C1C;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: "Montserrat";
+}
+
+.text-percent {
+  color: #E70000;
+  font-size: 10px;
+  font-family: "Montserrat";
+  font-weight: 800;
+}
+
+.horizontal-style {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.table-style {
+  background-color: var(--bg-primary-color);
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.table-head {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.23);
+}
+
+.sub-head {
+  color: rgba(28, 28, 28, 0.54);
+  font-size: 8px;
+  font-family: "Montserrat";
+}
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.positive-rate {
+  background: #19A060;
+  --background: #19A060;
+  border-radius: 8px;
+  --border-radius: 8px;
+  color: #fff;
+  font-family: "Montserrat";
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: 85px;
+}
+
+
+.negative-rate {
+  background: var(--danger);
+  --background: var(--danger);
+  border-radius: 8px;
+  --border-radius: 8px;
+  color: #fff;
+  font-family: "Montserrat";
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: 85px;
+}
+
+.coin-text {
+  color: var(--text-color);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: "Montserrat";
+}
+
+.coin-text-light {
+  color: var(--text-color);
+  font-weight: 100;
+  font-size: 15px;
+  font-family: "Montserrat";
+}
+
+
+.coin-sub {
+  color: var(--text-color);
+  font-weight: 800;
+  font-size: 8px;
+  font-family: "Montserrat";
+  position: relative;
+  left: 12px;
+  bottom: 10px;
+}
+
+.usdt-sub-text {
+  color: rgba(28, 28, 28, 0.54);
+  font-weight: 800;
+  font-size: 10px;
+  font-family: "Montserrat";
+  position: relative;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.buy-text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.w-2 {
+  width: 5.5rem;
+}
+
+.table-icons {
+  width: 8px;
+}
+
+
+.spot-btn {
+  --background: var(--bg-primary-color);
+  background: var(--bg-primary-color);
+  border: 1px solid var(--custom-border);
+  border-radius: 22px;
+  --border-radius: 22px;
+  box-shadow: none;
+  --box-shadow: none;
+  color: var(--text-color);
+  font-weight: 1000;
+}
+
+.p2p-btn {
+  --background: var(--bg-primary-color);
+  background: var(--bg-primary-color);
+  border: 1px solid var(--custom-border);
+  border-radius: 22px;
+  --border-radius: 22px;
+  box-shadow: none;
+  --box-shadow: none;
+  color: var(--text-color);
+  font-weight: 600;
+  width: 100px;
+  position: relative;
+  left: 12px;
+  font-weight: 1000;
+}
+
+.w-28 {
+  width: 28px;
+}
+
+.w-18 {
+  width: 18px;
+}
+
+.w-22 {
+  width: 22px;
+}
+
+:host {
+  ::ng-deep .segment-button-checked {
+    background: var(--bg-primary-color) !important;
+    color: var(--bg-primary-color) !important;
+  }
+}
+
+.custom-segment {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  border-bottom: 1px solid gainsboro;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-segment-buttons {
+  color: var(--text-color) !important;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.active {
+  border-bottom: 3px solid blue;
+}

@@ -1,0 +1,25 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">FAQs</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row *ngFor="let faq of faqs;">
+    <ion-col class="mx-3" size="11">
+      <p class="text-large">
+        <strong>{{faq?.question}}</strong>
+      </p>
+      <p class="text-medium">
+        {{faq?.answer}}
+      </p>
+    </ion-col>
+  </ion-row>
+</ion-content>

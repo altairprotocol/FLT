@@ -1,0 +1,114 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-title class="text-color">
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon class="text-color"  size="large" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-col size="8">
+        <div class="step-indicator">
+          <div class="item" [class.active]="activeIndex === 0">1</div>
+          <div class="separator"></div>
+          <div class="item" [class.active]="activeIndex === 1">2</div>
+          <div class="separator"></div>
+          <div class="item" [class.active]="activeIndex === 2">3</div>
+          <div class="separator"></div>
+          <div class="item" [class.active]="activeIndex === 3">4</div>
+        </div>
+      </ion-col>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-scroll bg-base">
+  <swiper-container init="false" #swiper css-mode="true" class="text-color">
+    <swiper-slide>
+      <div class="welcome-bg">
+        <h2 class="text-center title">Do you want to register?</h2>
+        <p class="text-center m-0">Enter the email address you want to use to register with coinmoney</p>
+        <ion-input labelPlacement="stacked" label="Email" placeholder="email@domain.com" errorText="Invalid email"
+          [(ngModel)]="email" (ionInput)="onInput()">
+          <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+          <ion-button fill="clear" slot="end" aria-label="Show/hide">
+            <ion-icon *ngIf="emailValid && email" slot="icon-only" name="checkmark-circle-outline" color="success"
+              aria-hidden="true"></ion-icon>
+            <ion-icon *ngIf="!emailValid && email" slot="icon-only" name="alert-circle" color="danger"
+              aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-input>
+        <p class="text-center m-0">Have an account? <a href="/login2">Log in here</a></p>
+        <ion-button (click)="onSlideNext()" expand="block" class="sliderButton" [disabled]="!emailValid">
+          Continue
+        </ion-button>
+        <p class="text-center m-0 terms-text">By registering you accept our Terms & Conditions and Privacy Policy. Your
+          data will
+          be security encrypted
+          with TLS</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <ion-img class="mt-5" src="../../assets/images/confirm-email.svg"></ion-img>
+      <div class="welcome-bg mt-3">
+        <h1 class="text-center" style="font-size: 40px;">Confirm your email</h1>
+        <p class="text-center m-0">We just sent you an email to <span class="text-primary">{{email}}</span>
+        </p>
+        <ion-button color="primary" (click)="onSlideNext()" expand="block" class="sliderButton mt-3">
+          Confirm
+        </ion-button>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="welcome-bg">
+        <h2 class="text-center title">Please enter the code</h2>
+        <p class="text-center m-0" style="font-size: 15px !important;">We sent email to <span
+            class="text-primary">{{email}}</span></p>
+        <ion-img src="../../assets/images/email-icon.svg"
+          style="width: 70px !important; height:70px !important;"></ion-img>
+        <ng-otp-input class="d-flex-c mt-3" (onInputChange)="onOtpChange($event)"
+          [config]="{ length: 6, placeholder: '_', inputClass: 'otp-input-box bg-base', allowNumbersOnly: true }"
+          (keyup)="checkOTP()"></ng-otp-input>
+        <p class="text-center mt-3">Didn't get mail? <a href="">Send again</a></p>
+        <ion-button (click)="onSlideNext()" expand="block" class="sliderButton m-0" [disabled]="emailOTP?.length !== 6">
+          Continue
+        </ion-button>
+        <p class="text-center m-0 terms-text">By registering you accept our Terms & Conditions and Privacy Policy. Your
+          data will
+          be security encrypted
+          with TLS</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="welcome-bg">
+        <h2 class="text-center title">Create a password</h2>
+        <p class="text-center m-0">The password must be at least 8 characters, including 1 uppercase letter, 1 number
+          and 1 special character.</p>
+        <ion-input labelPlacement="stacked" label="Password" placeholder="Enter password" errorText="Invalid password"
+          [(ngModel)]="password" (ionInput)="onPassword()" type="password">
+          <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+          <ion-button fill="clear" slot="end" aria-label="Show/hide">
+            <ion-icon *ngIf="passwordValid && password" slot="icon-only" name="checkmark-circle-outline" color="success"
+              aria-hidden="true"></ion-icon>
+            <ion-icon *ngIf="!passwordValid && password" slot="icon-only" name="alert-circle" color="danger"
+              aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-input>
+        <ion-input labelPlacement="stacked" label="Confirm password" placeholder="Confirm password"
+          errorText="Password don't match" [(ngModel)]="confirmPassword" (ionInput)="onConfirmPassword()"
+          type="password">
+          <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+          <ion-button fill="clear" slot="end" aria-label="Show/hide">
+            <ion-icon *ngIf="confirmPasswordValid && confirmPassword" slot="icon-only" name="checkmark-circle-outline"
+              color="success" aria-hidden="true"></ion-icon>
+            <ion-icon *ngIf="!confirmPasswordValid && confirmPassword" slot="icon-only" name="alert-circle"
+              color="danger" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-input>
+        <ion-button (click)="onSlideNext()" expand="block" class="sliderButton" [disabled]="!confirmPasswordValid">
+          Continue
+        </ion-button>
+        <p class="text-center m-0 terms-text">By registering you accept our Terms & Conditions and Privacy Policy. Your
+          data will
+          be security encrypted
+          with TLS</p>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>

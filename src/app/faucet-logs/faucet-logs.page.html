@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Faucet Logs</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <ion-card class="m-0 bg-base text-color" *ngFor="let faucet of faucetLogs">
+      <ion-card-content>
+        <div class="list-container d-flex align-items-center justify-content-between w-100 gap-3">
+          <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+          <div class="d-flex align-items-start justify-content-start w-100 flex-column gap-1">
+            <p class="p-0 m-0 fs-5">{{faucet?.name}}</p>
+            <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+              <p class="p-0 m-0 text-secondary">Quantity</p>
+              <p class="p-0 m-0">{{faucet?.num}} {{faucet?.coinname?.toUpperCase()}}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+              <p class="p-0 m-0 text-secondary">Coin</p>
+              <p class="p-0 m-0">{{faucet?.coinname?.toUpperCase()}}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+              <p class="p-0 m-0 text-secondary">Claimed</p>
+              <p class="p-0 m-0">{{formatDate(faucet?.addtime)}}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-end w-100">
+              <ion-button size="small" color="success" disabled="true">Claimed</ion-button>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

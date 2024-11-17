@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="5">
+        <h4 style="margin: 0; margin-top: 5px;">Mining</h4>
+      </ion-col>
+      <ion-col size="3">
+        <div class="d-flex w-100"><ion-img src="../../assets/images/mining-user.svg" (click)="refer('mining-machines')"
+            style="width: 32px; height: 32px;"></ion-img>
+          <ion-icon size="large" name="document-text-outline" (click)="refer('mining-rewards')"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <div *ngFor="let item of miningIndexList" class="item-container text-color">
+    <div class="heading-container">
+      <ion-img src="../../assets/images/btc-coin.svg" style="width: 53px; height: 53px;"></ion-img>
+      <h4>{{item?.name}}</h4>
+      <ion-img src="../../assets/images/red-flame.svg" style="width: 53px; height: 53px;"></ion-img>
+    </div>
+    <ion-card class="bg-base text-color">
+      <ion-card-content>
+        <div class="key-value">
+          <p class="key">Rent</p>
+          <p class="value">{{formatNumber(item?.price)}} USDT</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Hash Rate</p>
+          <p class="value">{{item?.power}}</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Daily Rewards:</p>
+          <p class="value">{{formatNumber(item?.daily_profit)}} PRM</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Balance</p>
+          <p class="value">{{formatNumber(item?.balace_available)}} {{item?.coinname?.toUpperCase()}}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div class="action-container">
+      <div class="coins">
+        <ion-img src="../../assets/images/eth-coin.svg" style="width: 53px; height: 53px;"></ion-img>
+        <ion-img src="../../assets/images/mining-other-coin.svg" style="width: 53px; height: 53px;"></ion-img>
+      </div>
+      <ion-button class="top-button" size="small" expand="block" color="primary"
+        (click)="confirmRentPurchase(item?.id)">Rent Now</ion-button>
+    </div>
+    <div class="custom-divider"></div>
+  </div>
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">News</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <p class="m-0 p-0 mt-2 fs-4 fw-bold">{{newsItem?.title}}</p>
+    <p style="font-size: 12px !important;" class="m-0 p-0 mt-2 text-muted">{{newsItem?.addtime}}</p>
+    <ion-img class="mt-2 mb-2" [src]="newsItem?.img"></ion-img>
+    <ion-card class="m-0 p-0 mt-3 shadow-none bg-base text-color">
+      <ion-card-content class="m-0">
+        <p class="m-0 p-0">{{newsItem?.content}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

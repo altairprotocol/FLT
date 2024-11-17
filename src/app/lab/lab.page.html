@@ -1,0 +1,106 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="5"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="4">
+        <h4 style="margin: 0; margin-top: 5px;">Lab</h4>
+      </ion-col>
+      <ion-col size="3">
+        <div class="d-flex w-100"><ion-img src="../../assets/images/mining-user.svg" (click)="refer('lab-ico')"
+            style="width: 32px; height: 32px;"></ion-img>
+          <ion-icon size="large" name="document-text-outline" (click)="refer('lab-history')"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <div *ngIf="icoList?.recommended">
+      <ion-card class="m-0 bg-base text-color">
+        <ion-card-content class="m-0">
+          <div class="list-container" (click)="referToICOInfoPage(icoList?.recommended?.id)">
+            <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+            <div class="timer-container">
+              <h1 class="text-color">{{icoList?.recommended?.name}}</h1>
+              <app-timer [beginTime]="icoList?.recommended?.beginTime"
+                [endTime]="icoList?.recommended?.endTime"></app-timer>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="segments-container mt-3">
+      <div class="custom-segment">
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Live' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Live')">Live</div>
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Upcoming' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Upcoming')">Upcoming</div>
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Ended' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Ended')">Ended</div>
+      </div>
+    </div>
+    <ion-card *ngIf="activeSegment == 'Live' && icoList?.list_running.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-secondary">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="activeSegment == 'Upcoming' && icoList?.list_upcoming.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-secondary">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="activeSegment == 'Ended' && icoList?.list_ended.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-secondary">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div *ngIf="activeSegment == 'Live'">
+      <ion-card class="m-0" *ngFor="let item of icoList?.list_running">
+        <ion-card-content class="m-0 bg-base text-color">
+          <div class="list-container" (click)="referToICOInfoPage(item?.id)">
+            <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+            <div class="timer-container">
+              <h1 class="w-100 text-color">{{item?.name}}</h1>
+              <app-timer [beginTime]="item?.beginTime" [endTime]="item?.endTime"></app-timer>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngIf="activeSegment == 'Upcoming'">
+      <ion-card class="m-0" *ngFor="let item of icoList?.list_upcoming">
+        <ion-card-content class="m-0 bg-base text-color">
+          <div class="list-container" (click)="referToICOInfoPage(item?.id)">
+            <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+            <div class="timer-container">
+              <h1 class="w-100 text-color">{{item?.name}}</h1>
+              <app-timer [beginTime]="item?.beginTime" [endTime]="item?.endTime"></app-timer>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngIf="activeSegment == 'Ended'">
+      <ion-card class="m-0" *ngFor="let item of icoList?.list_ended">
+        <ion-card-content class="m-0 bg-base text-color">
+          <div class="list-container" (click)="referToICOInfoPage(item?.id)">
+            <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+            <div class="timer-container">
+              <h1 class="w-100 text-color">{{item?.name}}</h1>
+              <app-timer [beginTime]="item?.beginTime" [endTime]="item?.endTime"></app-timer>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,25 @@
+.bg-content {
+    --background: #f9f8f8;
+}
+
+.profile-img {
+    width: 30px !important;
+    filter: invert(15%) sepia(92%) saturate(5965%) hue-rotate(227deg) brightness(101%) contrast(108%);
+}
+
+.w-img {
+    width: 25px;
+    height: 12px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 75px;
+}
+
+.search-field {
+    border: 1px solid #d9d9d9;
+    border-radius: 40px;
+    padding-left: 34px !important;
+    height: 26px !important;
+}

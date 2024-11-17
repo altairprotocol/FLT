@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="3"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="7">
+        <h4 style="margin: 0; margin-top: 5px;">Select payment Method</h4>
+      </ion-col>
+      <ion-col size="2">
+        <div class="d-flex align-items-center justify-content-end w-100">
+          <ion-icon size="large" name="add-circle-outline" (click)="refer('p2p-payment-method-new')"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div *ngIf="!onlyShow">
+      <ion-radio-group class="d-flex align-items-start justify-content-start w-100 flex-column"
+        [(ngModel)]="selectedPaymentMethod" value="{{selectedPaymentMethod}}">
+        <ion-radio class="custom-ion-radio" *ngFor="let method of paymentMethods" value="{{method?.information}}">
+          <p class="text-start m-0 p-0 ">{{method?.method?.toUpperCase()}}</p>
+          <p class="text-end  m-0 p-0 text-secondary">{{method?.information}}</p>
+        </ion-radio>
+      </ion-radio-group>
+      <ion-button [hidden]="onlyShow" [disabled]="!selectedPaymentMethod">Trade Now</ion-button>
+    </div>
+    <div *ngIf="onlyShow">
+      <div class="d-flex align-items-center justify-content-between w-100" *ngFor="let method of paymentMethods">
+        <div class="d-flex align-items-center justify-content-start gap-2">
+          <p class="text-start m-0 p-0 ">{{method?.method?.toUpperCase()}}</p>
+          <p class="text-end  m-0 p-0 text-secondary">{{method?.information}}</p>
+        </div>
+        <div class="d-flex align-items-center justify-content-end gap-2">
+          <ion-icon name="create-outline"></ion-icon>
+          <ion-icon name="trash-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

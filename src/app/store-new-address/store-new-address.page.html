@@ -1,0 +1,82 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Add New Address</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <!-- <ion-input labelPlacement="stacked" label="Address Title" placeholder="Address Title" [(ngModel)]="addressTitle">
+      <ion-icon slot="start" name="information-circle-outline" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="addressTitle" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input> -->
+    <!-- <div class="custom-divider"></div> -->
+    <ion-input labelPlacement="stacked" label="Contact Name" placeholder="Contact Name" [(ngModel)]="contactName">
+      <ion-icon slot="start" name="information-circle-outline" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="contactName" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <div class="custom-divider"></div>
+    <ion-input labelPlacement="stacked" label="Contact Number" placeholder="Contact Number" [(ngModel)]="contactNumber">
+      <ion-icon slot="start" name="call-outline" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="contactNumber" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <div class="custom-divider"></div>
+    <!-- <ion-select labelPlacement="stacked" label="Select Region" value="region" [(ngModel)]="region" name="region">
+      <ion-icon slot="start" name="earth-outline" aria-hidden="true"></ion-icon>
+      <ion-select-option *ngFor="let country of countries"
+        value="{{country?.isoCode}}">{{country?.name}}</ion-select-option>
+    </ion-select>
+    <div class="custom-divider"></div> -->
+    <ion-input labelPlacement="stacked" label="City" placeholder="City" [(ngModel)]="city">
+      <ion-icon slot="start" name="locate-outline" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="city" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <div class="custom-divider"></div>
+    <ion-input labelPlacement="stacked" label="Shipping Address" placeholder="Shipping Address"
+      [(ngModel)]="shippingAddress">
+      <ion-icon slot="start" name="location-outline" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="shippingAddress" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <div class="custom-divider"></div>
+    <!-- (ionInput)="onPassword()" -->
+    <!-- <ion-input labelPlacement="stacked" label="Password" placeholder="Enter password" errorText="Invalid password"
+      [(ngModel)]="fundPassword" type="password">
+
+      <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="fundPasswordValid && fundPassword" slot="icon-only" name="checkmark-circle-outline"
+          color="success" aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="!fundPasswordValid && fundPassword" slot="icon-only" name="alert-circle" color="danger"
+          aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input> -->
+    <ion-button expand="block" class="sliderButton" (click)="createAddress()"
+      [disabled]="!contactName || !contactNumber || !city || !shippingAddress">
+      Continue
+    </ion-button>
+  </div>
+</ion-content>

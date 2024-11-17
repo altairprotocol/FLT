@@ -1,0 +1,138 @@
+.container {
+    margin: 0;
+    padding: 0;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
+    margin-top: 20px;
+
+    .user-info-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+
+            .email-userid-box {
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                flex-direction: column;
+
+                p {
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    font-size: 13px;
+                }
+
+                .email-text {
+                    font-weight: 900;
+                }
+
+                .uid-copy {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
+                }
+            }
+        }
+
+        .verify-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            background-color: rgba(180, 213, 239, 0.9);
+            height: 26px;
+            padding: 3px 5px 3px 5px;
+            border-radius: 4px;
+
+            p {
+                font-size: 15px;
+                margin: 0;
+                padding: 0;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .menu-container {
+        margin-top: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        .iconWithText {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+
+            p {
+                font-weight: lighter;
+                font-size: 11px;
+            }
+
+            .menu-icon {
+                width: 35px !important;
+                height: 35px !important;
+            }
+        }
+
+    }
+
+    .links-container {
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+
+
+        margin-top: 40px;
+
+        .links-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            .icon-with-text {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+
+                p {
+                    margin: 0;
+                    padding: 0;
+                }
+
+            }
+        }
+    }
+
+    .app-version {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 30px;
+
+        p {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            font-weight: 100;
+            color: darkgray;
+        }
+    }
+}

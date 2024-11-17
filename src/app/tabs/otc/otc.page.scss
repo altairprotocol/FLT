@@ -1,0 +1,128 @@
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background: var(--bg-primary-color);
+    margin: 0;
+    padding: 0px 10px 0px 10px;
+    border-radius: 6px;
+    margin-top: 100px;
+}
+
+.toggle-button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    color: var(--text-color);
+    // border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0;
+    border: 1px solid var(--custom-border);
+}
+
+.toggle-button.active_buy {
+    background-color: #2dd55b;
+    color: white;
+    border-color: var(--custom-border);
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.toggle-button.active_sell {
+    background-color: #c5000f;
+    color: white;
+    border-color: #c5000f;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.w-28 {
+    width: 28px !important;
+}
+
+.w-50 {
+    width: 50% !important;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.total-balance {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 25px 0px 10px 0px;
+
+    .total-balance-text {
+        font-size: 20px;
+        color: var(--text-color);
+    }
+
+    .total-balance-amount {
+        color: var(--text-color);
+        font-size: 25px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid lightgrey !important;
+}
+
+.deposit-details-box {
+    margin: 10px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    .deposit-details-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        width: 100%;
+    }
+}
+
+.to-from-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    .to-from-box-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        p {
+            padding: 0px !important;
+            margin: 0px !important;
+            color: var(--text-color);
+        }
+    }
+}
+
+.w-30 {
+    width: 30px !important;
+}
+
+.reject-confirm-btn-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}

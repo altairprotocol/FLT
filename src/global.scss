@@ -1,0 +1,538 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+
+:root {
+  --color-white: #ffffff;
+
+  --base-bg:#e6e6e6;
+  --bg-primary-color: #F9F8F8;
+  --color-text: #ffffff;
+  --text-color: #1C1C1C;
+  --text-lighter: rgba(28, 28, 28, 0.54);
+  --font: "Montserrat";
+  --btn-base: #3396FF;
+  --bg-light: #ffffff;
+  --green: #19A060;
+  --danger: #c93e3e;
+  --orange: #F08D00;
+  --custom-border: #d9d9d9;
+  --grad-bg:#A4D5FF;
+}
+
+#dark {
+  --base-bg: #2c2424;
+  --bg-primary-color: #1C1C1C;
+  --color-text: #1C1C1C;
+  --text-color: #F9F8F8;
+  --text-lighter: rgba(249, 248, 248, 0.54);
+  --font: "Montserrat";
+  --btn-base: #3396FF;
+  --bg-light: #1C1C1C;
+  --green: #19A060;
+  --danger: #c93e3e;
+  --orange: #F08D00;
+  --grad-bg:#3b3b3b;
+  --custom-border: #3b3838;
+}
+.container {
+
+  color:var(--text-color);
+}
+
+
+h1,h2,h3,h4,h5,h6{
+  color:var(--text-color);
+}
+.red{
+  color:var(--danger);
+}
+.green{
+  color:var(--green);
+}
+
+.light-orange {
+  color: var(--orange);
+}
+
+.shadow-n {
+  box-shadow: none;
+}
+
+.bg-white {
+  background: var(--bg-primary-color);
+}
+
+.bg-base {
+  --background: var(--bg-primary-color) !important;
+  background: var(--bg-primary-color) !important;
+}
+
+.bg-base2 {
+  background: var(--bg-primary-color);
+}
+
+.text-medium {
+  color: var(--text-color);
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font);
+}
+
+.text-medium-green {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font);
+}
+
+.text-medium-danger {
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font);
+}
+
+
+.privacy-text {
+  color: var(--text-color);
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--font);
+}
+
+.field-label {
+  color: var(--text-lighter) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  font-family: var(--font) !important;
+}
+
+.text-strong {
+  color: var(--text-color);
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font);
+}
+
+.bold-text {
+  color: var(--text-color);
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--font);
+}
+
+.text-large {
+  color: var(--text-color);
+  font-size: 14px !important;
+  font-weight: 800;
+  font-family: var(--font);
+}
+
+.button-primary {
+  --background: var(--btn-base);
+  background: var(--btn-base);
+  border-radius: 4px;
+  --border-radius: 4px;
+  color: var(--color-text);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: var(--font);
+  --box-shadow: none;
+  padding: 8px;
+}
+
+
+.button-black {
+  background: var(--text-color);
+  --background: var(--text-color);
+  ;
+
+  border-radius: 4px;
+  --border-radius: 4px;
+  color: var(--color-text);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: var(--font);
+  --box-shadow: none;
+  padding: 8px;
+}
+
+
+.button-danger {
+  background: var(--danger);
+  --background: var(--danger);
+  border-radius: 4px;
+  --border-radius: 4px;
+  color: var(--color-text);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: var(--font);
+  --box-shadow: none;
+  padding: 8px;
+}
+
+.button-sucess {
+  background: var(--green);
+  --background: var(--green);
+  border-radius: 4px;
+  --border-radius: 4px;
+  color: var(--color-text);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: var(--font);
+  --box-shadow: none;
+  padding: 8px;
+
+}
+
+
+.checkbox-icon {
+  border-radius: 50px !important;
+}
+
+.bg-form-light {
+  background: var(--bg-light);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding-top: 26px;
+  // padding-bottom: 50px;
+  height: 100%;
+  margin-bottom: 3rem;
+}
+
+.text-align-c {
+  display: flex;
+  text-align: center;
+}
+
+
+
+.input-label-placement-floating.has-focus.sc-ion-input-md-h .label-text-wrapper.sc-ion-input-md,
+.input-label-placement-stacked.has-focus.sc-ion-input-md-h .label-text-wrapper.sc-ion-input-md {
+  color: rgba(28, 28, 28, 0.54) !important;
+  font-family: var(--font);
+  font-weight: bold;
+}
+
+.input-fill-outline.has-focus.sc-ion-input-md-h {
+  --border-color: rgba(0, 0, 0, 0.18) !important;
+}
+
+
+
+.txt-decoration {
+  text-decoration: none;
+}
+
+.custom-input {
+  color: var(--text-color) !important;
+  font-family: var(--font) !important;
+  font-weight: 600;
+  font-size: 14px
+}
+
+
+
+
+
+
+//  custom check 
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  /* background-color: #d1cccc; */
+  border: 1px solid gainsboro;
+}
+
+.custom-checkbox:hover input~.checkmark {
+  background-color: #d1cccc;
+  /* Color on hover */
+}
+
+.custom-checkbox input:checked~.checkmark {
+  background-color: #19A060;
+  /* Checked color */
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked~.checkmark:after {
+  display: block;
+}
+
+.custom-checkbox .checkmark:after {
+  left: 9px;
+  top: 6px;
+  width: 6px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.text-p {
+  color: var(--text-lighter);
+  font-size: small;
+  font-family: var(--font);
+  font-weight: 600;
+}
+
+.pr-b-15 {
+
+  position: relative;
+  bottom: 15px;
+}
+
+.d-flex-c {
+  display: flex;
+  justify-content: center;
+}
+
+.otp-input {
+  width: 46px !important;
+  font-size: 20px !important;
+  height: 40px !important;
+  border-radius: 8px !important;
+}
+
+
+.custom-input {
+  --border-width: 1px;
+  /* Define the border width */
+  --border-color: var(--custom-border) !important;
+  /* Define the border color */
+  --border-style: solid;
+  border-width: var(--border-width);
+  border-color: var(--border-color);
+}
+
+
+.ios.custom-input {
+  border: 1px solid #ccc;
+}
+
+.ios .custom-input {
+  padding-left: 20px !important;
+  border-radius: 10px;
+  
+}
+
+/* iOS-specific border style */
+@media (prefers-color-scheme: light) {
+
+  :root {
+    --ion-color-border: #ccc;
+  }
+}
+
+/* Android-specific border style */
+@media not all and (prefers-color-scheme: light) {
+
+  /* Customize the border for non-light mode (e.g., dark mode) or Android */
+  :root {
+    --ion-color-border: #ccc;
+    /* Customize to your preferred border color */
+  }
+}
+
+
+ion-range.custom-range {
+  --bar-background: #EBEBEB;
+  /* Active bar color */
+  --bar-background-active: #3396FF;
+  /* Bar color when dragging */
+  --knob-background: #3396FF;
+  /* Knob color */
+}
+
+
+.shadow-none {
+
+  box-shadow: none;
+}
+
+
+.info-mesg {
+  background-color: rgba(231, 0, 0, 0.17);
+  border-radius: 4px;
+  width: 100%;
+}
+
+.text-10 {
+  font-size: 10px;
+}
+
+.text-11 {
+  font-size: 11px;
+}
+
+.mx-0 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.font-weight-bold {
+  font-weight: 900;
+}
+
+.font-12 {
+  font-size: 12px !important;
+}
+
+.font-11 {
+  font-size: 11px !important;
+}
+
+.font-14 {
+  font-size: 14px !important;
+}
+
+.w-14 {
+  width: 14px !important;
+}
+
+.request-code-btn {
+  background: var(--btn-base);
+  --background: var(--btn-base);
+  border-radius: 4px;
+  --border-radius: 4px;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 10px;
+  font-family: var(--font);
+  --box-shadow: none;
+  padding: 2px;
+  width: 50%;
+  padding-top: 9px;
+  padding-bottom: 9px !important;
+}
+
+// New classes for dark theme
+
+.segment-button-checked {
+  background: var(--bg-primary-color) !important;
+  color: var(--text-color) !important;
+}
+
+#dark .segment-button-checked .text-color {
+  color: black !important;
+  --color: black !important;
+}
+/*
+#dark ion-img,
+#dark img #dark svg {
+  //filter:invert(1)
+}
+*/
+#dark .invert-1 {
+  filter: invert(1) hue-rotate(180deg); /* Invert colors for dark theme */
+}
+#dark >.side-nav  > ion-img> img {
+  filter:invert(1)
+}
+
+.text-color {
+  color: var(--text-color) !important;
+}
+
+.text-lighter {
+  color: var(--text-lighter);
+}
+
+.segment-bg {
+  background-color: var(--bg-primary-color) !important;
+  --background-color: var(--bg-primary-color) !important;
+  color: var(--text-color) !important;
+  --color: var(--text-color) !important;
+
+  ion-label::part(indicator-background) {
+    color: var(--color-text) !important;
+    --color: var(--color-text) !important;
+  }
+
+  ion-label::host(.segment-button-checked) {
+    color: var(--color-text) !important;
+    --color: var(--color-text) !important;
+  }
+}
+
+.card-border {
+  border: 1px solid var(--custom-border) !important;
+}
+
+// ::ng-deep 
+ion-input .label-text {
+  color: var(--text-color);
+}
+
+ion-skeleton-text {
+  --border-radius: 9999px;
+  --background: rgba(188, 0, 255, 0.065);
+  --background-rgb: 100, 0, 255;
+}
+
+#dark ion-action-sheet {
+  --background: #1c1c1e;
+  --color: #f4f4f4;
+  --button-background: #1c1c1e;
+  --button-text-color: #f4f4f4;
+  --button-color: #f4f4f4
+}

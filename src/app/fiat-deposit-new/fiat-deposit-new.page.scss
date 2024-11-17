@@ -1,0 +1,47 @@
+.container {
+    .wallet-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 10px !important;
+        padding: 10px;
+
+        h1 {
+            font-weight: 600;
+            font-size: 22px;
+            margin-bottom: 0px;
+        }
+
+        .wallet-amount-container {
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            flex-direction: column;
+
+            .payment-method-logo {
+                width: 41px;
+                height: 41px;
+            }
+
+            h4 {
+                font-weight: 700;
+                margin: 0;
+                padding: 0;
+            }
+
+            p {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .large-amount {
+                font-size: 12px;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+}

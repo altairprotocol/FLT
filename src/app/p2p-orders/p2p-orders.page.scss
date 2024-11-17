@@ -1,0 +1,43 @@
+.container {
+    .segments-container {
+        padding: 0 10px 0 10px;
+
+        h1 {
+            margin-bottom: 0;
+            font-weight: 600;
+            font-size: 22px;
+        }
+
+        .custom-segment {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            width: 100%;
+            gap: 15px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .custom-segment-buttons {
+            color: gray !important;
+            font-size: 17px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .active {
+            font-weight: 900;
+            color: black !important;
+            // border-bottom: 2px solid blue;
+        }
+
+        .subActive {
+            font-weight: 900;
+            // border-bottom: 2px solid blue;
+            font-size: 15px !important;
+        }
+
+        .subInActive {
+            font-size: 15px !important;
+        }
+    }
+}

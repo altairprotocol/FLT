@@ -1,0 +1,7 @@
+{
+  "name": "primalX",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

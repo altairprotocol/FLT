@@ -1,0 +1,28 @@
+.total-balance {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 25px 0px 10px 0px;
+
+    .total-balance-text {
+        color: var(--text-color);
+        font-size: 20px;
+    }
+
+    .total-balance-amount {
+        color: var(--text-color);
+        font-size: 25px;
+    }
+}
+
+.withdraw-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+}

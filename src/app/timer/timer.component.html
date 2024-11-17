@@ -1,0 +1,18 @@
+<div class="timer">
+  <div *ngIf="!minsLeft" class="timer-item">
+    <h4>{{ days }}</h4>
+    <p>Days</p>
+  </div>
+  <div *ngIf="!minsLeft" class="timer-item">
+    <h4>{{ hours }}</h4>
+    <p>Hours</p>
+  </div>
+  <div class="timer-item">
+    <h4>{{ minutes }}</h4>
+    <p>Mins</p>
+  </div>
+  <div class="timer-item">
+    <h4>{{ seconds }}</h4>
+    <p>Secs</p>
+  </div>
+</div>

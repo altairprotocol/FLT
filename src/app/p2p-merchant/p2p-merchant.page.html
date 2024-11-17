@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-title class="text-color">
+      <ion-img src="../../assets/logo.svg" style="height: 45px !important;"></ion-img>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-scroll bg-base">
+  <swiper-container init="false" #swiper css-mode="true" class="text-color">
+    <swiper-slide>
+      <ion-img class="main-image" src="../../assets/images/p2p-merchant-1.svg"></ion-img>
+      <div class="welcome-bg">
+        <h1 class="text-center">Advanced Ad Management</h1>
+        <p class="text-center m-0">Sellers can access more trading tools through the </p>
+        <p class="text-center m-0">seller portal to better manage their listings and </p>
+        <p class="text-center m-0">trading activities.</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <ion-img class="main-image" src="../../assets/images/p2p-merchant-verified.svg"></ion-img>
+      <div class="welcome-bg">
+        <h1 class="text-center">Verified Badges</h1>
+        <p class="text-center m-0">To give your brand credibility, a verified badge will </p>
+        <p class="text-center m-0">be displayed next to your P2P nickname.</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <ion-img class="main-image" src="../../assets/images/p2p-merchant-support.svg"></ion-img>
+      <div class="welcome-bg">
+        <h1 class="text-center">Dedicated Customer Support</h1>
+        <p class="text-center m-0">Primalx provides one-on-one service with quick </p>
+        <p class="text-center m-0">response to your requests or issues.</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <ion-img class="main-image" src="../../assets/images/p2p-merchant-requirements.svg"></ion-img>
+      <h1 class="m-0 p-0">Requirements</h1>
+      <div class="d-flex flex-column align-items-start justify-content-start w-100" style="padding: 0 10px 0 10px;">
+        <div class="d-flex align-items-start justify-content-start w-100 gap-1">
+          <ion-icon name="checkmark-circle" color="success" aria-hidden="true" size="large"></ion-icon>
+          <p>Complete SMS verification</p>
+        </div>
+        <div class="d-flex align-items-start justify-content-start w-100 gap-1">
+          <ion-icon name="checkmark-circle" color="success" aria-hidden="true" size="large"></ion-icon>
+          <p>Complete Email verification</p>
+        </div>
+        <div class="d-flex align-items-start justify-content-start w-100 gap-1">
+          <ion-icon name="checkmark-circle" color="success" aria-hidden="true" size="large"></ion-icon>
+          <p>Complete the Advanced verification</p>
+        </div>
+        <div class="d-flex align-items-start justify-content-start w-100 gap-1">
+          <ion-icon size="large" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+          <p>Your P2p account must have at
+            least 100 USDT</p>
+        </div>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+  <ion-button *ngIf="!finalSlide" (click)="onSlideNext()" expand="block" class="sliderButton">
+    Next
+  </ion-button>
+  <ion-button *ngIf="finalSlide" (click)="onSlideNext()" expand="block" class="sliderButton">
+    Apply Now
+  </ion-button>
+</ion-content>

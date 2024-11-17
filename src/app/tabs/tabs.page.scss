@@ -1,0 +1,24 @@
+.activeIcon {
+    filter: invert(15%) sepia(92%) saturate(5965%) hue-rotate(227deg) brightness(101%) contrast(108%);
+}
+
+.tabs-icon {
+    width: 22px !important;
+    height: 22px !important;
+}
+
+.active {
+    color: #4567c1;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 13px;
+    // line-height: 20px;
+}
+
+.plain-text {
+    color: var(--text-lighter);
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 13px;
+    // line-height: 20px;
+}

@@ -1,0 +1,227 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()" name="arrow-back"></ion-icon>
+
+    </span>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div lines="none" class="heading bg-base px-3 my-3">
+    <span class="text-medium">
+      Begin your ID-Verification Verify your identity to start using your trade wallet.
+    </span>
+  </div>
+
+
+  <div class="bg-form-light px-3">
+    <ion-text>
+      <h2 class="text-large">Personal Details</h2>
+    </ion-text>
+    <ion-text>
+      <span class="privacy-text">Your basic personal information is required for identification purposes.</span>
+    </ion-text>
+
+    <div class="d-block p-3 info-mesg my-2">
+
+      <span class="privacy-text d-flex"> <ion-img class="w-16" src="assets/images/exclamatry-danger.svg"></ion-img>
+        Please type carefully and fill out the form with your personal details. You are not allowed to edit the details
+        once you have submitted the application.</span>
+    </div>
+
+
+    <ion-row>
+      <ion-col size="4" (click)="setSelectedDocument('passport')">
+        <div class="card-identities" [class]="documentType == 'passport' ? 'selected-border': ''">
+
+          <ion-img class="w-28" src="assets/images/passport.svg"></ion-img>
+          <ion-text>
+            <h2 class="text-large f-12">
+              PASSPORT
+            </h2>
+          </ion-text>
+        </div>
+      </ion-col>
+      <ion-col size="4" (click)="setSelectedDocument('national_id')">
+        <div class="card-identities" [class]="documentType == 'national_id' ? 'selected-border': ''">
+
+          <ion-img class="w-28" src="assets/images/national-icense.svg"></ion-img>
+          <ion-text>
+            <h2 class="text-large f-12">
+              NATIONAL ID
+            </h2>
+          </ion-text>
+        </div>
+      </ion-col>
+      <ion-col size="4" (click)="setSelectedDocument('dl')">
+        <div class="card-identities" [class]="documentType == 'dl' ? 'selected-border': ''">
+          <ion-img class="w-28" src="assets/images/driwing.svg"></ion-img>
+          <ion-text>
+            <h2 class="text-large f-12 ">
+              DRIVING LICENSE
+            </h2>
+          </ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <form class="id-number-input">
+          <ion-input label="ID Number" label-placement="floating" fill="outline" placeholder="Enter ID Number"
+            [(ngModel)]="idNumber" name="idNumber" class="custom-input w-100"></ion-input>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-text class="privacy-text">
+          To avoid delays with verification process, please double-check to ensure the below requirements are fully met:
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list class="privacy-text bg-base-du">
+          Chosen credential must not be expired. <br>
+          There is no light glare or reflections on the card. <br>
+          File is at least 1 MB in size and has at least 300 dpi resolution.ccc </ion-list>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-text class="text-large">
+          Upload front side of document
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <div class="toggle-container">
+          <!-- (click)="frontFileInput.click()" -->
+          <div class="toggle-button text-color" [class.active]="frontFileSelected"
+            (click)="presentChoiceAlert('front')">
+            Choose File or Capture
+          </div>
+          <div class="toggle-button text-color" [class.active]="frontFileSelected">
+            {{ frontFileName || 'No file chosen' }}
+          </div>
+          <input type="file" #frontFileInput (change)="onFileSelected($event, 'front')" style="display: none;">
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-text class="text-large">
+          Upload back side of document
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <div class="toggle-container">
+          <div class="toggle-button text-color" [class.active]="backFileSelected" (click)="presentChoiceAlert('back')">
+            Choose File or Capture
+          </div>
+          <div class="toggle-button text-color" [class.active]="backFileSelected">
+            {{ backFileName || 'No file chosen' }}
+          </div>
+          <input type="file" #backFileInput (change)="onFileSelected($event, 'back')" style="display: none;">
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <div class="my-2 border-botom-styl"></div>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-text class="text-medium">
+          Upload a selfie as a Photo Proof while holding document in your hand
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12 my-3">
+        <ion-img class="w-28" src="assets/images/upload-selfi.svg"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <div class="toggle-container">
+          <div class="toggle-button text-color" [class.active]="selfieFileSelected"
+            (click)="presentChoiceAlert('selfie')">
+            Choose File or Capture
+          </div>
+          <div class="toggle-button text-color" [class.active]="selfieFileSelected">
+            {{ selfieFileName || 'No file chosen' }}
+          </div>
+          <input type="file" #selfieFileInput (change)="onFileSelected($event, 'selfie')" style="display: none;">
+        </div>
+      </ion-col>
+    </ion-row>
+
+
+
+
+    <div class="my-2 border-botom-styl"></div>
+
+
+
+    <label class="custom-checkbox my-3">
+      <input type="checkbox" [(ngModel)]="agreeToTOS" name="agreeToTOS">
+      <span class="checkmark"></span>
+      <span class="agree privacy-text">
+        I agree to the Terms of Service and Privacy Policy
+      </span>
+    </label>
+
+
+    <label class="custom-checkbox my-3">
+      <input type="checkbox" [(ngModel)]="agreeToCorrectInfo" name="agreeToCorrectInfo">
+      <span class="checkmark"></span>
+      <span class="agree privacy-text">
+        All the personal information I have entered is correct.
+      </span>
+    </label>
+
+    <label class="custom-checkbox my-3">
+      <input type="checkbox" [(ngModel)]="agreeForIndividual" name="agreeForIndividual">
+      <span class="checkmark"></span>
+      <span class="agree privacy-text">
+        I certify that, I am registering to participate in the trading platform in the capacity of an individual (and
+        beneficial owner) and not as an agent or representative of a third party corporate entity.
+      </span>
+    </label>
+
+    <ion-item *ngIf="errorMessage">
+      <ion-text class="text-center text-danger">{{errorMessage}}</ion-text>
+    </ion-item>
+
+
+
+
+
+
+
+
+    <ion-row>
+      <ion-col size="12" class="d-flex justify-content-center">
+        <ion-button class="button-primary" (click)="handleVerify()">
+          Proceed to Verify
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+</ion-content>

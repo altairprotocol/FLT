@@ -1,0 +1,64 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <span class="icon-title p-2"><ion-icon class="text-color" size="large" (click)="back()" name="arrow-back"></ion-icon>
+      <a class="text-medium-green txt-decoration" href="auth/register">Sign Up</a>
+    </span>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-item lines="none" class="heading bg-base w-50 d-flex align-items-center justify-items-center">
+    <img src="assets/logo.svg" alt="" />
+  </ion-item>
+  <h1 class="ms-5 fs-5 fw-500 text-large"></h1>
+
+  <form class="bg-form-light bg-base">
+    <ion-item lines="none" class="bg-base">
+      <div class="input-form custom-input-container">
+        <ion-text>
+          <h2 class="text-large">Email</h2>
+        </ion-text>
+        <ion-input label="Email Address" label-placement="floating" fill="outline" placeholder="Enter email address"
+          class="custom-input my-1" [(ngModel)]="userData.username" name="username">
+        </ion-input>
+        <ion-input label="Password" label-placement="floating" fill="outline" placeholder="Enter Password"
+          class="custom-input my-1" [(ngModel)]="userData.password" name="password"><ion-input-password-toggle
+            style="color: beige!important;" slot="end"></ion-input-password-toggle></ion-input>
+
+        <label class="custom-checkbox my-3">
+          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
+          <span class="checkmark"></span>
+          <span class="agree privacy-text">
+            Remember me
+          </span>
+        </label>
+
+        <ion-text>
+          <a href="auth/forgot" class="text-large txt-decoration">Forgot Password?</a>
+        </ion-text>
+
+        <!-- <label class="custom-checkbox my-3">
+          <input type="checkbox" [(ngModel)]="agreeToPolicies" name="agreeToPolicies">
+          <span class="checkmark"></span>
+          <span class="agree privacy-text">
+            I agree to the <span class="text-strong">Terms of Service</span> and
+            <span class="text-strong">Privacy Policy</span>
+          </span>
+        </label> -->
+
+      </div>
+    </ion-item>
+
+    <ion-row class="p-0 m-0">
+      <ion-col size="1"></ion-col>
+      <ion-col size="5"><ion-button class="text-capitalize button-sucess" expand="full" (click)="scanQRCode()">Scan
+          QR</ion-button></ion-col>
+      <ion-col size="5"><ion-button class="text-capitalize button-primary" expand="full" (click)="login()">Log
+          In</ion-button></ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

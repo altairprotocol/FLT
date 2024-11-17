@@ -1,0 +1,79 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="3"><span class="icon-title p-2 "><ion-icon size="large" class="text-color" (click)="back();"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Security</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class=" bg-base text-color">
+  <div class="activity-container">
+    <h4>Account Activity</h4>
+    <p class="text-secondary">last Login Time: {{this.last_time * 1000 | date:'yyyy-MM-dd HH-mm-ss' }}</p>
+    <h4>Security Level <span class="security-level text-{{this.score_color}}">{{this.score_text}}</span></h4>
+    <ion-row class="security-level-visual" style="display: flex;">
+      <ion-col [style.flex]="greenWidth" style="background-color: green; height: 10px;"></ion-col>
+      <ion-col [style.flex]="redWidth" style="background-color: red; height: 10px;"></ion-col>
+    </ion-row>
+  </div>
+  <ion-row>
+    <ion-col style="background-color: #D9D9D9;" size="12"></ion-col>
+  </ion-row>
+  <div class="links-container"> 
+    <div class="links-item" (click)="refer('auth/security')">
+      <ion-icon name="checkmark-circle" color="success" size="large" class="status-icon" *ngIf='1 == 1 '></ion-icon>
+      <div class="icon-with-text">
+        <h4>Login Password</h4>
+        <p class="text-secondary">Increasing the strength of your password helps to increase the security of your money</p>
+      </div>
+      <ion-icon name="arrow-forward-outline" size="large"></ion-icon>
+    </div>
+    <div class="custom-divider"></div>
+  
+    <div class="links-item">
+      <ion-icon name="checkmark-circle" color="success" size="large" class="status-icon" *ngIf='fundpass'></ion-icon>
+      <ion-icon name="alert-circle" color="warning" size="large" class="status-icon" *ngIf='!fundpass'></ion-icon>
+      <div class="icon-with-text">
+        <h4>Fund Password</h4>
+        <p class="text-secondary">You can change fund password for withdrawal confirmation</p>
+      </div>
+      <ion-icon name="arrow-forward-outline" size="large"></ion-icon>
+    </div>
+    <div class="custom-divider"></div> 
+  
+    <div class="links-item" (click)="refer('anti-fishing')">
+      <ion-icon name="checkmark-circle" color="success" size="large" class="status-icon" *ngIf='antiphishing'></ion-icon>
+      <ion-icon name="alert-circle" color="warning" size="large" class="status-icon" *ngIf='!antiphishing'></ion-icon>
+      <div class="icon-with-text">
+        <h4>Anti Phishing Code</h4>
+        <p class="text-secondary">The email sent will contain the anti-phishing code you set to prevent fraudulent emails.</p>
+      </div>
+      <ion-icon name="arrow-forward-outline" size="large"></ion-icon>
+    </div>
+    <div class="custom-divider"></div>
+  
+    <div class="links-item" (click)="refer('google-2fa')">
+      <ion-icon name="checkmark-circle" color="success" size="large" class="status-icon" *ngIf='google_2fa'></ion-icon>
+      <ion-icon name="alert-circle" color="warning" size="large" class="status-icon" *ngIf='!google_2fa'></ion-icon>
+      <div class="icon-with-text">
+        <h4>Google 2FA</h4>
+        <p class="text-secondary">Use Google 2FA for login</p>
+      </div>
+      <ion-icon name="arrow-forward-outline" size="large"></ion-icon>
+    </div>
+    <div class="custom-divider"></div>
+    
+  
+    <div class="links-item" (click)="refer('freeze')">
+      <ion-icon name="lock-closed" color="info" size="large" class="status-icon"></ion-icon>
+      <div class="icon-with-text">
+        <h4>Freeze Account</h4>
+        <p class="text-secondary">Increasing the strength of your password helps to increase the security of your money</p>
+      </div>
+      <ion-icon name="arrow-forward-outline" size="large"></ion-icon>
+    </div>
+  </div>
+  
+</ion-content>

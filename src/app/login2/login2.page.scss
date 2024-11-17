@@ -1,0 +1,47 @@
+:host {
+    .welcome-bg {
+        display: flex;
+        margin-top: 75px;
+        align-items: center;
+        justify-content: end;
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 10px 0 10px;
+
+        .custom-divider {
+            width: 50%;
+            height: 2px;
+            background-color: gainsboro;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bolder;
+        }
+
+        .terms-text {
+            font-size: 12px;
+        }
+    }
+
+    ion-input {
+        height: 65px !important;
+    }
+
+    h1 {
+        font-size: 35px;
+        font-weight: bolder;
+    }
+
+    p {
+        padding: 0px 10px 0px 10px;
+    }
+
+    .sliderButton {
+        margin-top: 50px;
+        width: 100%;
+        padding: 0px 10px 0px 10px;
+    }
+}

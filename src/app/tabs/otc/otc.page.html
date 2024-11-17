@@ -1,0 +1,140 @@
+<!-- <ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">OTC</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <div *ngIf="requested != 2">
+    <div class="toggle-container">
+      <div class="toggle-button" [class.active_buy]="selectedOption === 'buy'" (click)="selectOption('buy')">
+        Buy
+      </div>
+      <div class="toggle-button" [class.active_sell]="selectedOption === 'sell'" (click)="selectOption('sell')">
+        Sell
+      </div>
+    </div>
+
+    <ion-card class="mt-40" class="bg-base card-border">
+      <ion-card-content class="bg-base">
+        <ion-row class="align-items-center" style="border-bottom: 1px solid gray;">
+          <ion-col size="3"><ion-text class="w-50" *ngIf="selectedOption === 'buy'">Buy</ion-text>
+            <ion-text class="w-50" *ngIf="selectedOption === 'sell'">Sell</ion-text></ion-col>
+          <ion-col size="3"><ion-input labelPlacement="stacked" placeholder="0.000000" min="0.000001" max="100000000"
+              inputmode="decimal" color="dark" (focusout)="fixdecimals(1)" [(ngModel)]=" input1">
+            </ion-input></ion-col>
+          <ion-col size="6">
+            <ion-item lines="none" class="w-100" class="bg-base text-color">
+              <ion-img *ngIf="selectedImage" slot="start" src="{{selectedImage}}" aria-hidden="true"
+                class="w-28"></ion-img>
+              <ion-select aria-label="Coin name" [(ngModel)]="trade_coin" placeholder="{{trade_coin}}"
+                (ionChange)="findImage()">
+                <ion-select-option *ngFor="let coin of trade_coins"
+                  value="{{coin?.symbol}}">{{coin?.symbol?.toUpperCase()}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="align-items-center">
+          <ion-col size="3"><ion-text class="w-50" *ngIf="selectedOption === 'buy'">Spend</ion-text>
+            <ion-text class="w-50" *ngIf="selectedOption === 'sell'">Receive</ion-text></ion-col>
+          <ion-col size="3"><ion-input labelPlacement="stacked" placeholder="0.000000" min="0.000001" max="100000000"
+              inputmode="decimal" color="dark" (focusout)="fixdecimals(2)" [(ngModel)]=" input2">
+            </ion-input></ion-col>
+          <ion-col size="6">
+            <ion-item lines="none" class="w-100" class="bg-base text-color">
+              <ion-img *ngIf="selectedBaseImage" slot="start" src="{{selectedBaseImage}}" aria-hidden="true"
+                class="w-28"></ion-img>
+              <ion-select aria-label="Coin name" placeholder="{{base_coin}}" (ionChange)="findImage('base')"
+                [(ngModel)]="base_coin">
+                <ion-select-option *ngFor="let coin of base_coins"
+                  value="{{coin?.symbol}}">{{coin?.symbol?.toUpperCase()}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="align-items-center" class="mt-40">
+          <ion-col size="12">
+            <ion-button expand="block" color="primary" *ngIf="selection =='1'" (click)="getquote(1)">Get
+              Quote</ion-button>
+            <ion-button expand="block" color="primary" *ngIf="selection =='2'" (click)="getquote(2)">Get
+              Quote</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12"><ion-button expand="block" color="warning" fill="outline"
+              (click)="refer('otcrecord')">History</ion-button></ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="requested == 2">
+    <div class="total-balance card-border bg-base" style="margin-top: 100px;">
+      <p class="total-balance-text">Confirm Conversion</p>
+      <div class="to-from-box" *ngIf="tradetype === 'sell'">
+        <div class="to-from-box-item">
+          <ion-text class="text-color">{{trade}}</ion-text>
+          <ion-text class="text-color">From</ion-text>
+          <ion-text class="text-color">{{qty * 1}}</ion-text>
+        </div>
+        <ion-img class="w-30 prt-5" src="assets/images/check.svg"></ion-img>
+        <div class="to-from-box-item">
+          <ion-text class="text-color">{{base}}</ion-text>
+          <ion-text class="text-color">To</ion-text>
+          <ion-text class="text-color">{{total * 1}}</ion-text>
+        </div>
+      </div>
+      <div class="to-from-box" *ngIf="tradetype === 'buy'">
+        <div class="to-from-box-item">
+          <ion-text class="text-color">{{base}}</ion-text>
+          <ion-text class="text-color">To</ion-text>
+          <ion-text class="text-color">{{total * 1}}</ion-text>
+        </div>
+        <ion-img class="w-30 prt-5" src="assets/images/check.svg"></ion-img>
+        <div class="to-from-box-item">
+          <ion-text class="text-color">{{trade}}</ion-text>
+          <ion-text class="text-color">From</ion-text>
+          <ion-text class="text-color">{{qty * 1}}</ion-text>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="border-top"></div> -->
+    <ion-card class="bg-base card-border">
+      <ion-card-content>
+        <div class="deposit-details-box">
+          <div class="deposit-details-item">
+            <p class="text-large ">Type</p>
+            <p class="text-large">{{tradetype?.toUpperCase()}}</p>
+          </div>
+          <div class="deposit-details-item">
+            <p class="text-large ">Rate</p>
+            <p class="text-large">{{price * 1| number: '1.4'}} {{base_coin|uppercase}}</p>
+          </div>
+          <div class="deposit-details-item">
+            <p class="text-large ">Qty</p>
+            <p class="text-large">{{qty * 1}} {{trade_coin|uppercase}}</p>
+          </div>
+          <div class="deposit-details-item">
+            <p class="text-large ">Total</p>
+            <p class="text-large">{{total * 1}} {{base_coin|uppercase}}</p>
+          </div>
+          <div class="deposit-details-item">
+            <p class="text-large ">Fees</p>
+            <p class="text-large">NoFees </p>
+          </div>
+          <div class="reject-confirm-btn-box">
+            <ion-button class="w-100" expand="block" color="danger" (click)="rejectQuote()">Reject</ion-button>
+            <ion-button class="w-100" expand="block" color="success" (click)="ConfirmQuote(qid)">Confirm
+              ({{expire}}s)</ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

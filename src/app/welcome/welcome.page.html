@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-title class="text-color">
+      <ion-img src="../../assets/logo.svg" style="height: 45px !important;"></ion-img>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-scroll">
+  <swiper-container init="false" #swiper css-mode="true">
+    <swiper-slide>
+      <ion-img src="../../assets/images/welcome_1.svg"></ion-img>
+      <div class="welcome-bg">
+        <h1 class="text-center">Take hold of your finances</h1>
+        <p class="text-center m-0">Lorem ipsum dolor sit amet, consectetur</p>
+        <p class="text-center m-0"> adipiscing elit. Ut eget mauris massa pharetra.</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <ion-img src="../../assets/images/welcome_2.svg"></ion-img>
+      <div class="welcome-bg">
+        <h1 class="text-center">Smart trading tools</h1>
+        <p class="text-center m-0">Lorem ipsum dolor sit amet, consectetur</p>
+        <p class="text-center m-0"> adipiscing elit. Ut eget mauris massa pharetra.</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <ion-img src="../../assets/images/welcome_3.svg"></ion-img>
+      <div class="welcome-bg">
+        <h1 class="text-center">Invest in the future</h1>
+        <p class="text-center m-0">Lorem ipsum dolor sit amet, consectetur</p>
+        <p class="text-center m-0"> adipiscing elit. Ut eget mauris massa pharetra.</p>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+  <ion-button (click)="onSlideNext()" expand="block" class="sliderButton">
+    Next
+  </ion-button>
+</ion-content>

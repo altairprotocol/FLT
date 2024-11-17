@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="2"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="8" class="text-center">
+        <h4 style="margin: 0; margin-top: 5px;">Confirm Purchase</h4>
+      </ion-col>
+      <ion-col size="2">
+        <div class="d-flex w-100">
+          <ion-icon size="large" (click)="refer('mining-rewards')" name="document-text-outline"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-card class="m-0 bg-base text-color" *ngFor="let item of miningMachines">
+    <ion-card-content>
+      <div class="container">
+        <div class="key-value">
+          <p class="key">Name</p>
+          <p class="value">{{item?.name}}</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Duration</p>
+          <p class="value">{{item?.days}} Days</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Daily Rewards:</p>
+          <p class="value">{{item?.daily_profit}} PRM</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Price</p>
+          <p class="value">{{item?.price}} USDT</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Power</p>
+          <p class="value">{{item?.power}}</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Daily Used</p>
+          <p class="value">1/30 Days</p>
+        </div>
+        <div class="key-value">
+          <p class="key">Status</p>
+          <ion-button *ngIf="item?.status == 1" class="top-button" style="height: 30px !important;" size="small"
+            color="success">Ready
+            State</ion-button>
+          <ion-button *ngIf="item?.status == 0" class="top-button" style="height: 30px !important;" size="small"
+            color="secondary" disabled="true">Not Ready</ion-button>
+        </div>
+        <ion-button class="top-button" (click)="startMiningMachine(item?.id)" size="small" expand="block"
+          [disabled]="item?.status == 1" color="secondary">{{item?.status == 1 ? 'Running..' : 'Start
+          Mining'}}</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

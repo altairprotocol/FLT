@@ -1,0 +1,40 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Freeze Account</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <h1>Freeze Account?</h1>
+    <p>You are freezing your account {{email}}</p>
+    <ion-card class="m-0">
+      <ion-card-content>
+        <ion-icon size="large" name="warning-outline" color="danger"></ion-icon>
+        <p>Disabling your account will cause the following:</p>
+        <ul class="m-0 mt-3">
+          <li class="fw-bold">Account will not be able to log in</li>
+          <li class="fw-bold">All trading and login functions will be disabled</li>
+          <li class="fw-bold">All API keys of your account will be unavailable</li>
+          <li class="fw-bold">You need to contact customer service to unfreeze the account</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+    <p class="mt-3">Please select the reason for freezing:</p>
+    <div class="w-100" *ngFor="let reason of reasons">
+      <ion-checkbox labelPlacement="end" [checked]="selectedReason === reason" (ionChange)="setSelectedReason(reason)">
+        {{ reason }}
+      </ion-checkbox>
+    </div>
+
+    <ion-input label="Other Reason" *ngIf="selectedReason == 'Others'" placeholder="Please specify"
+      [(ngModel)]="otherReason"></ion-input>
+    <div class="custom-divider"></div>
+    <ion-button color="danger" [disabled]="!selectedReason || (selectedReason === 'Others' && !otherReason)"
+      (click)="confirmFreeze()">Disable my account!</ion-button>
+  </div>
+</ion-content>

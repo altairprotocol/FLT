@@ -1,0 +1,69 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Buy</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <ion-img *ngIf="storeItemData" class="product-image-large" [src]="exchangeUrl + storeItemData?.img"></ion-img>
+    <div class="key-value-container w-100">
+      <div class="key-value">
+        <p class="key">Name</p>
+        <p class="value" style="font-size: 12px !important;">{{storeItemData?.name}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Sold</p>
+        <p class="value">{{randomNumber}}/{{storeItemData?.num}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Marekt Price</p>
+        <div class="d-flex align-items-center justify-content-center gap-2">
+          <p class="text-decoration-line-through m-0 p-0">${{storeItemData?.market_price}}</p>
+          <span class="value "> ${{storeItemData?.price}}</span>
+        </div>
+      </div>
+    </div>
+    <ion-input labelPlacement="stacked" label="Select Quantity" [(ngModel)]="quantity">
+      <ion-icon slot="start" aria-hidden="true" name="bag-outline"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="quantityValid && quantity" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="!quantity && quantity" slot="icon-only" name="alert-circle" color="danger"
+          aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <!-- <ion-input labelPlacement="stacked" label="Password" placeholder="Enter password" errorText="Invalid password"
+      [(ngModel)]="password" (ionInput)="onPassword()" type="password">
+      <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="passwordValid && password" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="!passwordValid && password" slot="icon-only" name="alert-circle" color="danger"
+          aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input> -->
+    <ion-select *ngIf="storeAddresses?.length  > 0" label="Address" label-placement="fixed" [(ngModel)]="address"
+      placeholder="{{address ? address?.toUpperCase() : 'Select Address'}}">
+      <ion-select-option *ngFor="let address of storeAddresses"
+        value="{{address?.id}}">{{address?.truename}}</ion-select-option>
+    </ion-select>
+    <div *ngIf="storeAddresses?.length === 0" class="d-flex align-items-center justify-content-between w-100">
+      <p class="text-danger m-0">No Addresses added</p>
+      <ion-button size="small" color="success" (click)="refer('store-new-address')">Add address</ion-button>
+    </div>
+    <ion-button id="confirmSubscription" expand="block" class="sliderButton mt-3 w-100" (click)="buyItem()"
+      [disabled]="!quantity || !address">
+      Buy Now
+    </ion-button>
+    <div class="product-details">
+      <h4>Details</h4>
+      <div class="custom-divider"></div>
+      <div style="font-size: 12px;" [innerHtml]="storeItemData?.content"></div>
+    </div>
+  </div>
+</ion-content>

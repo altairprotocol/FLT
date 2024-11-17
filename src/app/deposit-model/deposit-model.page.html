@@ -1,0 +1,20 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="3"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Choose {{this.coin.toUpperCase()}} Network </ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="d-flex-col justify-content-center align-items-center h-100 bg-base">
+    <ion-button color="light" fill="clear" class="text-secondary text-dark-force">Select Network</ion-button>
+    <ion-button *ngFor="let n of networks" class="w-50" color="dark"
+      (click)="referToDeposit(n.name, n.network)">{{(n.network?n.network:n.parent).toUpperCase()}}</ion-button>
+  </div>
+</ion-content>

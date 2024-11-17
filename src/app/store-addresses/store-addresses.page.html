@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">My Addresses</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div *ngFor="let address of addresses" class="key-value-container w-100">
+      <div class="key-value">
+        <p class="heading"></p>
+        <div class="heading-value-container">
+          <ion-icon name="create" color="success" class="w-25 h-25" (click)="editAddress(address?.id)"></ion-icon>
+          <ion-icon name="trash" color="danger" class="w-25 h-25"
+            (click)="confirmDeleteAddress(address?.id)"></ion-icon>
+        </div>
+      </div>
+      <div class="key-value">
+        <p class="key">Contact Name </p>
+        <p class="value">{{address?.truename}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Contact Number</p>
+        <p class="value">{{address?.cellphone}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">City</p>
+        <p class="value">{{address?.city}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Address</p>
+        <p class="value">{{address?.addr}}</p>
+      </div>
+      <div class="custom-divider"></div>
+    </div>
+    <ion-card *ngIf="addresses.length === 0" class="">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-secondary">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

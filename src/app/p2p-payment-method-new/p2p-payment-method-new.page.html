@@ -1,0 +1,101 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="3"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">New Payment Method</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <ion-select labelPlacement="stacked" label="Payment Method" value="paymentMethod" [(ngModel)]="paymentMethod"
+      name="paymentMethod">
+      <ion-icon slot="start" name="wallet-outline" aria-hidden="true"></ion-icon>
+      <ion-select-option value="bank">Bank Transfer</ion-select-option>
+      <ion-select-option value="upi">UPI</ion-select-option>
+      <ion-select-option value="paypal">Paypal</ion-select-option>
+    </ion-select>
+    <ion-input class="mt-3" labelPlacement="stacked" label="Full Name" placeholder="Full Name" [(ngModel)]="fullName">
+      <ion-icon slot="start" name="person-outline" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="fullName" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <div class="custom-divider"></div>
+    <div *ngIf="paymentMethod == 'bank'">
+      <ion-input labelPlacement="stacked" label="Bank Account Number/IBAN" placeholder="Bank Account Number/IBAN"
+        [(ngModel)]="bankAccountNumber">
+        <ion-icon slot="start" name="information-circle-outline" aria-hidden="true"></ion-icon>
+        <ion-button fill="clear" slot="end" aria-label="Show/hide">
+          <ion-icon *ngIf="bankAccountNumber" slot="icon-only" name="checkmark-circle-outline" color="success"
+            aria-hidden="true"></ion-icon>
+          <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+      <div class="custom-divider"></div>
+      <ion-input labelPlacement="stacked" label="Bank Name" placeholder="Bank Name" [(ngModel)]="bankName">
+        <ion-icon slot="start" name="call-outline" aria-hidden="true"></ion-icon>
+        <ion-button fill="clear" slot="end" aria-label="Show/hide">
+          <ion-icon *ngIf="bankName" slot="icon-only" name="checkmark-circle-outline" color="success"
+            aria-hidden="true"></ion-icon>
+          <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+      <div class="custom-divider"></div>
+      <ion-input labelPlacement="stacked" label="SwiftCode/IFSC (Optional)" placeholder="SwiftCode/IFSC"
+        [(ngModel)]="ifscCode">
+        <ion-icon slot="start" name="locate-outline" aria-hidden="true"></ion-icon>
+        <ion-button fill="clear" slot="end" aria-label="Show/hide">
+          <ion-icon *ngIf="ifscCode" slot="icon-only" name="checkmark-circle-outline" color="success"
+            aria-hidden="true"></ion-icon>
+          <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+      <div class="custom-divider"></div>
+      <ion-input labelPlacement="stacked" label="Bank Branch (Optional)" placeholder="Bank Branch (Optional)"
+        [(ngModel)]="bankBranch">
+        <ion-icon slot="start" name="location-outline" aria-hidden="true"></ion-icon>
+        <ion-button fill="clear" slot="end" aria-label="Show/hide">
+          <ion-icon *ngIf="bankBranch" slot="icon-only" name="checkmark-circle-outline" color="success"
+            aria-hidden="true"></ion-icon>
+          <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+      <div class="custom-divider"></div>
+    </div>
+    <div *ngIf="paymentMethod == 'upi'">
+      <ion-input labelPlacement="stacked" label="UPI ID" placeholder="UPI ID" [(ngModel)]="upiID">
+        <ion-icon slot="start" name="person-outline" aria-hidden="true"></ion-icon>
+        <ion-button fill="clear" slot="end" aria-label="Show/hide">
+          <ion-icon *ngIf="upiID" slot="icon-only" name="checkmark-circle-outline" color="success"
+            aria-hidden="true"></ion-icon>
+          <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+      <div class="custom-divider"></div>
+    </div>
+    <div *ngIf="paymentMethod == 'paypal'">
+      <ion-input labelPlacement="stacked" label="Paypal ID" placeholder="Paypal ID" [(ngModel)]="paypalID">
+        <ion-icon slot="start" name="person-outline" aria-hidden="true"></ion-icon>
+        <ion-button fill="clear" slot="end" aria-label="Show/hide">
+          <ion-icon *ngIf="paypalID" slot="icon-only" name="checkmark-circle-outline" color="success"
+            aria-hidden="true"></ion-icon>
+          <ion-icon *ngIf="false" slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+      <div class="custom-divider"></div>
+    </div>
+    <ion-button expand="block" class="sliderButton" [hidden]="paymentMethod == 'bank'"
+      [disabled]="paymentMethod == 'upi' ? !upiID : !paypalID" (click)="addPaymentMethod()">
+      Confirm
+    </ion-button>
+    <ion-button expand="block" class="sliderButton" [hidden]="paymentMethod != 'bank'"
+      [disabled]="!bankName || !bankAccountNumber || !ifscCode" (click)="addPaymentMethod()">
+      Confirm
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,41 @@
+.total-balance {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 25px 0px 10px 0px;
+
+    .total-balance-text {
+        font-size: 20px;
+        color: var(--text-color);
+    }
+
+    .total-balance-amount {
+        font-size: 25px;
+        color: var(--text-color);
+    }
+}
+
+.w-120 {
+    width: 120px;
+}
+
+.h-51 {
+    height: 51px;
+}
+
+.border-gray {
+    border: 0.5px solid rgb(228, 223, 223);
+}
+
+.border-success {
+    border: 0.5px solid rgb(137, 173, 137);
+}
+
+.gateway-flex {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

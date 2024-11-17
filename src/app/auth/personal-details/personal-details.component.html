@@ -1,0 +1,121 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="3"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Personal Details</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div lines="none" class="heading bg-base px-3 my-3">
+    <span class="text-medium px-3">
+      Begin your ID-Verification Verify your identity to start using your trade wallet.
+    </span>
+  </div>
+
+
+  <div class="bg-form-light px-3">
+
+    <ion-text>
+      <h2 class="text-large">Personal Details</h2>
+    </ion-text>
+    <ion-text>
+      <span class="privacy-text">Your basic personal information is required for identification purposes.</span>
+    </ion-text>
+
+    <div class="d-block p-3 info-mesg my-2">
+
+      <span class="privacy-text d-flex"> <ion-img class="w-16" src="assets/images/exclamatry-danger.svg"></ion-img>
+        Please type carefully and fill out the form with your personal details. You are not allowed to edit the details
+        once you have submitted the application.</span>
+    </div>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-input label="First Name" label-placement="floating" fill="outline" placeholder="First Name"
+          name="firstName" class="custom-input my-1" [(ngModel)]="firstName"></ion-input>
+
+      </ion-col>
+      <ion-col size="6">
+        <ion-input label="Last Name" label-placement="floating" fill="outline" placeholder="Last Name" name="lastName"
+          [(ngModel)]="lastName" class="custom-input my-1"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-input type="date" label="DOB" label-placement="floating" fill="outline" [(ngModel)]="dob" name="dob"
+          class="custom-input my-1 date-style bg-base"></ion-input>
+
+      </ion-col>
+      <ion-col size="6">
+        <ion-select class="custom-input drop-style" label="Gender" placeholder="" [(ngModel)]="gender" name="gender">
+          <ion-select-option value="1">Male</ion-select-option>
+          <ion-select-option value="2">Female</ion-select-option>
+          <ion-select-option value="3">Other</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+
+    <div style="border-bottom: 1px solid #bbb7b7;" class="my-2"></div>
+
+    <ion-text>
+      <h2 class="text-large">Your Address</h2>
+    </ion-text>
+
+
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-select class="custom-input drop-style" label="Country" placeholder="" [(ngModel)]="country" name="country">
+
+          <ion-select-option *ngFor="let country of countries"
+            value="{{country?.isoCode}}">{{country?.name}}</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-input label="State" label-placement="floating" fill="outline" placeholder="State" [(ngModel)]="state"
+          [(ngModel)]="state" class="custom-input my-1"></ion-input>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-input label="City Name" label-placement="floating" fill="outline" placeholder="City Name"
+          [(ngModel)]="city" name="city" class="custom-input my-1"></ion-input>
+
+      </ion-col>
+      <ion-col size="6">
+        <ion-input label="Zip/postal Code" label-placement="floating" fill="outline" placeholder="Type here"
+          [(ngModel)]="zipCode" name="zipCode" class="custom-input my-1"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-input label="Address" label-placement="floating" fill="outline" placeholder="Type here"
+          [(ngModel)]="address" name="address" class="custom-input my-1"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="errorMessage">
+      <ion-col size="12">
+        <ion-text color="danger">Error: {{errorMessage}}</ion-text>
+      </ion-col></ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="d-flex justify-content-center">
+        <ion-button class="button-primary" (click)="handleNext()">
+          Next
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+</ion-content>

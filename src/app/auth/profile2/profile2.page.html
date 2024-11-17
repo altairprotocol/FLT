@@ -1,0 +1,106 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="3"><span class="icon-title p-2 "><ion-icon size="large" class="text-color" (click)="back();" name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Profile</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <div class="container text-color">
+    <div class="user-info-container">
+      <div class="user-info">
+        <ion-img src="../../../assets/images/profile-head.svg"></ion-img>
+        <div class="email-userid-box">
+          <p class="email-text">{{maskEmail(profileData?.email)}}</p>
+          <div class="uid-copy">
+            <p>UID: 5978318277139</p>
+            <ion-icon size="small" name="copy"></ion-icon>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="hideKycBox" (click)="refer('/auth/kyc-status')" class="verify-container">
+        <ion-icon slot="icon-only" name="checkmark-circle" color="success" aria-hidden="true"></ion-icon>
+        <p>Verified ID</p>
+      </div>
+      <div *ngIf="!hideKycBox" (click)="refer('/auth/kyc-status')" class="verify-container">
+        <ion-icon slot="icon-only" name="alert-circle" color="danger" aria-hidden="true"></ion-icon>
+        <p>Verify Now</p>
+      </div>
+    </div>
+    <div class="menu-container">
+      <div class="iconWithText" (click)="referTo('security-center')">
+        <ion-img class="menu-icon" src="../../../assets/images/profile-security.svg"></ion-img>
+        <p>Security</p>
+      </div>
+      <div class="iconWithText">
+        <ion-img class="menu-icon" src="../../../assets/images/profile-settings.svg"></ion-img>
+        <p>Settings</p>
+      </div>
+      <div class="iconWithText" (click)="refer('/auth/kyc-status')">
+        <ion-img class="menu-icon" src="../../../assets/images/profile-card.svg"></ion-img>
+        <p>KYC</p>
+      </div>
+      <div class="iconWithText" (click)="refer('referral')">
+        <ion-img class="menu-icon" src="../../../assets/images/profile-invite.svg"></ion-img>
+        <p>Invite</p>
+      </div>
+    </div>
+    <ion-img src="../../../assets/images/clock-image-homepage.svg"></ion-img>
+    <div class="links-container">
+      <div class="links-item" (click)="refer('chat-support')">
+        <div class="icon-with-text" (click)="referTo('auth/profile-about')">
+          <ion-img src="../../../assets/images/profile-support.svg"></ion-img>
+          <p>Help & Support</p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </div>
+      <div class="links-item" (click)="referTo('auth/profile-about')">
+        <div class="icon-with-text">
+          <ion-img src="../../../assets/images/profile-info.svg"></ion-img>
+          <p>About</p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </div>
+      <div class="links-item">
+        <div class="icon-with-text">
+          <ion-img src="../../../assets/images/profile-star.svg"></ion-img>
+          <p>Rate us</p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </div>
+      <div class="links-item" (click)="referTo('auth/profile-community')">
+        <div class="icon-with-text">
+          <ion-img src="../../../assets/images/profile-community.svg"></ion-img>
+          <p>Join our community</p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </div>
+      <div class="links-item">
+        <div class="icon-with-text">
+          <ion-img src="../../../assets/images/profile-terms.svg"></ion-img>
+          <p>Terms of use</p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </div>
+      <div class="links-item">
+        <div class="icon-with-text">
+          <ion-img src="../../../assets/images/profile-privacy-policy.svg"></ion-img>
+          <p>Privacy Policy</p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </div>
+      <div class="links-item">
+        <div class="icon-with-text">
+          <ion-img src="../../../assets/images/profile-logout.svg"></ion-img>
+          <p>Logout</p>
+        </div>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="app-version">
+      <p>App Version 1.0.1</p>
+    </div>
+  </div>
+</ion-content>

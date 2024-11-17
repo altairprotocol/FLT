@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-col size="4"><ion-img src="../../assets/logo.svg"></ion-img></ion-col>
+      <ion-col size="4"></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <div class="welcome-bg text-color">
+    <h2 class="text-center title">Login to your Account</h2>
+    <ion-input labelPlacement="stacked" label="Email / Username" placeholder="email@domain.com"
+      errorText="Invalid email" [(ngModel)]="email" (ionInput)="onInput()">
+      <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="emailValid && email" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="!emailValid && email" slot="icon-only" name="alert-circle" color="danger"
+          aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <ion-input labelPlacement="stacked" label="Password" placeholder="Enter password" errorText="Invalid password"
+      [(ngModel)]="password" (ionInput)="onPassword()" type="password">
+      <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon *ngIf="passwordValid && password" slot="icon-only" name="checkmark-circle-outline" color="success"
+          aria-hidden="true"></ion-icon>
+        <ion-icon *ngIf="!passwordValid && password" slot="icon-only" name="alert-circle" color="danger"
+          aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <div class="mt-3 d-flex align-items-center justify-content-start w-100">
+      <ion-checkbox labelPlacement="end" [(ngModel)]="rememberMe">Remember me</ion-checkbox>
+    </div>
+    <div class="w-100 d-flex align-items-center justify-content-center">
+      <div class="custom-divider"></div>
+    </div>
+    <p class="text-center m-0">Don't have an account? <a href="/register2">Sign up here</a></p>
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <ion-button (click)="scanQRCode()" expand="block" class="sliderButton mt-3" color="tertiary">
+        Scan QR?
+      </ion-button>
+      <ion-button (click)="login()" expand="block" class="sliderButton mt-3" [disabled]="!emailValid || !passwordValid">
+        Continue
+      </ion-button>
+    </div>
+    <p class="text-center m-0 terms-text">By registering you accept our Terms & Conditions and Privacy Policy. Your
+      data will
+      be security encrypted
+      with TLS</p>
+    <p class="text-center m-0"><a href="/password-reset">Forgot Password?</a></p>
+  </div>
+</ion-content>

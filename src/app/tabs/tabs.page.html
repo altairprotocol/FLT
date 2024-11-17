@@ -1,0 +1,29 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom" class="bg-base" style="padding-top: 5px;">
+    <ion-tab-button tab="home" (click)="referTo('/tabs/home')">
+      <ion-img class="tabs-icon" [ngClass]="{'activeIcon': isActive('home'), 'plain-text': !isActive('home')}"
+        src="../../assets/images/home-tab.svg"></ion-img>
+      <ion-label [ngClass]="{'active': isActive('home'), 'plain-text': !isActive('home')}">Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="markets" href="/tabs/markets">
+      <ion-img class="tabs-icon" src="../../assets/images/market-tab.svg"></ion-img>
+      <ion-label [ngClass]="{'active': isActive('markets'), 'plain-text': !isActive('markets')}">Markets</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="trade" href="/tabs/trade">
+      <ion-img class="tabs-icon" src="../../assets/images/trade-tab.svg"></ion-img>
+      <ion-label [ngClass]="{'active': isActive('trade'), 'plain-text': !isActive('trade')}">Trade</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="fixing" href="/fixing">
+      <ion-img class="tabs-icon" src="../../assets/images/earn-tab.svg"></ion-img>
+      <ion-label [ngClass]="{'active': isActive('fixing'), 'plain-text': !isActive('fixing')}">Fixing</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="wallet" (click)="referTo('wallet')">
+      <ion-img class="tabs-icon" src="../../assets/images/wallet-tab.svg"></ion-img>
+      <ion-label [ngClass]="{'active': isActive('wallet'), 'plain-text': !isActive('wallet')}">Wallet</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

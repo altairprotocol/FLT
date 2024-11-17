@@ -1,0 +1,129 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Order Status</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <p *ngIf="order?.status == '0'" class="text-warning m-0 mt-3 p-0 fs-5 fw-bolder">Your Order is pending</p>
+    <p *ngIf="order?.status == '1'" class="text-success m-0 mt-3 p-0 fs-5 fw-bolder">Your Order has been paid</p>
+    <p *ngIf="order?.status == '2'" class="text-danger m-0 mt-3 p-0 fs-5 fw-bolder">Your Order has been Cancelled</p>
+    <p *ngIf="order?.status == '3'" class="text-warning m-0 mt-3 p-0 fs-5 fw-bolder">Dispute has raised for this order
+    </p>
+    <p *ngIf="order?.status == '4'" class="text-success m-0 mt-3 p-0 fs-5 fw-bolder">Your Order has been completed</p>
+    <ion-card>
+      <ion-card-content class="w-100">
+        <div class="single-ad-container d-flex align-items-center justify-content-center w-100 flex-column gap-2">
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="d-flex align-items-center justify-content-start w-100 gap-1">
+              <p class="m-0 p-0 fs-6 fw-bolder" [class]="order?.ad_type == '1' ? 'text-success' : 'text-danger'">
+                {{order?.ad_type == '1' ? 'Buy' : 'Sell'}}</p>
+              <p class="m-0 p-0 fs-6 fw-bolder">{{order?.coin?.toUpperCase()}}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-end w-100 gap-1">
+              <span *ngIf="order?.status == '0'" class="fw-bolder mt-1 text-warning"
+                style="font-size: 12px !important;">Pending</span>
+              <span *ngIf="order?.status == '1'" class="fw-bolder mt-1 text-success"
+                style="font-size: 12px !important;">Paid</span>
+              <span *ngIf="order?.status == '2'" class="fw-bolder mt-1 text-danger"
+                style="font-size: 12px !important;">Cancelled</span>
+              <span *ngIf="order?.status == '3'" class="fw-bolder mt-1 text-danger"
+                style="font-size: 12px !important;">Disputed</span>
+              <span *ngIf="order?.status == '4'" class="fw-bolder mt-1 text-success"
+                style="font-size: 12px !important;">Completed</span>
+              <ion-icon size="small" name="arrow-forward-outline"></ion-icon>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Amount</p>
+            <p class="p-0 m-0 text-secondary fs-6 fw-bolder">{{formatNumber(order?.fiat_qty)}}
+              {{order?.fiat?.toUpperCase()}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Price</p>
+            <p class="p-0 m-0 text-secondary fs-6 ">{{formatNumber(order?.fixed_price)}} {{order?.fiat?.toUpperCase()}}
+            </p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Quantity</p>
+            <p class="p-0 m-0 text-secondary fs-6">{{order?.coin_qty}} {{order?.coin?.toUpperCase()}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Order Number</p>
+            <p class="p-0 m-0 text-secondary fs-6">{{order?.orderid}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <p class="p-0 m-0 text-secondary">Peer Name</p>
+            <div class="d-flex align-items-center justify-content-center gap-2" (click)="referToChatPage()">
+              <p class="p-0 m-0 text-secondary fs-6 fw-bolder">{{order?.name?.toUpperCase()}}</p>
+              <ion-icon name="chatbubble-ellipses"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="payInfo?.bank">
+      <ion-card-content>
+        <p class="m-0 p-0 fs-6 fw-bolder">Payment Information</p>
+        <ion-button size="small" disabled="true">Bank Transfer</ion-button>
+        <div class="key-value-container mt-3 w-100">
+          <div *ngIf="payInfo?.truename" class="key-value">
+            <p class="key">Name</p>
+            <p class="value">{{payInfo?.truename}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Bank Name</p>
+            <p class="value">{{payInfo?.bank}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Account Number</p>
+            <p class="value">{{payInfo?.bankcard}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">IBAN/IFSC</p>
+            <p class="value">{{payInfo?.bankaddr}}</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="payInfo?.method == 'upi'">
+      <ion-card-content>
+        <p class="m-0 p-0 fs-6 fw-bolder">Payment Information</p>
+        <ion-button size="small" disabled="true">UPI</ion-button>
+        <div class="key-value-container mt-3 w-100">
+          <div class="key-value">
+            <p class="key">Method</p>
+            <p class="value">UPI</p>
+          </div>
+          <div class="key-value">
+            <p class="key">UPI ID</p>
+            <p class="value">{{payInfo?.information}}</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <p class="m-0 mt-3 p-0 fs-6 fw-bolder">Payment Information</p>
+        <div class="key-value-container mt-3 w-100">
+          <div class="key-value">
+            <p class="key">Name</p>
+            <p class="value">{{adInfo?.name?.toUpperCase()}}</p>
+          </div>
+          <div class="key-value">
+            <p class="key">Verified</p>
+            <p class="value">{{adInfo?.peername?.toUpperCase()}}</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-button expand="block" class="sliderButton" [disabled]="true">
+      Need Help?
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,70 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Deposit Info</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card class="p-2 bg-base card-border">
+    <div class="total-balance">
+      <p class="total-balance-text">Amount</p>
+      <p class="total-balance-amount">{{amount}} {{coin?.toUpperCase()}}</p>
+    </div>
+    <div class="border-top"></div>
+    <div class="deposit-details-box">
+      <div class="deposit-details-item">
+        <p class="text-large ">Amount</p>
+        <p class="text-medium">{{amount}} {{coin?.toUpperCase()}}</p>
+      </div>
+      <div class="deposit-details-item">
+        <p class="text-large ">Status</p>
+        <p class="text-large text-secondary" *ngIf="status == 0">Unpaid</p>
+        <p class="text-large text-success" *ngIf="status == 2">Deposited</p>
+        <p class="text-large text-warning" *ngIf="status == 3">Processing</p>
+        <p class="text-large text-danger" *ngIf="status == 4">Cancelled</p>
+      </div>
+      <div class="deposit-details-item">
+        <p class="text-large ">Order#[MEMO]</p>
+        <div class="copy-box">
+          <p class="text-medium">{{memo}}</p>
+          <ion-icon name="copy-outline" class="text-color" (click)="copyString(memo)"></ion-icon>
+        </div>
+      </div>
+      <div class="deposit-details-item" *ngIf="acnumber">
+        <p class="text-large ">A/C Number</p>
+        <div class="copy-box">
+          <p class="text-medium">{{acnumber}}</p>
+          <ion-icon name="copy-outline" class="text-color" (click)="copyString(acnumber)"></ion-icon>
+        </div>
+      </div>
+      <div class="deposit-details-item">
+        <p class="text-large ">Bank</p>
+        <div class="copy-box">
+          <p class="text-small w-75">{{bank}}</p>
+          <ion-icon name="copy-outline" class="text-color" (click)="copyString(bank)"></ion-icon>
+        </div>
+      </div>
+      <div class="deposit-details-item">
+        <p class="text-large ">Name</p>
+        <div class="copy-box">
+          <p class="text-medium">{{name}}</p>
+          <ion-icon name="copy-outline" class="text-color" (click)="copyString(name)"></ion-icon>
+        </div>
+      </div>
+      <!-- <div class="deposit-details-item">
+      <p class="text-large ">Date</p>
+      <p class="text-large">{{deposit.addtime * 1000 | date:'yyyy-MM-dd HH-mm-ss' }}</p>
+    </div> -->
+
+      <ion-button expand="block" color="primary" (click)="depositMore()">Deposit More</ion-button>
+    </div>
+  </ion-card>
+
+</ion-content>

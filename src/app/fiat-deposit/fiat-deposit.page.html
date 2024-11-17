@@ -1,0 +1,50 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Deposit</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card class="p-2 bg-base card-border">
+    <div class="total-balance">
+      <p class="total-balance-text">Method: Bank Transfer</p>
+      <p class="total-balance-amount">Total Balance: {{coin_total}}&nbsp;{{coin_symbol | uppercase}}</p>
+    </div>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input label="Amount" label-placement="floating" fill="outline" class="custom-input my-1"
+          [(ngModel)]="receiveAmount"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-text>Please select one</ion-text>
+      </ion-col>
+      <ion-col size="12" *ngFor="let gateway of gateways" (click)="choosegateway(gateway.name)">
+        <div class="gateway-flex border-gray p-2"
+          [class]="selected_gateway === gateway.name ? 'border-success' : 'border-gray'">
+          <ion-img class="w-120 h-51" src="{{gateway.img}}"></ion-img>
+          <ion-text class="">{{gateway.title}}</ion-text>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-row>
+
+          <ion-col size="6">
+            <ion-button expand="block" color="danger" (click)="back()">Cancel</ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button expand="block" color="success" (click)="fiatdeposit()">Deposit</ion-button>
+          </ion-col>
+
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

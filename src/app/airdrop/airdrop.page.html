@@ -1,0 +1,120 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+            <ion-title class="text-color">Airdrop Module</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base text-color">
+  <div class="container">
+    <div class="segments-container mt-5">
+      <div class="custom-segment">
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Live' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Live')">Live</div>
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Upcoming' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Upcoming')">Upcoming</div>
+        <div class="custom-segment-buttons" [class]="activeSegment == 'Ended' ? 'subActive' : 'subInActive'"
+          (click)="changeSegment('Ended')">Ended</div>
+      </div>
+    </div>
+    <ion-card *ngIf="activeSegment == 'Live' && airdrops?.list_running.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-color">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="activeSegment == 'Upcoming' && airdrops?.list_upcoming.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-color">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="activeSegment == 'Ended' && airdrops?.list_ended.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p class="text-color">No data found</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div *ngIf="activeSegment == 'Live'">
+      <div *ngFor="let airdrop of airdrops?.list_running"
+        class="list-container d-flex align-items-center justify-content-between w-100 gap-3">
+        <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+        <div class="d-flex align-items-start justify-content-start w-100 flex-column gap-1">
+          <p class="p-0 m-0 fs-4">{{airdrop?.name}}</p>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Hold</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.num?.toFixed(2)}} RPM</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Airdrop</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.num?.toFixed(2)}} MEME</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Start Time</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.endTime}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">End Time</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.beginTime}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSegment == 'Upcoming'">
+      <div *ngFor="let airdrop of airdrops?.list_upcoming"
+        class="list-container d-flex align-items-center justify-content-between w-100 gap-3">
+        <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+        <div class="d-flex align-items-start justify-content-start w-100 flex-column gap-1">
+          <p class="p-0 m-0 fs-4 fw-bolder">{{airdrop?.name}}</p>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Hold</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.num?.toFixed(2)}} RPM</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Airdrop</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.num?.toFixed(2)}} MEME</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Start Time</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.endTime}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">End Time</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.beginTime}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSegment == 'Ended'">
+      <div *ngFor="let airdrop of airdrops?.list_ended"
+        class="list-container d-flex align-items-center justify-content-between w-100 gap-3 text-color">
+        <ion-img class="coin-icon" src="../../assets/images/lab-btc-icon.svg"></ion-img>
+        <div class="d-flex align-items-start justify-content-start w-100 flex-column gap-1">
+          <p class="p-0 m-0 fs-4">{{airdrop?.name?.toUpperCase()}}</p>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Hold</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.num}} RPM</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Airdrop</p>
+            <p class="p-0 m-0  fw-bolder">{{airdrop?.num}} MEME</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">Start Time</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.beginTime}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100 gap-2">
+            <p class="p-0 m-0 text-color">End Time</p>
+            <p class="p-0 m-0 fw-bolder">{{airdrop?.endTime}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

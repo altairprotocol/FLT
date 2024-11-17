@@ -1,0 +1,151 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <div class="p2p-main-header">
+      <ion-icon size="large" (click)="back()" class="text-color" name="arrow-back"></ion-icon>
+      <!-- <p>P2P Trading</p> -->
+      <ion-select aria-label="Fruit" interface="popover" placeholder="{{p2pMode}}" value="{{p2pMode}}"
+        (ionChange)="changeP2PMode($event)" class="w-auto fs-6 fw-bold">
+        <ion-select-option value="p2pTrading">P2P Trading</ion-select-option>
+        <ion-select-option value="express">Express</ion-select-option>
+      </ion-select>
+      <div class="d-flex align-items-center justify-content-center gap-2">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <ion-icon (click)="showMenu($event)" name="ellipsis-horizontal-outline"></ion-icon>
+        <ion-popover #popover [isOpen]="isMenuOpen" (didDismiss)="isMenuOpen = false" class="">
+          <ng-template>
+            <div class="d-flex align-items-end justify-content-end flex-column p-2 gap-2 bg-base text-color">
+              <p class="m-0 p-0" (click)="refer('p2p-payment-settings')">Payment Settings</p>
+              <p class="m-0 p-0" (click)="refer('p2p-post-ad')">Post a new Ad</p>
+              <p class="m-0 p-0" (click)="refer('p2p-ads')">My Ads</p>
+              <p class="m-0 p-0" (click)="refer('/tabs/wallet')">P2P Wallet</p>
+              <p class="m-0 p-0" (click)="refer('p2p-merchant')">Become a Merchant</p>
+              <p class="m-0 p-0" (click)="refer('p2p-faq')">FAQs</p>
+            </div>
+          </ng-template>
+        </ion-popover>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <div class="segments-container d-flex align-items-center justify-content-between gap-2">
+      <div class="custom-segment">
+        <ion-button class="custom-segment-buttons" [class]="activeMethod == 'Buy' ? 'active text-success' : ''"
+          (click)="changeActiveMethod('Buy')" fill="clear">Buy</ion-button>
+        <ion-button class="custom-segment-buttons" [class]="activeMethod == 'Sell' ? 'active text-danger' : ''"
+          (click)="changeActiveMethod('Sell')" fill="clear">Sell</ion-button>
+      </div>
+      <ion-button size="small" (click)="changeFiatCurrency()">
+        {{activeFiat}}
+        <ion-icon slot="end" name="git-compare-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="segments-container">
+      <div class="custom-segment">
+        <ion-button class="custom-segment-buttons sub-container" [class]="activeBaseMarket == 'USDT' ? 'active' : ''"
+          (click)="changeActiveBaseMarket('USDT')" fill="clear">USDT</ion-button>
+        <ion-button class="custom-segment-buttons sub-container" [class]="activeBaseMarket == 'BTC' ? 'active' : ''"
+          (click)="changeActiveBaseMarket('BTC')" fill="clear">BTC</ion-button>
+        <ion-button class="custom-segment-buttons sub-container" [class]="activeBaseMarket == 'ETH' ? 'active' : ''"
+          (click)="changeActiveBaseMarket('ETH')" fill="clear">ETH</ion-button>
+        <ion-button class="custom-segment-buttons sub-container" [class]="activeBaseMarket == 'BNB' ? 'active' : ''"
+          (click)="changeActiveBaseMarket('BNB')" fill="clear">BNB</ion-button>
+      </div>
+    </div>
+    <ion-card *ngIf="p2pAds?.length === 0" class="bg-base text-color">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <p>No ads found with selected filters</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let ad of p2pAds | keyvalue" class="m-0 mt-3 bg-base text-color" (click)="showWarning(ad);">
+      <ion-card-content class="w-100" style="padding: 10px 15px!important;">
+        <div class="single-ad-container d-flex align-items-center justify-content-center w-100 flex-column gap-1">
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="d-flex align-items-center justify-content-center w-100 gap-1">
+              <ion-img src="../../assets/images/p2p-trading.profile.svg"></ion-img>
+              <div class="d-flex flex-column align-items-start justify-content-start w-100">
+                <p class="m-0 p-0 fs-6 fw-bold">{{ad?.value?.name.toUpperCase()}}</p>
+                <div class="d-flex align-items-center justify-content-center gap-1">
+                  <ion-icon [color]="ad?.value?.merchantStatus?.onlineStatus == 'offline' ? 'secondary' : 'success'"
+                    [name]="ad?.value?.merchantStatus?.onlineStatus == 'offline' ? 'cloud-offline-outline' : 'checkmark-circle'"></ion-icon>
+                  <p style="font-size: 12px !important;">{{ad?.value?.merchantStatus?.onlineStatus == 'offline' ?
+                    'Last seen ' + ad?.value?.merchantStatus?.last_online_time: 'Online'}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-end justify-content-end w-100">
+              <p class="m-0 p-0 text-secondary">{{ad?.value?.orders}} Orders</p>
+              <p class="m-0 p-0 text-secondary"> | {{ad?.value?.completion}} %</p>
+            </div>
+          </div>
+          <p class="m-0 p-0 fs-4 fw-bold w-100 text-align-start">$ {{formatNumber(ad?.value?.fixed_price)}}</p>
+          <div class="d-flex align-items-start justify-content-start w-100 gap-2">
+            <p class="p-0 m-0 text-secondary">Quantity</p>
+            <p class="p-0 m-0 text-secondary fw-bolder">7,4032 {{activeBaseMarket}}</p>
+          </div>
+          <div class="d-flex align-items-start justify-content-start w-100 gap-2">
+            <p class="p-0 m-0 text-secondary">Limits</p>
+            <p class="p-0 m-0 text-secondary fw-bolder">{{formatNumber(ad?.value?.min_limit)}} -
+              {{formatNumber(ad?.value?.max_limit)}} {{this.activeFiat}}</p>
+          </div>
+          <div class="d-flex align-items-start justify-content-start w-100 gap-2">
+            <p class="p-0 m-0 text-secondary">Time Limit</p>
+            <p class="p-0 m-0 text-secondary fw-bolder">{{ad?.value?.time_limit}} Mins</p>
+          </div>
+
+          <div class="custom-divider"></div>
+          <div class="d-flex align-items-center justify-content-between w-100 custom-border-left">
+            <p *ngIf="ad?.value?.method?.length === 0" class="p-0 m-0" style="margin-left: 5px !important;">Bank
+              Transfer</p>
+            <p class="p-0 m-0" style="margin-left: 5px !important;">{{ad?.value?.method?.join(" / ")}}
+            </p>
+            <ion-button *ngIf="activeMethod === 'Buy'" size="small" color="success">Buy</ion-button>
+            <ion-button *ngIf="activeMethod === 'Sell'" size="small" color="danger">Sell</ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <!-- <ion-card class="m-0 mt-2">
+      <ion-card-content class="w-100" style="padding: 10px 15px!important;">
+        <div class="single-ad-container d-flex align-items-center justify-content-center w-100 flex-column gap-1">
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="d-flex align-items-center justify-content-center w-100 gap-1">
+              <ion-img src="../../assets/images/p2p-trading.profile.svg"></ion-img>
+              <div class="d-flex flex-column align-items-start justify-content-start w-100">
+                <p class="m-0 p-0 fs-6 fw-bold">Mark James</p>
+                <div class="d-flex align-items-center justify-content-center gap-1">
+                  <ion-icon color="success" name="checkmark-circle"></ion-icon>
+                  <p>Online</p>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-end justify-content-end w-100">
+              <p class="m-0 p-0 text-secondary">79 Orders</p>
+              <p class="m-0 p-0 text-secondary"> | 92.00 %</p>
+            </div>
+          </div>
+          <p class="m-0 p-0 fs-4 fw-bold w-100 text-align-start">$ 1,462.00</p>
+          <div class="d-flex align-items-start justify-content-start w-100 gap-2">
+            <p class="p-0 m-0 text-secondary">Quantity</p>
+            <p class="p-0 m-0 text-secondary fw-bolder">7,4032 {{activeBaseMarket}}</p>
+          </div>
+          <div class="d-flex align-items-start justify-content-start w-100 gap-2">
+            <p class="p-0 m-0 text-secondary">Limits</p>
+            <p class="p-0 m-0 text-secondary fw-bolder">10,823.00 - 10,823.00 {{this.activeFiat}}</p>
+          </div>
+          <div class="custom-divider"></div>
+          <div class="d-flex align-items-center justify-content-between w-100 custom-border-left">
+            <p class="p-0 m-0" style="margin-left: 5px !important;">Bank Transfer</p>
+            <ion-button *ngIf="activeMethod === 'Buy'" size="small" color="success">Buy</ion-button>
+            <ion-button *ngIf="activeMethod === 'Sell'" size="small" color="danger">Sell</ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card> -->
+
+  </div>
+</ion-content>

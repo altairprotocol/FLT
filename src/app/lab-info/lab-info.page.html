@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="5"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="5">
+        <h4 style="margin: 0; margin-top: 5px;">Lab</h4>
+      </ion-col>
+      <ion-col size="2">
+        <div class="d-flex w-100">
+          <ion-icon size="large" name="document-text-outline" (click)="refer('lab-history')"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container d-flex flex-column align-items-center justify-content-center w-100 gap-3 text-color">
+    <ion-img class="top-image" src="../../assets/images/lab-info-icon.svg"></ion-img>
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <h1 class="m-0 p-0">{{icoIssue?.name}}</h1>
+      <ion-button size="small" color="success">Running</ion-button>
+    </div>
+    <div *ngIf="icoIssue" class="w-100">
+      <app-timer [beginTime]="icoIssue?.time" [endTime]="icoIssue?.endtime"></app-timer>
+    </div>
+    <p class="info-text">ICC Device is providing a hardware crypto wallet which
+      enables you t generate and create passwords when
+      you need it. ICC Device is very particularly about the
+      security of your crypto assets as such its products are of
+      state-of-the-art and top notch secure technological
+      standards. It is also easy to use so that even when you f
+      orget your password, yo......</p>
+    <div class="key-value-container w-100">
+      <div class="key-value">
+        <p class="key">ICO</p>
+        <p class="value">{{icoIssue?.name}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">ICO Price</p>
+        <p class="value">{{formatNumber(icoIssue?.price)}} {{icoIssue?.buycoin?.toUpperCase()}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Buy Limit</p>
+        <p class="value">{{formatNumber(icoIssue?.min)}} - {{formatNumber(icoIssue?.max)}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Starts On</p>
+        <p class="value">{{icoIssue?.time}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Ends On</p>
+        <p class="value">{{icoIssue?.endtime}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Total Sold</p>
+        <p class="value">{{icoIssue?.deal}}</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Total Supply</p>
+        <p class="value">{{icoIssue?.limit}}</p>
+      </div>
+    </div>
+    <ion-button class="top-button" size="small" expand="block" color="secondary"
+      (click)="referToICOBuyPage()">Subscribe</ion-button>
+  </div>
+</ion-content>

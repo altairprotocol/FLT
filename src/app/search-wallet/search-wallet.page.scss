@@ -1,0 +1,37 @@
+.w-img {
+    width: 15px;
+    height: 43px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 25px;
+}
+
+.search-field {
+    border: 1px solid #d9d9d9;
+    border-radius: 40px;
+    height: 26px !important;
+    margin-right: 10px;
+}
+
+.h-28 {
+    height: 28px !important;
+}
+
+.w-28 {
+    width: 28px !important;
+}
+
+.custom-input {
+    --ion-input {
+        border-radius: 20%;
+    }
+}
+
+.light-bg-f3 {
+    background: var(--bg-primary-color);
+    border-radius: 5%;
+    margin: 4px 2px 4px 2px;
+    color: var(--text-color);
+}

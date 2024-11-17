@@ -1,0 +1,256 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <div class="trade-header">
+      <ion-icon size="large" (click)="back()" class="text-color" name="arrow-back"></ion-icon>
+      <p>Spot</p>
+      <ion-icon name="star-outline" *ngIf="!is_fav" (click)="changeFav(this.commonmarket, 'add')"></ion-icon>
+      <ion-icon name="star" *ngIf="is_fav" (click)="changeFav(this.commonmarket, 'remove')"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <span class="d-flex justify-content-between p-2">
+      <span class="d-flex gap-3 align-items-center">
+        <span style="border-right: 1px solid #bdbdbd" class="icon-title p-2 invert-1"><ion-icon size="large" name="arrow-back"
+            (click)="back()"></ion-icon></span>
+        <span><a href=""><ion-img class="w-20" src="assets/images/filter.svg"></ion-img></a></span>
+        <span><ion-text class="text-large">{{commonmarket?.replace("_", " / ").toUpperCase()}}</ion-text></span>
+      </span>
+
+      <span class="d-flex gap-3 align-items-center pr-r">
+        <span>
+          <ion-img *ngIf="!is_fav" (click)="changeFav(this.commonmarket, 'add')" class="w-20"
+            src="assets/images/star.svg"></ion-img>
+          <ion-img *ngIf="is_fav" (click)="changeFav(this.commonmarket, 'remove')" class="w-20"
+            src="assets/images/star_success.svg"></ion-img>
+        </span>
+      </span>
+    </span>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="bg-base text-color">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button class="top-button" size="small" expand="block" color="medium">Charts</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button class="top-button text-color" size="small" expand="block" fill="outline" color="medium"
+        (click)="referToTrade(commonmarket,1)">Trade</ion-button>
+    </ion-col>
+  </ion-row>
+  <div class="coin-with-rate-star-container text-color">
+    <div class="coin-with-rate-star">
+      <ion-icon name="menu" size="large"></ion-icon>
+      <p class="common-market-text">{{commonmarket?.replace("_", " / ").toUpperCase()}}</p>
+      <p class="{{this.sentiment}}-change">+{{this.change}}%</p>
+      
+    </div>
+    <ion-img *ngIf="!is_fav" (click)="changeFav(this.commonmarket, 'add')" class="w-20"
+      src="assets/images/star.svg"></ion-img>
+    <ion-img *ngIf="is_fav" (click)="changeFav(this.commonmarket, 'remove')" class="w-20"
+      src="assets/images/star_success.svg"></ion-img>
+  </div>
+  <ion-row class="bg-base">
+    <ion-col size="12" class="bg-base">
+      <ion-card class="d-flex justify-content-between shadow-none card-border m-0 bg-base ">
+        <div class="coin-new-price">
+          <h3  class="{{this.sentiment}}">{{this.new_price}}</h3>
+          
+          <h5 >~{{this.new_price}}</h5>
+          
+        </div>
+        <div class="colomn">
+          <span>24h High</span>
+          <span>24h Low</span>
+          <!-- <span>24th Amount (AVA)</span> -->
+          <span>24th Volume ({{this.two}})</span>
+        </div>
+        <div class="last">
+          <span>{{high}}</span>
+          <span>{{low}}</span>
+          <!-- <span>100,993.1</span> -->
+          <span>{{volume}}</span>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row class="bg-base">
+    <ion-col size="12" class="bg-base">
+      <div class="iframe-container">
+        <iframe class="iframe-content" [src]="urlSafe"></iframe>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="bg-base">
+    <ion-col size="12" class="d-flex gap-3 px-4">
+      <a class="txt-decoration" [ngClass]="{'active': showChart}" (click)="toggleSection('chart')">
+        <ion-text class="privacy-text">Order Book</ion-text>
+      </a>
+      <a class="txt-decoration" [ngClass]="{'active': showMarketHistory}" (click)="toggleSection('marketHistory')">
+        <ion-text class="privacy-text">Market History</ion-text>
+      </a>
+      <a class="txt-decoration" [ngClass]="{'active': showCoinInfo}" (click)="toggleSection('coin-info')">
+        <ion-text class="privacy-text">Info</ion-text>
+      </a>
+    </ion-col>
+  </ion-row>
+
+  <div class="Chart" *ngIf="showChart">
+    <!-- table -->
+    <ion-row class="px-2 bg-base">
+      <ion-col size="12" class="bg-base">
+        <ion-grid class="table-style bg-base">
+          <ion-row class="table-head bg-base ion-hide">
+            <ion-col class="head-table">Price({{commonmarket?.split('_')[1]?.toUpperCase()}})</ion-col>
+            <ion-col class="head-table">Qty({{commonmarket?.split('_')[0]?.toUpperCase()}})</ion-col>
+            <ion-col class="head-table">Price({{commonmarket?.split('_')[1]?.toUpperCase()}})</ion-col>
+            <ion-col class="head-table">Qty({{commonmarket?.split('_')[0]?.toUpperCase()}})</ion-col>
+          </ion-row>
+
+          <!-- <div class="ordersBox"> -->
+          <ion-row>
+            <ion-col>
+              <div class="buyOrdersBox" *ngFor="let buy of buyorders; let i = index"
+                [ngStyle]="{'background': 'linear-gradient(to left, rgba(103, 153, 1, 0.2) ' + buyPercentages[i] + '%, transparent 0%)'}">
+                <ion-text class="text-small text-color">{{buy?.price*1}}</ion-text>
+                <ion-text class="text-small text-success">{{buy?.nums*1}}</ion-text>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="sellOrdersBox" *ngFor="let sell of sellorders; let i = index"
+                [ngStyle]="{'background': 'linear-gradient(to right, rgba(179, 0, 0, 0.2) ' + sellPercentages[i] + '%, transparent 0%)'}">
+                <ion-text class="text-small text-color">{{sell?.price*1}}</ion-text>
+                <ion-text class="text-small text-danger">{{sell?.nums*1}}</ion-text>
+              </div>
+            </ion-col>
+          </ion-row>
+          <!-- </div> -->
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-button class="button-sucess text-white w-100" (click)="referToTrade(commonmarket,1)"> Buy
+          {{commonmarket?.split('_')[0]?.toUpperCase()}}</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="button-danger text-white w-100" (click)="referToTrade(commonmarket,2)"> Sell
+          {{commonmarket?.split('_')[0]?.toUpperCase()}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="Coin-info" *ngIf="showCoinInfo">
+
+    <ion-item class="bg-base" lines="none">
+      <span><ion-img class="w-28" [src]="img ? img : 'assets/images/coin.svg'"></ion-img></span> <span
+        class="text-large px-1">{{commonmarket?.replace("_", " / ").toUpperCase()}}</span>
+    </ion-item>
+
+    <ion-card class="shadow-none card-border bg-base">
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Title</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.coinTitle && this.coinTitle != '' ? this.coinTitle :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Symbol</span></ion-text>
+        <ion-text class="text-large" slot="end">{{commonmarket?.split('_')[0]?.toUpperCase()}}<span></span></ion-text>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Algorithm</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.algorithm && this.algorithm != '' ? this.algorithm :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Block Reward</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.block_reward && this.block_reward != '' ? this.block_reward :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Decimals</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.decimals && this.decimals != '' ? this.decimals :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Release Date</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.release_date && this.release_date != '' ? this.release_date :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Short Comings</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.short_comings && this.short_comings != '' ? this.short_comings :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Supply</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.supply && this.supply != '' ? this.supply :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+    </ion-card>
+
+    <ion-card class="shadow-none card-border bg-base">
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Difficulty</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.difficulty && this.difficulty != '' ? this.difficulty :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Features</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.features && this.features != '' ? this.features :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+
+      <ion-item lines="none" class="bg-base">
+        <ion-text slot="start"><span class="light-color privacy-text">Developer</span></ion-text>
+        <ion-text class="text-large" slot="end">{{this.developer && this.developer != '' ? this.developer :
+          '---'}}<span></span></ion-text>
+      </ion-item>
+    </ion-card>
+
+    <ion-row class="py-5">
+      <ion-col size="6">
+        <ion-button class="button-sucess w-100" (click)="referToTrade(commonmarket,1)"> Buy
+          {{commonmarket.split('_')[0]}}</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="button-danger w-100" (click)="referToTrade(commonmarket,2)">Sell
+          {{commonmarket.split('_')[1]}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="Coin-info" *ngIf="showMarketHistory">
+
+    <ion-item class="bg-base" lines="none">
+      <span><ion-img class="w-28" [src]="img ? img : 'assets/images/coin.svg'"></ion-img></span> <span
+        class="text-large px-1">{{commonmarket?.replace("_", " / ").toUpperCase()}}</span>
+    </ion-item>
+
+    <ion-card class="shadow-none card-border bg-base">
+      <ion-row>
+        <ion-col size="4"><ion-text class="w-100 privacy-text text-center">Time</ion-text></ion-col>
+        <ion-col size="4"><ion-text class="w-100 privacy-text text-center">Price</ion-text></ion-col>
+        <ion-col size="4"><ion-text class="w-100 privacy-text text-center">Quantity</ion-text></ion-col>
+      </ion-row>
+      <ion-row *ngFor="let logs of tradelogs">
+        <ion-col size="4"><ion-text
+            class="w-100 privacy-text text-center">{{logs?.addtime.substring(6)}}</ion-text></ion-col>
+        <ion-col *ngIf="logs?.type == '1'" size="4"><ion-text
+            class="w-100 privacy-text text-center text-success">{{logs?.price*1}}</ion-text></ion-col>
+        <ion-col *ngIf="logs?.type == '2'" size="4"><ion-text
+            class="w-100 privacy-text text-center text-danger">{{logs?.price*1}}</ion-text></ion-col>
+        <ion-col size="4" class="w-100"><ion-text
+            class="w-100 privacy-text text-right">{{logs?.num*1}}</ion-text></ion-col>
+      </ion-row>
+
+    </ion-card>
+  </div>
+</ion-content>

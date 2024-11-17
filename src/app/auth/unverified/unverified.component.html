@@ -1,0 +1,59 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <span class="icon-title p-2 "><ion-icon class="text-color"  size="large" (click)="back()" name="arrow-back"></ion-icon>
+
+    </span>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div lines="none" class="heading bg-base px-3 my-3">
+    <span class="d-flex justify-content-start gap-2">
+      <span><ion-img class="w-28" src="../../../assets/images/verified.svg"></ion-img></span>
+      <ion-text class="text-large">Verification Center<br> <span> </span></ion-text>
+    </span>
+  </div>
+
+
+  <div class="bg-form-light">
+    <div class="d-flex-col px-3">
+      <ion-text>
+        <h2 class="text-p  ">To comply with regulations, each participant is required to go through identity
+          verification (KYC/AML) to prevent fraud, money laundering operations, transactions banned under the sanctions
+          regime, or those which fund terrorism. Please complete our fast and secure verification process to participate
+          in our platform.</h2>
+      </ion-text>
+
+
+      <ion-img class="w-28" src="assets/images/verification-docs.svg"></ion-img>
+
+
+      <ion-text>
+        <h2 class="text-medium  text-center">You have not submitted your necessary documents to verify your identity. In
+          order to trade in our platform, please verify your identity.</h2>
+      </ion-text>
+
+
+      <ion-text>
+        <h2 class="text-p   text-center">It would be great if you could submit the form. If you have any questions,
+          please feel free to contact our support team.</h2>
+      </ion-text>
+
+      <hr>
+
+      <div class="d-block p-3 info-mesg my-2">
+        <span class="text-large">Verification Levels</span>
+        <br>
+        <span class="privacy-text">1. Verified</span>
+      </div>
+    </div>
+
+
+
+    <ion-button href="auth/personal-details" class="my-5 mx-5 text-capitalize button-primary" expand="full">Click here
+      to Complete your KYC</ion-button>
+
+  </div>
+</ion-content>

@@ -1,0 +1,166 @@
+<ion-content [fullscreen]="true" class="bg-base">
+  <div class="container text-color">
+    <div class="scrolling-wrapper">
+      <ion-row class="pt-1 mt-10 flex-nowrap">
+        <ion-col class="flex-auto" size="12" *ngFor="let banner of banners">
+          <ion-img on [src]="banner?.img" alt="" class="img-fluid"></ion-img>
+        </ion-col>
+      </ion-row>
+    </div>
+  
+    <div class="rounded-[10px] col-span-4 announcement">
+      <ion-icon name="megaphone-outline"></ion-icon>
+      <div class="small-text" style="line-height: 1rem;height:1rem;overflow:hidden" >
+        <span (click)="referToArticleView(ann)" style="overflow-x:hidden;padding-right:3px" *ngFor="let ann of announcements">{{ann.title.substr(0,35)}}.. </span>
+        </div>
+
+    </div>
+    <div class="menu-container">
+      <div class="iconWithText" (click)="refer('p2p-main')">
+        <ion-img class="menu-icon" src="../../../assets/images/p2p-icon.svg"></ion-img>
+        <p>P2P</p>
+      </div>
+      <div class="iconWithText" (click)="refer('tabs/trade')">
+        <ion-img class="menu-icon" src="../../../assets/images/trade-icon.svg"></ion-img>
+        <p>Trade</p>
+      </div>
+      <div class="iconWithText" (click)="refer('mining')">
+        <ion-img class="menu-icon" src="../../../assets/images/mining-icon.svg"></ion-img>
+        <p>Mining</p>
+      </div>
+      <div class="iconWithText" (click)="refer('lab')">
+        <ion-img class="menu-icon" src="../../../assets/images/lab-icon.svg"></ion-img>
+        <p>Lab</p>
+      </div>
+    </div>
+    <div class="menu-container">
+      <div class="iconWithText" (click)="refer('voting')">
+        <ion-img class="menu-icon" src="../../../assets/images/voting-icon.svg"></ion-img>
+        <p>Voting</p>
+      </div>
+      <div class="iconWithText" (click)="refer('fixing')">
+        <ion-img class="menu-icon" src="../../../assets/images/fixing-icon.svg"></ion-img>
+        <p>Fixing</p>
+      </div>
+      <div class="iconWithText" (click)="refer('airdrop')">
+        <ion-img class="menu-icon" src="../../../assets/images/airdrop-icon.svg"></ion-img>
+        <p>Airdrops</p>
+      </div>
+      <div class="iconWithText">
+        <!-- <ion-button id="open-modal" expand="block">Open</ion-button> -->
+        <ion-img class="menu-icon" id="open-modal" src="../../../assets/images/more-icon.svg"></ion-img>
+        <p>More</p>
+      </div>
+    </div>
+  </div>
+  <ion-row>
+    <ion-col style="background-color: var(--bg-primary-color);" size="12"></ion-col>
+  </ion-row>
+  <div class="markets-data text-color">
+    <h1>Markets</h1>
+    <div class="custom-segment">
+      <ion-button class="custom-segment-buttons" [class]="activeBaseMarket == 'USDT' ? 'active' : ''"
+        (click)="changeActiveBaseMarket('USDT')" fill="clear">USDT</ion-button>
+      <ion-button class="custom-segment-buttons" [class]="activeBaseMarket == 'BTC' ? 'active' : ''"
+        (click)="changeActiveBaseMarket('BTC')" fill="clear">BTC</ion-button>
+      <ion-button class="custom-segment-buttons" [class]="activeBaseMarket == 'ETH' ? 'active' : ''"
+        (click)="changeActiveBaseMarket('ETH')" fill="clear">ETH</ion-button>
+    </div>
+    <ion-row>
+      <ion-col size="5" class="text-semi">
+        <p class="text-11">Coins &#x2193;</p>
+      </ion-col>
+      <ion-col size="4" class="text-semi">
+        <p class="text-11">Price &#x2193;</p>
+      </ion-col>
+      <ion-col size="3" class="text-semi">
+        <p class="text-11">24h change &#x2193;</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="homeData && homeData?.length === 0">
+      <ion-col size="4"></ion-col>
+      <ion-col size="4">No data found</ion-col>
+      <ion-col size="4"></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of homeData" class="align-items-center flex" (click)="referToMarketDetail(item?.ticker);">
+      <ion-col size="6"><span class="d-flex"> <ion-img class="w-28 m-r-3" src="{{item?.icon}}"></ion-img>
+          <span class="font-14 label-color">{{item?.ticker.toUpperCase().split('_')[0]}}</span>
+          <span class="font-14 text-lighter label-color">/{{item?.ticker.toUpperCase().split('_')[1]}}</span>
+        </span>
+      </ion-col>
+      <ion-col size="3"><span class="label-color">{{item?.new_price | number: '1.2'}}</span></ion-col>
+      <ion-col size="3"><ion-button *ngIf="item?.change >= 0" class="positive-rate w-100 text-large">{{item?.change *
+          1}}%</ion-button>
+        <ion-button *ngIf="item?.change < 0" class="negative-rate w-100 text-large">{{item?.change *
+          1}}%</ion-button></ion-col>
+    </ion-row>
+  </div>
+  <ion-row>
+    <ion-col style="background-color: var(--bg-primary-color);" size="12"></ion-col>
+  </ion-row>
+  <div class="news-section text-color">
+    <h1>News</h1>
+    <div *ngFor="let item of newsList" (click)="referToArticleView(item)">
+      <ion-row class="news-container">
+        <ion-col size="8" class="">
+          <h1 class="news-heading">{{item?.title}}</h1>
+          <p class="news-date">{{item?.addtime}}</p>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img class="" [src]="item?.img"></ion-img>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header lines="none">
+        <ion-toolbar class="bg-base text-color">
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title class="text-color">More</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding bg-base">
+        <div class="menu-container text-color">
+          <div class="iconWithText" (click)="refer('faucet')">
+            <ion-img class="menu-icon" src="../../../assets/images/faucet-icon.svg"></ion-img>
+            <p>Faucet</p>
+          </div>
+          <div class="iconWithText" (click)="refer('store')">
+            <ion-img class="menu-icon" src="../../../assets/images/store-icon.svg"></ion-img>
+            <p>Store</p>
+          </div>
+          <div class="iconWithText" (click)="refer('otc-main')">
+            <ion-img class="menu-icon" src="../../../assets/images/otc-icon.svg"></ion-img>
+            <p>OTC</p>
+          </div>
+          <div class="iconWithText">
+            <ion-img class="menu-icon" src="../../../assets/images/dex-icon.svg"></ion-img>
+            <p>DEX</p>
+          </div>
+        </div>
+        <div class="menu-container text-color">
+          <div class="iconWithText" (click)="refer('convert')">
+            <ion-img class="menu-icon" src="../../../assets/images/convert-icon.svg"></ion-img>
+            <p>Convert</p>
+          </div>
+          <div class="iconWithText">
+            <ion-img class="menu-icon" src="../../../assets/images/fiat-deposit-icon.svg"></ion-img>
+            <p>Fiat Deposit</p>
+          </div>
+          <div class="iconWithText">
+            <ion-img class="menu-icon" src="../../../assets/images/deposit-icon.svg"></ion-img>
+            <p>Deposit</p>
+          </div>
+          <div class="iconWithText" (click)="refer('gift')">
+            <ion-img class="menu-icon" src="../../../assets/images/gift-icon.svg"></ion-img>
+            <p>Gift Card</p>
+          </div>
+        </div>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

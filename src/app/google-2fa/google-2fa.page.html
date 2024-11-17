@@ -1,0 +1,87 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Google 2FA</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ion-card class="m-0">
+      <ion-card-content>
+        <div class="d-flex align-items-center justify-content-center w-100 gap-2">
+          
+          <p class="text-warning" *ngIf='need_set_ga'><ion-icon size="medium" color="warning" name="information-circle-outline"></ion-icon>Please complete 2fa Setup below.</p>
+          <p class="text-info" *ngIf='!need_set_ga'><ion-icon size="medium" color="info" name="checkmark-circle-outline"></ion-icon>Your setup for 2FA is complete.</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>2FA Setup</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Step 1: Setup Google Authenticator -->
+        <ion-grid>
+          <ion-row *ngIf='need_set_ga'>
+            <ion-col size="12">
+              <h2>1st step: Setup "Google Authenticator"</h2>
+              <p>
+                Click "+" to add a new account. You may scan the QR code or enter the provided key to add your account on Google Authenticator.
+              </p>
+            </ion-col>
+            <ion-col size="12" class="ion-text-center">
+              <!-- QR Code Placeholder -->
+
+              <qrcode *ngIf="google2faSecret" cssClass="scann_img" [margin]="2" [qrdata]=qrUrl [width]="150" [errorCorrectionLevel]="'M'"
+        [allowEmptyString]="true">
+      </qrcode>
+              <p style="text-align: center; margin-top: 8px;">
+                If you cannot successfully scan bar codes on the app, you can also manually add accounts, and enter the following key:
+              </p>
+              <p style="text-align: center; font-weight: bold;">{{this.google2faSecret}}</p>
+            </ion-col>
+          </ion-row>
+  
+          <!-- Step 2: Enter 2FA Code -->
+          <ion-row>
+            <ion-col size="12" *ngIf='need_set_ga'>
+              <h2>2nd step: Enter 6-digits code from Google Authenticator:</h2>
+            </ion-col>
+            <ion-col size="12" >
+              <ion-item>
+                
+                <ion-input type="text" placeholder="Enter 2FA Code" [(ngModel)]="codeGenerated"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label>2FA Required for:</ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>Sign In</ion-label>
+                <ion-checkbox slot="end"  [(ngModel)]="ga_login" checked *ngIf='need_set_ga'></ion-checkbox>
+                <ion-checkbox slot="end"  [(ngModel)]="ga_login" checked *ngIf='!need_set_ga' disabled></ion-checkbox>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>Withdrawals</ion-label>
+                <ion-checkbox slot="end" checked [(ngModel)]="ga_transfer" *ngIf='need_set_ga'></ion-checkbox>
+                <ion-checkbox slot="end"  [(ngModel)]="ga_transfer" checked *ngIf='!need_set_ga' disabled></ion-checkbox>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" style="text-align: center; margin-top: 20px;" *ngIf='need_set_ga'>
+              <ion-button expand="block" color="primary" (click)="setGoogle2FaCode()">Verify and Enable</ion-button>
+            </ion-col>
+            <ion-col size="12" style="text-align: center; margin-top: 20px;" *ngIf='!need_set_ga'>
+              <ion-button expand="block" color="danger" (click)="deleteGoogle2FaCode()">Remove Google 2FA</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

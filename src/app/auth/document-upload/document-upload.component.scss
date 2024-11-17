@@ -1,0 +1,159 @@
+.w-16 {
+  position: relative;
+  right: 3px;
+  bottom: 16px;
+  width: 36px;
+}
+
+
+.icon-title {
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading {
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+.input-form {
+  // margin: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  // gap: 10px;
+
+  ion-input {
+    width: 100%;
+    --border-radius: 10px;
+  }
+}
+
+.id-number-input {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  margin-top: 10px;
+  height: 100%;
+}
+
+ion-checkbox {
+  font-size: 11px !important;
+}
+
+.custom-input {
+  color: var(--text-color) !important;
+  font-family: "Montserrat" !important;
+  font-weight: 600;
+  width: 100%;
+
+  item-inner {}
+}
+
+.bg-base-du {
+  background-color: var(--bg-primary-color);
+}
+
+.block {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 25px;
+  padding: 29px;
+
+}
+
+ion-modal {
+  --height: auto;
+}
+
+ion-input {
+  width: 100%;
+  --border-radius: 10px !important;
+}
+
+.date-style {
+  height: 3.5rem;
+  border-radius: 10px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 4px;
+}
+
+
+
+.drop-style {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding-left: 8px;
+  padding-right: 6px;
+  height: 3.5rem;
+}
+
+.w-28 {
+  width: 28px;
+}
+
+.card-identities {
+  background-color: var(--bg-primary-color);
+  border: 3px solid rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-radius: 6px;
+  max-height: 5rem;
+}
+
+.f-12 {
+  font-size: 10px !important;
+}
+
+
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-primary-color);
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 6px;
+  width: 16rem;
+}
+
+.toggle-button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin: 0;
+  font-size: 8px;
+}
+
+.toggle-button.active {
+  background-color: #3396FF;
+  color: white;
+  border-color: #3396FF;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-size: 8px;
+}
+
+.border-bottom-style {
+  border-bottom: 1px solid #bbb7b7;
+}
+
+.selected-border {
+  border-color: green !important;
+}

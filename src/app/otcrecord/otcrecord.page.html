@@ -1,0 +1,51 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="3"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">OTC Records</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let o of tradelogs" (click)="referToOtcLog(o?.qid)" class="bg-base">
+    <ion-card-content>
+      <div class="otc-box">
+        <div class="otc-item">
+          <div class="ellipse-box">
+            <ion-icon [color]="o?.type === 'sell' ? 'danger' : 'success'" fill="solid" size="small"
+              name="ellipse-outline"></ion-icon>
+            <ion-text class="text-medium font-weight-bold">{{o?.trade_coin.toUpperCase()}} /
+              {{o?.base_coin.toUpperCase()}}</ion-text>
+          </div>
+          <ion-text>{{o?.addtime * 1000 | date:'yyyy-MM-dd'}} {{o?.addtime * 1000 | date:'HH:mm:ss'}}</ion-text>
+        </div>
+        <div class="otc-item">
+          <ion-text>Price</ion-text>
+          <div class="ellipse-box">
+            <ion-text class="text-medium font-weight-bold">{{o?.final_price * 1}}</ion-text>
+            <ion-text>{{o?.base_coin.toUpperCase()}}</ion-text>
+          </div>
+        </div>
+        <div class="otc-item">
+          <ion-text>Qty</ion-text>
+          <div class="ellipse-box">
+            <ion-text class="text-medium font-weight-bold">{{o?.qty * 1}}</ion-text>
+            <ion-text>{{o?.trade_coin.toUpperCase()}}</ion-text>
+          </div>
+        </div>
+        <div class="otc-item">
+          <ion-text>Total</ion-text>
+          <div class="ellipse-box">
+            <ion-text class="text-medium font-weight-bold">{{o?.final_total * 1}}</ion-text>
+            <ion-text>{{o?.base_coin.toUpperCase()}}</ion-text>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,112 @@
+.headerIcon {
+    width: 35px !important;
+    height: 35px !important;
+    color: var(--text-color)
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+.w-28 {
+    width: 28px;
+}
+
+.w-18 {
+    width: 18px;
+}
+
+.w-22 {
+    width: 22px;
+}
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.w-side-icon {
+    width: 15px;
+}
+
+
+.profile-img {
+    width: 40px !important;
+    height: 40px !important;
+    filter: invert(15%) sepia(92%) saturate(5965%) hue-rotate(227deg) brightness(101%) contrast(108%);
+}
+
+.support-img {
+    width: 23px !important;
+    height: 23px !important;
+}
+
+.w-img {
+    width: 25px;
+    height: 12px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 80px;
+    height: 18px;
+    z-index: 999;
+}
+
+ion-toolbar {
+    --padding-bottom: 0px !important;
+}
+
+.search-field {
+    border: 1px solid var(--custom-border);
+    border-radius: 40px;
+    // padding-left: 34px !important;
+    height: 26px !important;
+    margin: 0 10px 0px 10px;
+    color: var(--text-color);
+    background: gainsboro;
+}
+
+ion-header {
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+
+.d-block-force {
+    display: block !important;
+}
+
+ion-input {
+    --placeholder-color: black !important;
+}
+
+.positive-rate {
+    background: #19A060;
+    --background: #19A060;
+    border-radius: 8px;
+    --border-radius: 8px;
+    // color: #fff;
+    color: var(--text-color);
+    font-family: "Montserrat";
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+.negative-rate {
+    background: var(--danger);
+    --background: var(--danger);
+    border-radius: 8px;
+    --border-radius: 8px;
+    // color: #fff;
+    color: var(--text-color);
+    font-family: "Montserrat";
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}

@@ -1,0 +1,59 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Transfer History</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <ion-select labelPlacement="stacked" label="Coin" [(ngModel)]="selectedCoin" class="w-100 mt-5" name="selectedCoin"
+      placeholder="Select one" (ionChange)="filterHistory()" fill="outline">
+      <ion-select-option value="all">All</ion-select-option>
+      <ion-select-option *ngFor="let coin of coins | keyvalue"
+        value="{{coin?.key}}">{{coin?.key?.toUpperCase()}}</ion-select-option>
+    </ion-select>
+    <ion-card class="m-0 mt-3 bg-base">
+      <ion-card-content class="p-0" style="padding: 10px 5px !important;">
+        <div class="d-flex align-items-start justify-content-start w-100" style="gap: 30px !important;">
+          <p class="text-secondary fw-bolder">Coin</p>
+          <p class="text-secondary fw-bolder">Amount</p>
+          <p class="text-secondary fw-bolder">From</p>
+          <p class="text-secondary fw-bolder">To</p>
+          <p class="text-secondary fw-bolder">Time</p>
+        </div>
+        <div *ngFor="let item of filteredHistory" class="d-flex align-items-start justify-content-start w-100 mt-3"
+          style="gap: 25px !important;">
+          <p class="fw-bold" style="font-size: 13px;">{{item?.coin?.toUpperCase()}}</p>
+          <p class="fw-bold" style="font-size: 12px; width: 70px !important">{{formatNumber(item?.amount)}}</p>
+          <p class="fw-bold" style="font-size: 13px;">{{item?.from_account?.toUpperCase()}}</p>
+          <p class="fw-bold" style="font-size: 13px;">{{item?.to_account?.toUpperCase()}}</p>
+          <p class="fw-bold" style="font-size: 12px;">{{formatDate(item?.created_at)}}</p>
+        </div>
+        <div class="d-flex align-items-center justify-content-center w-100 mt-3">
+          <h1 *ngIf="filteredHistory?.length === 0">No data</h1>
+        </div>
+        <!-- <ion-row class="m-0">
+          <ion-col size="2">
+            <p style="font-size: 12px;">BTC</p>
+          </ion-col>
+          <ion-col size="3">
+          </ion-col>
+          <ion-col size="2">
+            <p style="font-size: 12px;">0.94723</p>
+            <p style="font-size: 12px;">SPOT</p>
+          <p style="font-size: 12px;">P2P</p>
+        <p style="font-size: 12px;">2024-05-13 05:34:12</p>
+          </ion-col>
+          <ion-col size="2">
+          </ion-col>
+          <ion-col size="3">
+          </ion-col>
+        </ion-row> -->
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

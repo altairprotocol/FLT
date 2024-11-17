@@ -1,0 +1,35 @@
+<ion-header class="shadow-n bg-base">
+  <ion-toolbar class="bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2"><ion-icon size="large" (click)="back()" class="text-color"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Search Wallet</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-base">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row class="bg-base">
+    <ion-col size="12">
+      <ion-input label="Search Coins" label-placement="floating" fill="outline" [(ngModel)]="search"
+        class="custom-input my-1" (ionInput)="getItems($event)"></ion-input>
+    </ion-col>
+    <ion-col size="12">
+      <div *ngFor="let t of coins" class="light-bg-f3">
+        <ion-row class="align-items-center p-2 card-border" *ngIf="t?.total > 0" (click)="balance(t.symbol,t.type)">
+          <ion-col size="9" class="d-flex align-items-center" style="gap: 10px;">
+            <ion-img class="w-28" src="{{t?.ico}}"></ion-img>
+            <div>
+              <span class="font-14">{{t?.symbol.toUpperCase()}}</span>
+              <span class="font-9 "> {{t?.name.toUpperCase()}}</span>
+            </div>
+          </ion-col>
+          <ion-col size="3"><span class="">{{t?.total | number: '1.2'}}</span></ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

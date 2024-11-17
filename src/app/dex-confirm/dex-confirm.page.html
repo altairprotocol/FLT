@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Confirm</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center w-100 flex-column">
+      <p class="m-0 p-0 text-secondary">I want to buy</p>
+      <p class="text-success fs-2">0.312312 ETH</p>
+    </div>
+    <div class="key-value-container w-100">
+      <div class="key-value">
+        <p class="key">Quote price</p>
+        <p class="value">75,000 USDT/ETH</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Amount</p>
+        <p class="value">100</p>
+      </div>
+      <div class="key-value">
+        <p class="key">Total</p>
+        <p class="value">100000 USDT </p>
+      </div>
+      <div class="key-value">
+        <p class="key">Required Network</p>
+        <p class="value">ETH over ROPSTEN network</p>
+      </div>
+    </div>
+    <ion-button expand="block" class="sliderButton mt-5" [disabled]="!true" color="success">
+      Success
+    </ion-button>
+    <ion-button expand="block" class="sliderButton mt-5" [disabled]="true">
+      Wallet Connect
+    </ion-button>
+  </div>
+</ion-content>

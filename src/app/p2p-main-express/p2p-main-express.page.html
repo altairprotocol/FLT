@@ -1,0 +1,91 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base text-color">
+    <ion-row>
+      <ion-col size="4"><span class="icon-title p-2 "><ion-icon class="text-color" size="large" (click)="back()"
+            name="arrow-back"></ion-icon></span></ion-col>
+      <ion-title class="text-color">Express</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-base">
+  <div class="container text-color">
+    <div class="segments-container d-flex align-items-center justify-content-between gap-2">
+      <div class="custom-segment">
+        <ion-button class="custom-segment-buttons" [class]="activeMethod == 'Buy' ? 'active text-success' : ''"
+          (click)="changeActiveMethod('Buy')" fill="clear">Buy</ion-button>
+        <ion-button class="custom-segment-buttons" [class]="activeMethod == 'Sell' ? 'active text-danger' : ''"
+          (click)="changeActiveMethod('Sell')" fill="clear">Sell</ion-button>
+      </div>
+      <ion-button size="small" (click)="changeFiatCurrency()">
+        {{activeFiat}}
+        <ion-icon slot="end" name="git-compare-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-card class="m-0 bg-base text-color">
+      <ion-card-content style="padding: 40px 20px !important;">
+        <div class="d-flex align-items-center justify-content-center flex-column">
+          <!-- <p class="m-0 p-0 w-100 text-end">By Quantity</p> -->
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <h1 class="m-0 p-0 fw-bolder text-color" style="font-size: 35px !important;">{{amount}}</h1>
+            <p class="m-0 p-0 fw-bolder text-secondary">USDT</p>
+          </div>
+          <p *ngIf="activeMethod == 'Buy'" class="m-0 p-0 fw-bolder text-secondary">I will Spend . ~ {{calculatedPrice}}
+            {{activeFiat}} </p>
+          <p *ngIf="activeMethod == 'Sell'" class="m-0 p-0 fw-bolder text-secondary">I will Receive ~
+            {{calculatedPrice}}
+            {{activeFiat}} </p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div class="numeric-keyboard mt-5">
+      <div class="first-row d-flex align-items-center justify-content-center gap-1">
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('1')">
+          1
+        </ion-button>
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('2')">
+          2
+        </ion-button>
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('3')">
+          3
+        </ion-button>
+      </div>
+      <div class="second-row d-flex align-items-center justify-content-center gap-1">
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('4')">
+          4
+        </ion-button>
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('5')">
+          5
+        </ion-button>
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('6')">
+          6
+        </ion-button>
+      </div>
+      <div class="third-row d-flex align-items-center justify-content-center gap-1">
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('7')">
+          7
+        </ion-button>
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('8')">
+          8
+        </ion-button>
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('9')">
+          9
+        </ion-button>
+      </div>
+      <div class="last-row d-flex align-items-center justify-content-center gap-1">
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key" (click)="manipulateAmount('.')">
+          .
+        </ion-button>
+        <ion-button fill="clear" size="small" class="w-100 keypad-key" (click)="manipulateAmount('0')">
+          0
+        </ion-button>
+        <ion-button fill="clear" size="small" expand="full" class="w-100 keypad-key"
+          (click)="manipulateAmount('backspace')">
+          <ion-icon name="backspace"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+    <ion-button class="mt-5" expand="block" [disabled]="!activeMethod || amount == 0 || amount == '.'"
+      (click)="doTrade()">Next</ion-button>
+  </div>
+</ion-content>

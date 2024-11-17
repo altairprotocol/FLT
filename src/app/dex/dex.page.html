@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="pt-2 shadow-n bg-base">
+    <ion-row>
+      <ion-col size="5"><ion-icon size="large" class="text-color" (click)="back();"
+          name="arrow-back"></ion-icon></ion-col>
+      <ion-col size="5">
+        <h4 style="margin: 0; margin-top: 5px;">DEX</h4>
+      </ion-col>
+      <ion-col size="2">
+        <div class="d-flex w-100">
+          <ion-icon size="large" name="document-text-outline" (click)="refer('otc-history')"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ion-row>
+      <ion-col size="6">
+        <ion-select labelPlacement="stacked" label="Use" value="useCoin" [(ngModel)]="useCoin" name="useCoin"
+          fill="outline">
+          <ion-icon slot="start" name="logo-bitcoin" aria-hidden="true" color="warning"></ion-icon>
+          <ion-select-option value="USDT">USDT</ion-select-option>
+          <ion-select-option value="SOL">SOL</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="6">
+        <ion-input label="Amount" label-placement="floating" fill="outline" value="{{useCoinAmount}}"
+          type="number"></ion-input>
+      </ion-col>
+    </ion-row>
+    <div class="custom-divider">
+    </div>
+    <div class="d-flex align-items-center justify-content-center w-90">
+      <ion-icon name="chevron-collapse" size="large"></ion-icon>
+    </div>
+    <div class="custom-divider">
+    </div>
+    <ion-row>
+      <ion-col size="6">
+        <ion-select labelPlacement="stacked" label="Get" value="getCoin" [(ngModel)]="getCoin" class="w-100"
+          name="getCoin" fill="outline">
+          <ion-icon slot="start" name="logo-bitcoin" aria-hidden="true" color="warning"></ion-icon>
+          <ion-select-option value="ETH">ETH</ion-select-option>
+          <ion-select-option value="TRX">TRX</ion-select-option>
+        </ion-select></ion-col>
+      <ion-col size="6"><ion-input label="Amount" label-placement="floating" fill="outline" class="w-100" type="number"
+          value="{{getCoinAmount}}"></ion-input></ion-col>
+    </ion-row>
+    <ion-button expand="block" class="sliderButton mt-5" [disabled]="true">
+      Next
+    </ion-button>
+  </div>
+</ion-content>
